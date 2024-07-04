@@ -1,0 +1,656 @@
+{
+  "responseData": [],
+  "responseUser": [
+    {
+      "Id": 1,
+      "FirstName": "Alice",
+      "LastName": "Johnson",
+      "Email": "alice.johnson@example.com",
+      "HashPassword": "hashedpassword1",
+      "Token": "token1",
+      "RefreshToken": "refreshtoken1",
+      "ExpiryTime": "2024-12-31T23:59:59",
+      "IsDisabled": false,
+      "CreatedByUserId": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedByUserId": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 2,
+      "FirstName": "Bob",
+      "LastName": "Smith",
+      "Email": "bob.smith@example.com",
+      "HashPassword": "hashedpassword2",
+      "Token": "token2",
+      "RefreshToken": "refreshtoken2",
+      "ExpiryTime": "2024-12-31T23:59:59",
+      "IsDisabled": false,
+      "CreatedByUserId": 1,
+      "CreatedAt": "2024-01-02T12:00:00",
+      "UpdatedByUserId": 1,
+      "UpdatedAt": "2024-01-02T12:00:00"
+    },
+    {
+      "Id": 3,
+      "FirstName": "Carol",
+      "LastName": "Davis",
+      "Email": "carol.davis@example.com",
+      "HashPassword": "hashedpassword3",
+      "Token": "token3",
+      "RefreshToken": "refreshtoken3",
+      "ExpiryTime": "2024-12-31T23:59:59",
+      "IsDisabled": false,
+      "CreatedByUserId": 1,
+      "CreatedAt": "2024-01-03T12:00:00",
+      "UpdatedByUserId": 1,
+      "UpdatedAt": "2024-01-03T12:00:00"
+    }
+  ],
+
+  "responseOptions": [
+    {
+      "Id": 1,
+      "Key": "Category",
+      "Value": "Finance",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 2,
+      "Key": "Category",
+      "Value": "Employment",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 3,
+      "Key": "Category",
+      "Value": "ThirdParty",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 4,
+      "Key": "Category",
+      "Value": "Business Contracts",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 5,
+      "Key": "Role",
+      "Value": "Admin",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 6,
+      "Key": "Role",
+      "Value": "HR",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 7,
+      "Key": "Role",
+      "Value": "Finance Manager",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 8,
+      "Key": "Role",
+      "Value": "Founder",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 9,
+      "Key": "Permissions",
+      "Value": "Read",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 10,
+      "Key": "Permissions",
+      "Value": "Write",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 11,
+      "Key": "Permissions",
+      "Value": "Update",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 12,
+      "Key": "Permissions",
+      "Value": "View",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 13,
+      "Key": "Status",
+      "Value": "Negotiation",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 14,
+      "Key": "Status",
+      "Value": "Approved",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 15,
+      "Key": "Status",
+      "Value": "Pending",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 16,
+      "Key": "Forms",
+      "Value": "Paper",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 17,
+      "Key": "Forms",
+      "Value": "Esigned",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 18,
+      "Key": "Forms",
+      "Value": "Paper/Esign",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 19,
+      "Key": "AdditionalField",
+      "Value": "Sample AdditionalField Value",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 20,
+      "Key": "ExpirationLimit",
+      "Value": "150",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 21,
+      "Key": "ExpirationLimit",
+      "Value": "130",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 22,
+      "Key": "ExpirationLimit",
+      "Value": "30",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 23,
+      "Key": "AdditionalField",
+      "Value": "Sample AdditionalField Value2",
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    }
+  ],
+  "responseRoleCategoryPermissions": [
+    {
+      "RoleId": 5,
+      "CategoryId": 1,
+      "PermissionId": 9,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 1,
+      "PermissionId": 10,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 1,
+      "PermissionId": 11,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 1,
+      "PermissionId": 12,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 2,
+      "PermissionId": 9,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 2,
+      "PermissionId": 10,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 2,
+      "PermissionId": 11,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 5,
+      "CategoryId": 2,
+      "PermissionId": 12,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 6,
+      "CategoryId": 1,
+      "PermissionId": 9,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 6,
+      "CategoryId": 1,
+      "PermissionId": 12,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 7,
+      "CategoryId": 1,
+      "PermissionId": 9,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 7,
+      "CategoryId": 1,
+      "PermissionId": 10,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 7,
+      "CategoryId": 1,
+      "PermissionId": 12,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 8,
+      "CategoryId": 1,
+      "PermissionId": 9,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 8,
+      "CategoryId": 1,
+      "PermissionId": 10,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 8,
+      "CategoryId": 1,
+      "PermissionId": 11,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "RoleId": 8,
+      "CategoryId": 1,
+      "PermissionId": 12,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    }
+  ],
+  "responseCategoryAdditionalFields": [
+    {
+      "CategoryId": 1,
+      "AdditionalFieldId": 19 
+    },
+    {
+      "CategoryId": 2,
+      "AdditionalFieldId": 23
+    },
+    {
+      "CategoryId": 3,
+      "AdditionalFieldId": 19 
+    },
+    {
+      "CategoryId": 4,
+      "AdditionalFieldId": 23
+    }
+  ],
+  "responseTypes": [
+    {
+      "Id": 1,
+      "Name": "Type 1",
+      "CategoryId": 1,
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "Id": 2,
+      "Name": "Type 2",
+      "CategoryId": 2,
+      "IsDisabled": false,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    }
+  ],
+  "responseUserRoles": [
+    {
+      "UserId": 1,
+      "RoleId": 5,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    },
+    {
+      "UserId": 2,
+      "RoleId": 6,
+      "CreatedBy": 1,
+      "CreatedAt": "2024-01-01T12:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-01-01T12:00:00"
+    }
+  ],
+  "responseContracts": [
+    {
+      "Id": 1,
+      "UniqueNo": "ABC123",
+      "Version": 1.0,
+      "Current": true,
+      "CategoryId": 1,
+      "TypeId": 1,
+      "CounterParty": "Company A",
+      "Account": "Account 123",
+      "Client": "Client X",
+      "Project": "Project Y",
+      "CounterPartyOwner": "John Doe",
+      "LegalOwnerId": 1,
+      "BusinessOwnerId": 2,
+      "StatusId": 13,
+      "SigningDate": "2024-06-30",
+      "StartingDate": "2024-07-01",
+      "TerminationDate": "2025-06-30",
+      "RenewalDateFlagOff": false,
+      "Value": 5000.0,
+      "Jurisdiction": "New York",
+      "LiabilitiesCap": 10000.0,
+      "ExpirationLimitId": 20,
+      "Notes": "This is a sample contract.",
+      "OpenIssues": "None",
+      "FormId": 17,
+      "Link": "https://example.com/contract1",
+      "AutoRenewal": true,
+      "ContractCode": "CONTRACT-001",
+      "Filename": "contract1.pdf",
+      "CreatedBy": 1,
+      "CreatedAt": "2024-06-30T10:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-06-30T10:00:00"
+    },
+    {
+      "Id": 2,
+      "UniqueNo": "XYZ456",
+      "Version": 2.0,
+      "Current": true,
+      "CategoryId": 2,
+      "TypeId": 2,
+      "CounterParty": "Company B",
+      "Account": "Account 456",
+      "Client": "Client Y",
+      "Project": "Project Z",
+      "CounterPartyOwner": "Jane Doe",
+      "LegalOwnerId": 2,
+      "BusinessOwnerId": 1,
+      "StatusId": 14,
+      "SigningDate": "2024-07-01",
+      "StartingDate": "2024-07-02",
+      "TerminationDate": "2025-07-01",
+      "RenewalDateFlagOff": false,
+      "Value": 8000.0,
+      "Jurisdiction": "California",
+      "LiabilitiesCap": 15000.0,
+      "ExpirationLimitId": 21,
+      "Notes": "This is another sample contract.",
+      "OpenIssues": "Pending review",
+      "FormId": 18,
+      "Link": "https://example.com/contract2",
+      "AutoRenewal": true,
+      "ContractCode": "CONTRACT-002",
+      "Filename": "contract2.pdf",
+      "CreatedBy": 1,
+      "CreatedAt": "2024-07-01T09:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-07-01T09:00:00"
+    },
+    {
+      "Id": 3,
+      "UniqueNo": "PQR789",
+      "Version": 1.5,
+      "Current": true,
+      "CategoryId": 3,
+      "TypeId": 1,
+      "CounterParty": "Company C",
+      "Account": "Account 789",
+      "Client": "Client Z",
+      "Project": "Project W",
+      "CounterPartyOwner": "Sarah Lee",
+      "LegalOwnerId": 1,
+      "BusinessOwnerId": 3,
+      "StatusId": 15,
+      "SigningDate": "2024-07-02",
+      "StartingDate": "2024-07-03",
+      "TerminationDate": "2025-07-02",
+      "RenewalDateFlagOff": false,
+      "Value": 10000.0,
+      "Jurisdiction": "Texas",
+      "LiabilitiesCap": 20000.0,
+      "ExpirationLimitId": 22,
+      "Notes": "This is a third sample contract.",
+      "OpenIssues": "Awaiting feedback",
+      "FormId": 16,
+      "Link": "https://example.com/contract3",
+      "AutoRenewal": true,
+      "ContractCode": "CONTRACT-003",
+      "Filename": "contract3.pdf",
+      "CreatedBy": 1,
+      "CreatedAt": "2024-07-02T11:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-07-02T11:00:00"
+    },
+    {
+      "Id": 4,
+      "UniqueNo": "LMN012",
+      "Version": 3.0,
+      "Current": true,
+      "CategoryId": 4,
+      "TypeId": 2,
+      "CounterParty": "Company D",
+      "Account": "Account 012",
+      "Client": "Client W",
+      "Project": "Project X",
+      "CounterPartyOwner": "Michael Brown",
+      "LegalOwnerId": 2,
+      "BusinessOwnerId": 2,
+      "StatusId": 14,
+      "SigningDate": "2024-07-03",
+      "StartingDate": "2024-07-04",
+      "TerminationDate": "2025-07-03",
+      "RenewalDateFlagOff": false,
+      "Value": 12000.0,
+      "Jurisdiction": "Florida",
+      "LiabilitiesCap": 25000.0,
+      "ExpirationLimitId": 21,
+      "Notes": "This is another sample contract.",
+      "OpenIssues": "None",
+      "FormId": 17,
+      "Link": "https://example.com/contract4",
+      "AutoRenewal": true,
+      "ContractCode": "CONTRACT-004",
+      "Filename": "contract4.pdf",
+      "CreatedBy": 1,
+      "CreatedAt": "2024-07-03T10:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-07-03T10:00:00"
+    }
+  ],
+  "responseContractAdditionalFieldValues":[
+      {
+        "ContractId": 1,
+        "AdditionalFieldId": 19,
+        "Value": "Sample value 1"
+      },
+      {
+        "ContractId": 2,
+        "AdditionalFieldId": 23,
+        "Value": "Sample value 2"
+      },
+      {
+        "ContractId": 3,
+        "AdditionalFieldId": 19,
+        "Value": "Sample value 3"
+      }
+    ]
+
+}
