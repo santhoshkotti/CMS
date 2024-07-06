@@ -1,10 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { AppComponent } from './app.component';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { DashBoardComponent } from './components/dash-board/dash-board.component';
+import { FormContractComponent } from './components/form-contract/form-contract.component';
+import { CategoryComponent } from './components/category/category.component';
+import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
+import { HeaderComponent } from './components/header/header.component';
+
+const routes: Routes = [
+  { path: '', component: AppComponent},
+  { path: 'layout', component: LayoutComponent},
+  {path:'header',component:HeaderComponent},
+  {path:'dashboard',component:DashBoardComponent},
+  {path:'formContract',component:FormContractComponent},
+  { path: '', component: AppComponent },
+  { path: 'layout', component: LayoutComponent },
+  { path: 'category', component: CategoryComponent },
+  { path: 'options', component: GenericOptionsComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,375 @@
+<!-- <button data-modal-target="static-modal" data-modal-toggle="static-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+  Toggle modal
+</button>
+<form [formGroup]="financialContractForm" (ngSubmit)="onSubmit()">
+  <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="">Contract Focus</h4>
+            <div class="mb-4 col-span-2">
+              <label for="account" class="block text-sm font-medium text-gray-700">Account</label>
+              <input id="account"  [(ngModel)]="newContract.Account" name="account" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="client" class="block text-sm font-medium text-gray-700">Client</label>
+              <input id="client" formControlName="client" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="project" class="block text-sm font-medium text-gray-700">Project</label>
+              <input id="project" formControlName="project" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="formm" class="block text-sm font-medium text-gray-700">Form</label>
+              <input id="formm" formControlName="form" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-hide="static-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Close
+          </button>
+          <button data-modal-target="default-modal" data-modal-toggle="default-modal" data-modal-hide="static-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="">Contacts</h4>
+            <div class="mb-4 col-span-2">
+              <label for="counterPartyOwner" class="block text-sm font-medium text-gray-700">CounterParty Owner</label>
+              <input id="counterPartyOwner" formControlName="counterPartyOwner" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="businessOwner" class="block text-sm font-medium text-gray-700">Business Owner</label>
+              <input id="businessOwner" formControlName="businessOwner" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="legalOwner" class="block text-sm font-medium text-gray-700">Legal Owner</label>
+              <input id="legalOwner" formControlName="legalOwner" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-target="static-modal" data-modal-toggle="static-modal" data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Previous
+          </button>
+          <button data-modal-target="datee-modal" data-modal-toggle="datee-modal" data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="datee-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="datee-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+
+        <div class="max-h-[350px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="col-span-2">Dates</h4>
+            <div class="mb-4 col-span-1">
+              <label for="signing-date" class="block text-sm font-medium text-gray-700">Signing Date</label>
+              <input type="date" id="signing-date" formControlName="signingDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="termination-date" class="block text-sm font-medium text-gray-700">Termination Date</label>
+              <input type="date" id="termination-date" formControlName="terminationDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="renewal-flagoff-date" class="block text-sm font-medium text-gray-700">Renewal FlagOff Date</label>
+              <input type="date" id="renewal-flagoff-date" formControlName="renewalFlagOffDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="starting-date" class="block text-sm font-medium text-gray-700">Starting Date</label>
+              <input type="date" id="starting-date" formControlName="startingDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="notice-date" class="block text-sm font-medium text-gray-700">Days to next Notice Date</label>
+              <input type="date" id="notice-date" formControlName="noticeDate" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+  \
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-target="default-modal" data-modal-toggle="default-modal" data-modal-hide="datee-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Previous
+          </button>
+          <button data-modal-hide="default-modal" type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
+
+
+
+
+
+<button data-modal-target="static-modal" data-modal-toggle="static-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+  Toggle modal
+</button>
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="">Contract Focus</h4>
+            <div class="mb-4 col-span-2">
+              <label for="Account" class="block text-sm font-medium text-gray-700">Account</label>
+              <input id="Account" name="Account"    type="text" class="mt-1 block w-full rounded-lg" [(ngModel)]="newContract.Account">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="client" class="block text-sm font-medium text-gray-700">Client</label>
+              <input id="client" name="client" [(ngModel)]="this.newContract.Client" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="project" class="block text-sm font-medium text-gray-700">Project</label>
+              <input id="project" name="Project"  [(ngModel)]="this.newContract.Project" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="UniqueNo" class="block text-sm font-medium text-gray-700">Unique No</label>
+              <input id="UniqueNo"  name="UniqueNo" type="text" [(ngModel)]="this.newContract.UniqueNo" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-hide="static-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Close
+          </button>
+          <button data-modal-target="default-modal" data-modal-toggle="default-modal" data-modal-hide="static-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="">Contacts</h4>
+            <div class="mb-4 col-span-2">
+              <label for="counterPartyOwner" class="block text-sm font-medium text-gray-700">CounterParty Owner</label>
+              <input id="counterPartyOwner" name="counterPartyOwner"  [(ngModel)]="this.newContract.CounterPartyOwner" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="businessOwner" class="block text-sm font-medium text-gray-700">CounterParty</label>
+              <input id="businessOwner" name="CounterParty" [(ngModel)]="this.newContract.CounterParty" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="legalOwner" class="block text-sm font-medium text-gray-700">Legal Owner</label>
+              <input id="legalOwner" name="legalOwner"   type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-target="static-modal" data-modal-toggle="static-modal" data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Previous
+          </button>
+          <button data-modal-target="status-modal" data-modal-toggle="status-modal" data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="status-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="">Classification</h4>
+            <div class="mb-4 col-span-2">
+              <label for="ContractCode" class="block text-sm font-medium text-gray-700">Contract Code</label>
+              <input id="ContractCode" name="ContractCode"  [(ngModel)]="this.newContract.ContractCode" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="Value" class="block text-sm font-medium text-gray-700">Value</label>
+              <input id="Value" name="Value" [(ngModel)]="this.newContract.Value" type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="Version" class="block text-sm font-medium text-gray-700">Version</label>
+              <input id="Version" name="Version" [(ngModel)]="this.newContract.Version"   type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <label for="Link" class="block text-sm font-medium text-gray-700">Link</label>
+              <input id="Link" name="Link" [(ngModel)]="this.newContract.Link"  type="text" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-target="default-modal" data-modal-toggle="default-modal" data-modal-hide="status-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Previous
+          </button>
+          <button data-modal-target="datee-modal" data-modal-toggle="datee-modal" data-modal-hide="status-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="datee-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Financial Contract
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="datee-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="max-h-[350px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <h4 class="col-span-2">Dates</h4>
+            <div class="mb-4 col-span-1">
+              <label for="signing-date" class="block text-sm font-medium text-gray-700">Signing Date</label>
+              <input type="date" id="signing-date" name="SigningDate" [(ngModel)]="this.newContract.SigningDate"class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-1">
+              <label for="termination-date" class="block text-sm font-medium text-gray-700">Termination Date</label>
+              <input type="date" id="termination-date" name="TerminationDate" [(ngModel)]="this.newContract.TerminationDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="renewal-flagoff-date" class="block text-sm font-medium text-gray-700">Renewal FlagOff Date</label>
+              <input type="date" id="renewal-flagoff-date" name="RenewalDateFlagOff" [(ngModel)]="this.newContract.RenewalDateFlagOff" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="starting-date" class="block text-sm font-medium text-gray-700">Starting Date</label>
+              <input type="date" id="starting-date" name="startingDate" [(ngModel)]="this.newContract.StartingDate" class="mt-1 block w-full rounded-lg">
+            </div>
+            <div class="mb-4 col-span-2">
+              <label for="notice-date" class="block text-sm font-medium text-gray-700">Days to next Notice Date</label>
+              <input type="date" id="notice-date" name="nextNoticeDate" class="mt-1 block w-full rounded-lg">
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-target="default-modal" data-modal-toggle="default-modal" data-modal-hide="datee-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Previous
+          </button>
+          <button data-modal-hide="default-modal" type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+

@@ -1,0 +1,14 @@
+<!-- <div class="mb-6 flex items-center">
+  <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4">
+    {{ isEditMode ? 'Edit Category' : 'Enter Category' }}
+  </label>
+  <input *ngIf="!isEditMode" type="text" [(ngModel)]="newCategory" id="category-input" class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4">
+  <input *ngIf="isEditMode" type="text"placeholder="editCategory" [(ngModel)]="editCategory" id="category-input" class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4">
+
+  <button *ngIf="!isEditMode" (click)="saveCategory()" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Save</button>
+  <button *ngIf="isEditMode" (click)="updateCategory()" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Update</button>
+
+  <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="clearInput()">Cancel</button>
+</div>
+
+<app-table [rows]="categories" (editItem)="handleEdit($event)" (deleteItem)="handleDelete($event)"></app-table> -->

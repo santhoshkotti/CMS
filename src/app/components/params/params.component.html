@@ -1,0 +1,10 @@
+<!-- src/app/pages/layout/layout.component.html -->
+<div class="container mx-auto p-4 h-screen flex justify-center items-center">
+  <div class="grid grid-cols-2 m-4 gap-4">
+    <div class="params bg-gray-200 p-4 m-5 text-center w-40" *ngFor="let item of params; let i = index" (click)="navigateToComponent(names[i])">
+      <span class="material-icons">{{ item }}</span>
+      <div >{{ names[i] }}</div>
+    </div>
+    <!-- <app-generic key="Forms"></app-generic> -->
+  </div>
+</div>
