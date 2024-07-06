@@ -1,1 +1,27 @@
-<p>header works!</p>
+<div class="flex justify-between items-center p-3">
+  <div class="flex items-center space-x-2">
+    <img src="/assets/Synergech logo.png" class="h-8" alt="Synergech Logo" />
+  </div>
+  <div class="flex space-x-5 text-sm items-center">
+    <a class="font-medium" href="#">DashBoard</a>
+    <a class="font-medium" href="#">Parameter</a>
+    <a data-modal-target="contracttypes-modal" data-modal-toggle="contracttypes-modal" class="data-modal-target=small-modal data-collapse-toggle=small-modal font-medium" >New Contract</a>
+    <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      <span class="sr-only">Open user menu</span>
+      <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+    </button>
+  </div>
+</div>
+
+
+
+
+<div id="contracttypes-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+             <div *ngFor="let items of contractTypes" class="p-4 md:p-5 space-y-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  {{items}}
+             </div>
+        </div>
+    </div>
+</div>

@@ -11,36 +11,39 @@ export interface Users{
     FirstName :string,
     LastName :string,
     Email:string,
-    HashPassword :string   
+    HashPassword :string
 }
 
 export interface Contracts {
     Id :number,
-    UniqueNo :number,
-    Version :number,
-    Current :boolean,  
-
+    UniqueNo:string|null,
+    // UniqueNo :number,
+    Version :number|null,
+    Current :boolean|null,
+    Staus: string|null,
     CounterParty :string,
-    Account :string,
+    Account :string|null,
     Client :string,
     Project:string,
     CounterPartyOwner:string,
 
-   
+
+
     SigningDate:Date,
     StartingDate :Date,
     TerminationDate:Date,
     RenewalDateFlagOff :boolean,
-    Value:number,
+    Value:number|null,
     Jurisdiction :string,
     LiabilitiesCap :number,
-    
+
     Notes :string,
     OpenIssues :string,
-    
+
     Link: string,
     AutoRenewal :boolean,
-    ContractCode :number,
-    Filename :string  
+    ContractCode :string,
+    Filename :File|null,
+    StatusId:number|null,
 }
 
