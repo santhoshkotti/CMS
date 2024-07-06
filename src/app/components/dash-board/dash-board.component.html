@@ -1,0 +1,106 @@
+<div class="flex ml-2">
+  <select [(ngModel)]="this.demofiteredstring"
+          class="w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option [ngValue]="null" disabled selected>Select Contract</option>
+    <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+  </select>
+
+  <span class="inline-flex items-center px-3 text-sm text-blue-900 bg-blue-200 border border-e-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
+        (click)="onSubmit()">
+    <svg class="w-4 h-4 text-blue-500 dark:text-blue-400" aria-hidden="true"
+         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        d="M8.5 2a6.5 6.5 0 1 0 4.126 11.552l4.136 4.135a1 1 0 0 0 1.414-1.414l-4.135-4.136A6.5 6.5 0 0 0 8.5 2zm0 2a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9z"/>
+    </svg>
+  </span>
+</div>
+
+
+
+
+
+
+
+<div class="flex justify-center  mt-7 ml-2 " >
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-6lg w-full ">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400   ">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      TITLE
+                  </th>
+                  <th scope="col" class="px-6 py-3" >
+
+
+
+
+
+                      <button id="dropdownHoverButton" (click)="toggleDropdown()" class="inline-flex items-center">
+                        STATUS
+                      </button>
+                      <div *ngIf="isDropdownVisible" id="dropdownHover" class="absolute z-10 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                          <li *ngFor="let status of statuses" (click)="filterByStatus(status)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            {{ status }}
+                          </li>
+                        </ul>
+                      </div>
+
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      COUNTER PARTY
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      EFFECTIVE FORM
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      LAST MODIFIED ON
+                  </th>
+
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let tabledetails of showContract | filterContract:filteredString:statusFilter" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-6 py-4 font-medium">
+                      {{tabledetails.Project}}
+                  </td>
+                  <td class="px-6 py-4 font-medium">
+                     <ng-container *ngIf="tabledetails.StatusId==13" >Active</ng-container>
+                     <ng-container *ngIf="tabledetails.StatusId==14" >Pending</ng-container>
+                     <ng-container *ngIf="tabledetails.StatusId==15" >SignExpired</ng-container>
+                  </td>
+                  <td class="px-6 py-4 font-medium">
+                    {{tabledetails.CounterParty}}
+                  </td>
+                  <td class="px-6 py-4 font-medium">
+                    {{tabledetails.SigningDate | date:'yyyy-MM-dd'}}
+                  </td>
+                  <td class="px-6 py-4 font-medium">
+                    {{tabledetails.StartingDate | date:'yyyy-MM-dd'}}
+                  </td>
+
+              </tr>
+             </tbody>
+      </table>
+  </div>
+</div>
+
+<!-- <tr *ngFor="let tabledetails of dashboardDetails | filterContract:filteredString:statusFilter" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <td class="px-6 py-4 font-medium">
+      {{tabledetails.title}}
+  </td>
+  <td class="px-6 py-4 font-medium">
+    {{tabledetails.status}}
+  </td>
+  <td class="px-6 py-4 font-medium">
+    {{tabledetails.counterParty}}
+  </td>
+  <td class="px-6 py-4 font-medium">
+    {{tabledetails.effectiveform}}
+  </td>
+  <td class="px-6 py-4 font-medium">
+    {{tabledetails.lastModifiedOn}}
+  </td>
+
+</tr> -->
+

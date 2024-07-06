@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center mb-4">
-  <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/5">
+  <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/4">
     <label for="contractSelect" class="block mb-2">Select Contract:</label>
     <select
       id="contractSelect"
@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<div class="flex flex-col items-center mb-4 w-full">
+<div *ngIf="selectedContract" class="flex flex-col items-center mb-4 w-full">
   <!-- New Fields Section -->
   <div class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
     <h3 class="text-lg font-semibold mb-2">Primary Details</h3>
@@ -34,12 +34,14 @@
         <strong class="opacity-70">Business Owner:</strong>
       </div>
       <div class="bg-white p-2 rounded">
-        {{ selectedContract.BusinessOwner }}
+        {{ selectedContract.BusinessOwnerId }}
       </div>
       <div class="bg-blue-100 p-2 rounded">
         <strong class="opacity-70">Legal Owner:</strong>
       </div>
-      <div class="bg-white p-2 rounded">{{ selectedContract.LegalOwner }}</div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.LegalOwnerId }}
+      </div>
     </div>
   </div>
 
@@ -187,53 +189,28 @@
       <div class="bg-blue-100 p-2 rounded">
         <strong class="opacity-70">Value:</strong>
       </div>
-      <div class="bg-white p-2 rounded">
-        {{ selectedContract.Value | currency }}
-      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Value }}</div>
       <div class="bg-blue-100 p-2 rounded">
         <strong class="opacity-70">Annualized Value:</strong>
       </div>
       <div class="bg-white p-2 rounded">
-        {{ selectedContract.AnnualizedValue | currency }}
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Total Value Category:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        {{ selectedContract.TotalValueCategory }}
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Total Annualized Value Category:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        {{ selectedContract.TotalAnnualizedValueCategory }}
+        {{ selectedContract.AnnualizedValue }}
       </div>
     </div>
   </div>
-</div>
 
-<div class="flex flex-wrap">
-  <!-- Issues Section -->
-  <div
-    class="w-full md:w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg"
-  >
-    <h3 class="text-lg font-semibold mb-2">Issues</h3>
-    <div class="bg-white p-2 rounded">
-      <ul>
-        <li *ngFor="let issue of selectedContract.OpenIssues">{{ issue }}</li>
-      </ul>
+  <!-- Issues and Notes Section -->
+  <div class="flex w-full gap-4">
+    <!-- Issues Section -->
+    <div class="w-1/2 p-4 border bg-blue-100 shadow-md mb-4 rounded-lg">
+      <h3 class="text-lg font-semibold mb-2">Issues</h3>
+      <div class="bg-white p-2 rounded">{{ selectedContract.OpenIssues }}</div>
     </div>
-  </div>
 
-  <!-- Notes Section -->
-  <div
-    class="w-full md:w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg"
-  >
-    <h3 class="text-lg font-semibold mb-2">Notes</h3>
-    <div class="bg-white p-2 rounded">
-      <ul>
-        <li *ngFor="let note of selectedContract.Notes">{{ note }}</li>
-      </ul>
+    <!-- Notes Section -->
+    <div class="w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
+      <h3 class="text-lg font-semibold mb-2">Notes</h3>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Notes }}</div>
     </div>
   </div>
 </div>
