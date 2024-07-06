@@ -1,10 +1,10 @@
-import { DecimalPipe, Time } from "@angular/common"
+import { DecimalPipe, Time } from '@angular/common';
 
-export interface Options{
-        Id:number,
-        Key:string,
-        Value:string
-    }
+export interface Options {
+  Id: number;
+  Key: string;
+  Value: string;
+}
 
 export interface Users{
     Id :number,
