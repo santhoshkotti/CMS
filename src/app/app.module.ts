@@ -4,36 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { ParamsComponent } from './components/params/params.component';
 import { TableComponent } from './components/table/table.component';
 import { CategoryComponent } from './components/category/category.component';
 import { FormsModule } from '@angular/forms';
-import { FormComponent } from './components/form/form.component';
-import { TypesComponent } from './components/types/types.component';
-import { StatusComponent } from './components/status/status.component';
-
-
+import { FooterComponent } from './components/footer/footer.component';
+import { ContractviewComponent } from './components/contractview/contractview.component';
+import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     LayoutComponent,
     ParamsComponent,
     TableComponent,
     CategoryComponent,
-    FormComponent,
-    TypesComponent,
-    StatusComponent
+    ContractviewComponent,
+    FooterComponent,
+    GenericOptionsComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

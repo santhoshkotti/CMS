@@ -1,0 +1,239 @@
+<div class="flex justify-center items-center mb-4">
+  <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/5">
+    <label for="contractSelect" class="block mb-2">Select Contract:</label>
+    <select
+      id="contractSelect"
+      class="form-control"
+      (change)="onContractChange($event)"
+    >
+      <option *ngFor="let contract of responseContracts" [value]="contract.Id">
+        {{ contract.ContractCode }}
+      </option>
+    </select>
+  </div>
+</div>
+
+<div class="flex flex-col items-center mb-4 w-full">
+  <!-- New Fields Section -->
+  <div class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
+    <h3 class="text-lg font-semibold mb-2">Primary Details</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Counter Party:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.CounterParty }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Counter Party Owner:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.CounterPartyOwner }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Business Owner:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.BusinessOwner }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Legal Owner:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.LegalOwner }}</div>
+    </div>
+  </div>
+
+  <!-- Section Buttons -->
+  <div class="flex w-full">
+    <button
+      class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300 rounded-t-lg"
+      [ngClass]="{
+        'bg-white text-blue-500': activeSection === 'focus',
+        'bg-slate-300 text-white': activeSection !== 'focus'
+      }"
+      (click)="setActiveSection('focus')"
+    >
+      Contract Focus
+    </button>
+    <button
+      class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300"
+      [ngClass]="{
+        'bg-white text-blue-500': activeSection === 'dates',
+        'bg-slate-300 text-white': activeSection !== 'dates'
+      }"
+      (click)="setActiveSection('dates')"
+    >
+      Dates
+    </button>
+    <button
+      class="flex-1 px-4 py-2 border-b-2 border-gray-300 rounded-t-lg"
+      [ngClass]="{
+        'bg-white text-blue-500': activeSection === 'classification',
+        'bg-slate-300 text-white': activeSection !== 'classification'
+      }"
+      (click)="setActiveSection('classification')"
+    >
+      Classification
+    </button>
+  </div>
+
+  <!-- Contract Focus Section -->
+  <div
+    *ngIf="activeSection === 'focus'"
+    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+  >
+    <h3 class="text-lg font-semibold mb-2">Contract Focus</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Account:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Account }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Jurisdiction:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.Jurisdiction }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Client:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Client }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Current:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Current }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Project:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.Project }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Link:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">0</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Form:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.FormId }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Status:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.StatusId }}</div>
+    </div>
+  </div>
+
+  <!-- Dates Section -->
+  <div
+    *ngIf="activeSection === 'dates'"
+    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+  >
+    <h3 class="text-lg font-semibold mb-2">Dates</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Signing date:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.SigningDate }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Starting date:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.StartingDate }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Duration (year):</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.DurationYears }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Auto renewal:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.AutoRenewal }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Termination date:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.TerminationDate }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Days to expiration:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">120</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Renewal Flag Off Date:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">01 September 2024</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Days to next notice date:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">31-10-2024</div>
+    </div>
+  </div>
+
+  <!-- Classification Section -->
+  <div
+    *ngIf="activeSection === 'classification'"
+    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+  >
+    <h3 class="text-lg font-semibold mb-2">Classification</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Category:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.CategoryId }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Type:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">{{ selectedContract.TypeId }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Value:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.Value | currency }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Annualized Value:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.AnnualizedValue | currency }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Total Value Category:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.TotalValueCategory }}
+      </div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Total Annualized Value Category:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.TotalAnnualizedValueCategory }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-wrap">
+  <!-- Issues Section -->
+  <div
+    class="w-full md:w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg"
+  >
+    <h3 class="text-lg font-semibold mb-2">Issues</h3>
+    <div class="bg-white p-2 rounded">
+      <ul>
+        <li *ngFor="let issue of selectedContract.OpenIssues">{{ issue }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Notes Section -->
+  <div
+    class="w-full md:w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg"
+  >
+    <h3 class="text-lg font-semibold mb-2">Notes</h3>
+    <div class="bg-white p-2 rounded">
+      <ul>
+        <li *ngFor="let note of selectedContract.Notes">{{ note }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

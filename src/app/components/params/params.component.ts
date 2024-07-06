@@ -10,19 +10,31 @@ export class ParamsComponent {
   params: string[] = [
     'category',
     'description',
-    'group',
     'done_outline',
-    'title',
     'timer',
     'person_add',
+    'security'
   ];
-  names:string[] = ['category','form','user','status','types','limitset','role']
+  // params: string[] = [
+  //   'category',
+  //   'description',
+  //   'group',
+  //   'done_outline',
+  //   'title',
+  //   'timer',
+  //   'person_add',
+  // ];
+  //names:string[] = ['category','form','user','status','types','limitset','role']
+  //names:string[] = ['Category','Forms','user','Status','types','ExpirationLimit','Role']
+  names:string[] = ['Category','Forms','Status','ExpirationLimit','Role','Permissions']
 
   constructor(private router: Router) {}
 
+  // navigateToComponent(item: string) {
+  //   this.router.navigate([`/${item}`]);
+  // }
   navigateToComponent(item: string) {
-    this.router.navigate([`/${item}`]);
+    this.router.navigate(['/options'], { queryParams: { key: item } });
   }
-
 
 }
