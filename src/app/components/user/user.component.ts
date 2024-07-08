@@ -271,7 +271,6 @@ export class UserComponent {
   //   this.newFirstName = '';
   //   this.newLastName = '';
   //   this.newEmail = '';
-
   //   this.editFirstName = '';
   //   this.editLastName = '';
   //   this.editEmail = '';
