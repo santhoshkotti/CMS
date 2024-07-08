@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-params',
   templateUrl: './params.component.html',
-  styleUrls: ['./params.component.css']
+  styleUrls: ['./params.component.css'],
 })
 export class ParamsComponent {
   params: string[] = [
@@ -12,8 +12,9 @@ export class ParamsComponent {
     'description',
     'done_outline',
     'timer',
+    'manage_accounts',
+    'security',
     'person_add',
-    'security'
   ];
   // params: string[] = [
   //   'category',
@@ -26,7 +27,15 @@ export class ParamsComponent {
   // ];
   //names:string[] = ['category','form','user','status','types','limitset','role']
   //names:string[] = ['Category','Forms','user','Status','types','ExpirationLimit','Role']
-  names:string[] = ['Category','Forms','Status','ExpirationLimit','Role','Permissions']
+  names: string[] = [
+    'Category',
+    'Forms',
+    'Status',
+    'ExpirationLimit',
+    'Role',
+    'Permissions',
+    'Users',
+  ];
 
   constructor(private router: Router) {}
 
@@ -34,7 +43,10 @@ export class ParamsComponent {
   //   this.router.navigate([`/${item}`]);
   // }
   navigateToComponent(item: string) {
-    this.router.navigate(['/options'], { queryParams: { key: item } });
+    if (item !== 'Users') {
+      this.router.navigate(['/options'], { queryParams: { key: item } });
+    } else{
+      this.router.navigate(['/users']);
+    }
   }
-
 }

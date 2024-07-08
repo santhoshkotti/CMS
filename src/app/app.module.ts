@@ -14,11 +14,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterContractPipe } from './filter-contract.pipe';
 import { FormContractComponent } from './components/form-contract/form-contract.component';
 
-
 import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UserComponent } from './components/user/user.component';
 @NgModule({
-  imports: [BrowserModule,HttpClientModule, AppRoutingModule,FormsModule,ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -26,9 +32,13 @@ import { HeaderComponent } from './components/header/header.component';
     ParamsComponent,
     TableComponent,
     CategoryComponent,
-    ContractviewComponent,FormContractComponent,DashBoardComponent,FilterContractPipe,
+    ContractviewComponent,
+    FormContractComponent,
+    DashBoardComponent,
+    FilterContractPipe,
     FooterComponent,
     GenericOptionsComponent,
+    UserComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

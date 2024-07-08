@@ -13,6 +13,24 @@ export interface Users{
     Email:string,
     HashPassword :string
 }
+export interface PermissionPayload {
+  RoleId: number;
+  CategoryId: number;
+  PermissionId: number;
+  CreatedBy: number;
+  CreatedAt: string;
+  UpdatedBy: number;
+  UpdatedAt: string;
+}
+
+export interface UserRole {
+  UserId: number;
+  RoleId: number;
+  CreatedBy: number;
+  CreatedAt: string;
+  UpdatedBy: number;
+  UpdatedAt: string;
+}
 
 export interface Contracts {
     Id :number,
