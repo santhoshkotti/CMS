@@ -20,6 +20,7 @@ if os.path.exists(filePath):
             responseRoleCategoryPermissions=data.get('responseRoleCategoryPermissions',[])
             responseCategoryAdditionalFields=data.get('responseCategoryAdditionalFields',[])
             responseTypes=data.get('responseTypes',[])
+            responseUserRoles=data.get('responseUserRoles',[])
             responseContracts=data.get('responseContracts',[])
             responseContractAdditionalFieldValues=data.get('responseContractAdditionalFieldValues',[])
     else:
@@ -31,13 +32,14 @@ if os.path.exists(filePath):
         responseTypes=[]
         responseContracts=[]
         responseContractAdditionalFieldValues=[]
+        responseUserRoles=[]
         with open(filePath, 'w') as f:
-            json.dump({'responseData': responseData, 'responseUser': responseUser, 'responseOptions': responseOptions,'responseRoleCategoryPermissions':responseRoleCategoryPermissions,'responseCategoryAdditionalFields':responseCategoryAdditionalFields,'responseTypes':responseTypes,'responseContracts':responseContracts,'responseContractAdditionalFieldValues':responseContractAdditionalFieldValues}, f)
+            json.dump({'responseData': responseData, 'responseUser': responseUser, 'responseOptions': responseOptions,'responseUserRoles':responseUserRoles,'responseRoleCategoryPermissions':responseRoleCategoryPermissions,'responseCategoryAdditionalFields':responseCategoryAdditionalFields,'responseTypes':responseTypes,'responseContracts':responseContracts,'responseContractAdditionalFieldValues':responseContractAdditionalFieldValues}, f)
 
 
 def save_data():
     with open(filePath, 'w') as f:
-        json.dump({'responseData': responseData, 'responseUser': responseUser, 'responseOptions': responseOptions,'responseRoleCategoryPermissions':responseRoleCategoryPermissions,'responseCategoryAdditionalFields':responseCategoryAdditionalFields,'responseTypes':responseTypes,'responseContracts':responseContracts,'responseContractAdditionalFieldValues':responseContractAdditionalFieldValues}, f)
+        json.dump({'responseData': responseData, 'responseUser': responseUser, 'responseUserRoles':responseUserRoles,'responseOptions': responseOptions,'responseRoleCategoryPermissions':responseRoleCategoryPermissions,'responseCategoryAdditionalFields':responseCategoryAdditionalFields,'responseTypes':responseTypes,'responseContracts':responseContracts,'responseContractAdditionalFieldValues':responseContractAdditionalFieldValues}, f)
 
 
 # CRUD Endpoints for Users
