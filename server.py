@@ -440,5 +440,20 @@ def delete_contract_additional_fields_value(contract_id, additional_field_id):
     save_data()
     return '', 204
 
+#ADDITIONAL APIS
+
+@app.route('/categoryadditionalfeildnames/<int:category_id>',methods=['get'])
+def additonal_cate_values(category_id):
+    global responseCategoryAdditionalFields
+    global responseOptions
+    response=[ v for v in responseCategoryAdditionalFields if(v['CategoryId']==category_id)]   
+    additional_field_ids = [item['AdditionalFieldId'] for item in response]
+    values = [
+        {'AdditionalFieldId': option['Id'], 'Value': option['Value']}
+        for option in responseOptions
+        if option['Id'] in additional_field_ids
+    ]
+    return jsonify(values), 200
+
 if __name__ == '__main__':
     app.run(debug=True)
