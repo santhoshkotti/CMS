@@ -213,6 +213,21 @@ def delete_role_category_permission():
 
 # CRUD operations for CategoryAdditionalFields
 
+# @app.route('/categoryadditionalfields', methods=['POST'])
+# def create_category_additional_field():
+#     data = request.get_json()
+#     new_field = {
+#         "CategoryId": data['CategoryId'],
+#         "AdditionalFieldId": data['AdditionalFieldId'],
+#         "CreatedAt": datetime.utcnow().isoformat(),
+#         "CreatedBy": data.get('CreatedBy'),
+#         "UpdatedAt": datetime.utcnow().isoformat(),
+#         "UpdatedBy": data.get('UpdatedBy')
+#     }
+#     responseCategoryAdditionalFields.append(new_field)
+#     save_data()
+#     return jsonify(new_field), 201
+
 @app.route('/categoryadditionalfields', methods=['POST'])
 def create_category_additional_fields():
     data = request.get_json()
@@ -412,14 +427,26 @@ def delete_contract(contract_id):
 def get_contract_additional_fields_values():
     return jsonify(responseContractAdditionalFieldValues), 200
 
+# @app.route('/contract-additional-fields-values', methods=['POST'])
+# def create_contract_additional_fields_value():
+#     new_value = request.get_json()
+#     new_value['CreatedAt'] = datetime.utcnow().isoformat()
+#     new_value['UpdatedAt'] = datetime.utcnow().isoformat()
+#     responseContractAdditionalFieldValues.append(new_value)
+#     save_data()
+#     return jsonify(new_value), 201
+
 @app.route('/contract-additional-fields-values', methods=['POST'])
-def create_contract_additional_fields_value():
-    new_value = request.get_json()
-    new_value['CreatedAt'] = datetime.utcnow().isoformat()
-    new_value['UpdatedAt'] = datetime.utcnow().isoformat()
-    responseContractAdditionalFieldValues.append(new_value)
+def create_contract_additional_fields_values():
+    new_values = request.get_json()
+    print(new_values)
+    timestamp = datetime.utcnow().isoformat()
+    for new_value in new_values:
+        new_value['CreatedAt'] = timestamp
+        new_value['UpdatedAt'] = timestamp
+        responseContractAdditionalFieldValues.append(new_value)
     save_data()
-    return jsonify(new_value), 201
+    return jsonify(new_values), 201
 
 @app.route('/contract-additional-fields-values/<int:contract_id>/<int:additional_field_id>', methods=['GET'])
 def get_contract_additional_fields_value(contract_id, additional_field_id):
@@ -460,6 +487,32 @@ def additonal_cate_values(category_id):
         if option['Id'] in additional_field_ids
     ]
     return jsonify(values), 200
+
+@app.route('/contract-additional-fields-values/<int:contract_id>', methods=['GET'])
+def get_contract_additional_fields_valuesk(contract_id):
+    additional_field_ids = [v['AdditionalFieldId'] for v in responseContractAdditionalFieldValues if v['ContractId'] == contract_id]
+    
+    if not additional_field_ids:
+        return jsonify({"message": "No AdditionalFieldIds found for the given ContractId"}), 404
+    existing_json = [{"AdditionalFieldId": field_id, "Value": next((opt['Value'] for opt in responseOptions if opt['Id'] == field_id), "Value not found")} for field_id in additional_field_ids]
+    values = [
+        {"AdditionalFieldId": item['AdditionalFieldId'], "C_Value": item['Value']}
+        for item in responseContractAdditionalFieldValues if item['ContractId'] == contract_id
+    ]
+    merged_values = []
+
+    for existing_item in existing_json:
+        for new_item in values:
+            if existing_item['AdditionalFieldId'] == new_item['AdditionalFieldId']:
+                merged_values.append({**existing_item, **new_item})
+
+    print(merged_values)  
+    return jsonify(merged_values), 200
+    
+   
+    
+  
+
 
 if __name__ == '__main__':
     app.run(debug=True)
