@@ -214,20 +214,24 @@ def delete_role_category_permission():
 # CRUD operations for CategoryAdditionalFields
 
 @app.route('/categoryadditionalfields', methods=['POST'])
-def create_category_additional_field():
+def create_category_additional_fields():
     data = request.get_json()
-    new_field = {
-        "CategoryId": data['CategoryId'],
-        "AdditionalFieldId": data['AdditionalFieldId'],
-        "CreatedAt": datetime.utcnow().isoformat(),
-        "CreatedBy": data.get('CreatedBy'),
-        "UpdatedAt": datetime.utcnow().isoformat(),
-        "UpdatedBy": data.get('UpdatedBy')
-    }
-    responseCategoryAdditionalFields.append(new_field)
+    
+    new_fields = []
+    for item in data:
+        new_field = {
+            "CategoryId": item['CategoryId'],
+            "AdditionalFieldId": item['AdditionalFieldId'],
+            "CreatedAt": datetime.utcnow().isoformat(),
+            "CreatedBy": item.get('CreatedBy'),
+            "UpdatedAt": datetime.utcnow().isoformat(),
+            "UpdatedBy": item.get('UpdatedBy')
+        }
+        responseCategoryAdditionalFields.append(new_field)
+        new_fields.append(new_field)
+    
     save_data()
-    return jsonify(new_field), 201
-
+    return jsonify(new_fields), 201
 
 @app.route('/categoryadditionalfields', methods=['GET'])
 def get_category_additional_fields():
