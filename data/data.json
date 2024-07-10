@@ -438,7 +438,11 @@
   "responseCategoryAdditionalFields": [
     {
       "CategoryId": 1,
-      "AdditionalFieldId": 19 
+      "AdditionalFieldId": 19
+    },
+    {
+      "CategoryId": 2,
+      "AdditionalFieldId": 19
     },
     {
       "CategoryId": 2,
@@ -446,7 +450,7 @@
     },
     {
       "CategoryId": 3,
-      "AdditionalFieldId": 19 
+      "AdditionalFieldId": 19
     },
     {
       "CategoryId": 4,
@@ -633,24 +637,63 @@
       "CreatedAt": "2024-07-03T10:00:00",
       "UpdatedBy": 1,
       "UpdatedAt": "2024-07-03T10:00:00"
+    },
+    {
+      "Id": 5,
+      "UniqueNo": "DEF345",
+      "Version": 1,
+      "Current": true,
+      "CategoryId": 2,
+      "TypeId": 1,
+      "CounterParty": "Company E",
+      "Account": "Account 345",
+      "Client": "Client V",
+      "Project": "Project Q",
+      "CounterPartyOwner": "Emma White",
+      "LegalOwnerId": 2,
+      "BusinessOwnerId": 3,
+      "StatusId": 14,
+      "SigningDate": "2024-07-04",
+      "StartingDate": "2024-07-05",
+      "TerminationDate": "2025-07-04",
+      "RenewalDateFlagOff": false,
+      "Value": 9000,
+      "Jurisdiction": "Washington",
+      "LiabilitiesCap": 18000,
+      "ExpirationLimitId": 21,
+      "Notes": "This is a new sample contract.",
+      "OpenIssues": "Review required",
+      "FormId": 17,
+      "Link": "https://example.com/contract5",
+      "AutoRenewal": true,
+      "ContractCode": "CONTRACT-005",
+      "Filename": "contract5.pdf",
+      "CreatedBy": 1,
+      "CreatedAt": "2024-07-04T10:00:00",
+      "UpdatedBy": 1,
+      "UpdatedAt": "2024-07-04T10:00:00"
     }
   ],
-  "responseContractAdditionalFieldValues":[
-      {
-        "ContractId": 1,
-        "AdditionalFieldId": 19,
-        "Value": "Sample value 1"
-      },
-      {
-        "ContractId": 2,
-        "AdditionalFieldId": 23,
-        "Value": "Sample value 2"
-      },
-      {
-        "ContractId": 3,
-        "AdditionalFieldId": 19,
-        "Value": "Sample value 3"
-      }
-    ]
-
+  "responseContractAdditionalFieldValues": [
+    {
+      "ContractId": 1,
+      "AdditionalFieldId": 19,
+      "Value": "Sample value 1"
+    },
+    {
+      "ContractId": 1,
+      "AdditionalFieldId": 23,
+      "Value": "Sample value 4"
+    },
+    {
+      "ContractId": 2,
+      "AdditionalFieldId": 23,
+      "Value": "Sample value 2"
+    },
+    {
+      "ContractId": 3,
+      "AdditionalFieldId": 19,
+      "Value": "Sample value 3"
+    }
+  ]
 }
