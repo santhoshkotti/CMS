@@ -1,7 +1,7 @@
-import { ContractviewserviceService } from '../../services/Contractview/contractviewservice.service';
+import { ContractformService } from './../../services/contractFormService/contractform.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-contractview',
   templateUrl: './contractview.component.html',
@@ -17,24 +17,54 @@ export class ContractviewComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private contractService: ContractviewserviceService
+    private contractService: ContractformService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
+  // ngOnInit(): void {
+  //   this.contractService.getContracts().subscribe(
+  //     (contracts) => {
+  //       this.responseContracts = contracts;
+  //       this.calculateAnnualizedValue();
+  //       if (this.responseContracts.length > 0) {
+  //         this.selectedContract = this.responseContracts[0]; // Set default selection
+  //         this.loadAdditionalFields(this.selectedContract.Id);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching contracts:', error);
+  //       // Handle error as needed
+  //     }
+  //   );
+  // }
   ngOnInit(): void {
-    this.contractService.getContracts().subscribe(
-      (contracts) => {
-        this.responseContracts = contracts;
-        this.calculateAnnualizedValue();
-        if (this.responseContracts.length > 0) {
-          this.selectedContract = this.responseContracts[0]; // Set default selection
+    this.route.queryParams.subscribe((params) => {
+      const contractId = params['contractId'];
+
+      this.contractService.getContractFormdetails().subscribe(
+        (contracts) => {
+          this.responseContracts = contracts;
+          this.calculateAnnualizedValue();
+
+          if (contractId) {
+            this.selectedContract = this.responseContracts.find(
+              (contract) => contract.Id === +contractId
+            );
+          }
+
+          if (!this.selectedContract) {
+            this.selectedContract = this.responseContracts[0]; // Set default selection
+          }
+
           this.loadAdditionalFields(this.selectedContract.Id);
+        },
+        (error) => {
+          console.error('Error fetching contracts:', error);
+          // Handle error as needed
         }
-      },
-      (error) => {
-        console.error('Error fetching contracts:', error);
-        // Handle error as needed
-      }
-    );
+      );
+    });
   }
 
   private calculateAnnualizedValue(): void {
@@ -55,77 +85,96 @@ export class ContractviewComponent implements OnInit {
     this.loadAdditionalFields(selectedId);
   }
 
+  // private loadAdditionalFields(contractId: number): void {
+  //   this.contractService.getAdditionalFieldNames(contractId).subscribe(
+  //     (additionalFields) => {
+  //       console.log('API Response - Additional Fields:', additionalFields); // Log API response
+  //       this.additionalFields = Array.isArray(additionalFields)
+  //         ? additionalFields
+  //         : []; // Ensure additionalFields is an array
+  //       console.log('Additional Fields:', this.additionalFields);
+
+  //       // Check if CategoryId exists and load additional field names
+  //       if (this.selectedContract && this.selectedContract.CategoryId) {
+  //         // Iterate through additionalFields and make API calls
+  //         this.additionalFields.forEach((field) => {
+  //           this.contractService
+  //             .getContractAdditionalFields(contractId, field.AdditionalFieldId)
+  //             .subscribe(
+  //               (additionalFieldData) => {
+  //                 console.log(
+  //                   'API Response - Additional Field Data:',
+  //                   additionalFieldData
+  //                 ); // Log API response
+  //                 // Add fetched data to additionalFieldNames
+  //                 this.additionalFieldNames.push({
+  //                   additionalFieldData, // Assuming 'Value' is the relevant property from the response
+  //                 });
+  //                 console.log(
+  //                   'Updated Additional Field Names:',
+  //                   this.additionalFieldNames
+  //                 );
+
+  //                 // Combine additional fields with names
+  //                 this.combineAdditionalFields();
+  //               },
+  //               (error) => {
+  //                 console.error(
+  //                   `Error fetching additional field data for AdditionalFieldId ${field.AdditionalFieldId}:`,
+  //                   error
+  //                 );
+  //               }
+  //             );
+  //         });
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching additional fields:', error);
+  //     }
+  //   );
+  // }
+
+  // private combineAdditionalFields(): void {
+  //   this.combinedAdditionalFields = [];
+
+  //   // Flatten the additionalFieldData structure to simplify matching
+  //   const flattenedData = this.additionalFieldNames.map((item) => ({
+  //     AdditionalFieldId: item.additionalFieldData.AdditionalFieldId,
+  //     Value: item.additionalFieldData.Value,
+  //   }));
+
+  //   this.additionalFields.forEach((field) => {
+  //     const matchingName = flattenedData.find(
+  //       (name) => name.AdditionalFieldId === field.AdditionalFieldId
+  //     );
+  //     if (matchingName) {
+  //       this.combinedAdditionalFields.push({
+  //         AdditionalFieldId: field.AdditionalFieldId,
+  //         Value: matchingName.Value,
+  //         FieldName: field.Value,
+  //       });
+  //     }
+  //   });
+
+  //   console.log('Combined Additional Fields:', this.combinedAdditionalFields);
+  // }
   private loadAdditionalFields(contractId: number): void {
-    this.contractService.getAdditionalFieldNames(contractId).subscribe(
-      (additionalFields) => {
-        console.log('API Response - Additional Fields:', additionalFields); // Log API response
-        this.additionalFields = Array.isArray(additionalFields)
-          ? additionalFields
-          : []; // Ensure additionalFields is an array
-        console.log('Additional Fields:', this.additionalFields);
-
-        // Check if CategoryId exists and load additional field names
-        if (this.selectedContract && this.selectedContract.CategoryId) {
-          // Iterate through additionalFields and make API calls
-          this.additionalFields.forEach((field) => {
-            this.contractService
-              .getContractAdditionalFields(contractId, field.AdditionalFieldId)
-              .subscribe(
-                (additionalFieldData) => {
-                  console.log(
-                    'API Response - Additional Field Data:',
-                    additionalFieldData
-                  ); // Log API response
-                  // Add fetched data to additionalFieldNames
-                  this.additionalFieldNames.push({
-                    additionalFieldData, // Assuming 'Value' is the relevant property from the response
-                  });
-                  console.log(
-                    'Updated Additional Field Names:',
-                    this.additionalFieldNames
-                  );
-
-                  // Combine additional fields with names
-                  this.combineAdditionalFields();
-                },
-                (error) => {
-                  console.error(
-                    `Error fetching additional field data for AdditionalFieldId ${field.AdditionalFieldId}:`,
-                    error
-                  );
-                }
-              );
-          });
+    this.contractService
+      .getContractAdditionalFieldsValues(contractId)
+      .subscribe(
+        (additionalFields) => {
+          console.log('API Response - Additional Fields:', additionalFields); // Log API response
+          this.combinedAdditionalFields = Array.isArray(additionalFields)
+            ? additionalFields
+            : []; // Ensure additionalFields is an array
+          console.log(
+            'Combined Additional Fields:',
+            this.combinedAdditionalFields
+          );
+        },
+        (error) => {
+          console.error('Error fetching additional fields:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching additional fields:', error);
-      }
-    );
-  }
-
-  private combineAdditionalFields(): void {
-    this.combinedAdditionalFields = [];
-
-    // Flatten the additionalFieldData structure to simplify matching
-    const flattenedData = this.additionalFieldNames.map((item) => ({
-      AdditionalFieldId: item.additionalFieldData.AdditionalFieldId,
-      Value: item.additionalFieldData.Value,
-    }));
-
-    this.additionalFields.forEach((field) => {
-      const matchingName = flattenedData.find(
-        (name) => name.AdditionalFieldId === field.AdditionalFieldId
       );
-      if (matchingName) {
-        this.combinedAdditionalFields.push({
-          AdditionalFieldId: field.AdditionalFieldId,
-          Value: matchingName.Value,
-          FieldName: field.Value,
-        });
-      }
-    });
-
-    console.log('Combined Additional Fields:', this.combinedAdditionalFields);
   }
 }

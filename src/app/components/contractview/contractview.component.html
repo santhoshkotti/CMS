@@ -1,19 +1,9 @@
 <div class="flex justify-center items-center mb-4">
   <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/5">
     <div class="flex items-center">
-      <label for="contractSelect" class="mr-2">Select Contract:</label>
-      <select
-        id="contractSelect"
-        class="form-control"
-        (change)="onContractChange($event)"
+      <label for="contractSelect" class="mr-2"
+        >Contract: {{ selectedContract.ContractCode }}</label
       >
-        <option
-          *ngFor="let contract of responseContracts"
-          [value]="contract.Id"
-        >
-          {{ contract.ContractCode }}
-        </option>
-      </select>
     </div>
   </div>
 </div>
@@ -83,7 +73,7 @@
       Classification
     </button>
     <button
-      *ngIf="additionalFields.length > 0"
+      *ngIf="combinedAdditionalFields.length > 0"
       class="flex-1 px-4 py-2 border-b-2 border-gray-300 rounded-t-lg"
       [ngClass]="{
         'bg-white text-blue-500': activeSection === 'additionalFields',
@@ -198,39 +188,44 @@
         <strong class="opacity-70">Value:</strong>
       </div>
       <div class="bg-white p-2 rounded">{{ selectedContract.Value }}</div>
+      <div class="bg-blue-100 p-2 rounded">
+        <strong class="opacity-70">Liabilities Cap:</strong>
+      </div>
+      <div class="bg-white p-2 rounded">
+        {{ selectedContract.LiabilitiesCap }}
+      </div>
     </div>
   </div>
 
   <!-- Additional Fields Section -->
   <div
-    *ngIf="activeSection === 'additionalFields' && additionalFields.length > 0"
+    *ngIf="activeSection === 'additionalFields'"
     class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
   >
     <h3 class="text-lg font-semibold mb-2">Additional Fields</h3>
     <div class="grid grid-cols-4 gap-4">
       <div
         *ngFor="let field of combinedAdditionalFields"
-        class="col-span-4 sm:col-span-2 lg:col-span-1"
+        class="bg-blue-100 p-2 rounded"
       >
-        <div class="bg-blue-100 p-2 rounded">
-          <strong class="opacity-70">{{ field.FieldName }}:</strong>
-        </div>
-        <div class="bg-white p-2 rounded">{{ field.Value }}</div>
+        <strong class="opacity-70">{{ field.Value }}:</strong>
+        <div class="bg-white p-2 rounded">{{ field.C_Value }}</div>
       </div>
     </div>
   </div>
-  <!-- Issues and Notes Section -->
-  <div class="flex w-full gap-4">
-    <!-- Issues Section -->
-    <div class="w-1/2 p-4 border bg-blue-100 shadow-md mb-4 rounded-lg">
-      <h3 class="text-lg font-semibold mb-2">Issues</h3>
-      <div class="bg-white p-2 rounded">{{ selectedContract.OpenIssues }}</div>
-    </div>
+</div>
 
-    <!-- Notes Section -->
-    <div class="w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
-      <h3 class="text-lg font-semibold mb-2">Notes</h3>
-      <div class="bg-white p-2 rounded">{{ selectedContract.Notes }}</div>
-    </div>
+<!-- Issues and Notes Section -->
+<div class="flex w-full gap-4">
+  <!-- Issues Section -->
+  <div class="w-1/2 p-4 border bg-blue-100 shadow-md mb-4 rounded-lg">
+    <h3 class="text-lg font-semibold mb-2">Issues</h3>
+    <div class="bg-white p-2 rounded">{{ selectedContract.OpenIssues }}</div>
+  </div>
+
+  <!-- Notes Section -->
+  <div class="w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
+    <h3 class="text-lg font-semibold mb-2">Notes</h3>
+    <div class="bg-white p-2 rounded">{{ selectedContract.Notes }}</div>
   </div>
 </div>
