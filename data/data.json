@@ -441,8 +441,8 @@
       "AdditionalFieldId": 19
     },
     {
-      "CategoryId": 2,
-      "AdditionalFieldId": 19
+      "CategoryId": 1,
+      "AdditionalFieldId": 23
     },
     {
       "CategoryId": 2,
@@ -679,11 +679,6 @@
       "ContractId": 1,
       "AdditionalFieldId": 19,
       "Value": "Sample value 1"
-    },
-    {
-      "ContractId": 1,
-      "AdditionalFieldId": 23,
-      "Value": "Sample value 4"
     },
     {
       "ContractId": 2,
