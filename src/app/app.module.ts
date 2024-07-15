@@ -28,12 +28,13 @@ import { NgMultiSelectDropDownModule, IDropdownSettings } from 'ng-multiselect-d
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
+import { MainComponent } from './components/main/main.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LayoutComponent,FormContractComponent,DashBoardComponent,FilterContractPipe],
+  declarations: [AppComponent, HeaderComponent, LayoutComponent,FormContractComponent,DashBoardComponent,FilterContractPipe, MainComponent],
   imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule,RouterModule,HttpClientModule, BrowserAnimationsModule
     ,MatTableModule,
      MatSortModule,
