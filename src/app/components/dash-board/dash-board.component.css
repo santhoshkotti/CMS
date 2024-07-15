@@ -1,0 +1,133 @@
+/* ::ng-deep .mat-header-cell.mat-sort-header-sorted {
+  color: white !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white !important;
+}
+
+::ng-deep .mat-sort-header-arrow,
+::ng-deep .mat-sort-header-arrow .mat-icon {
+  fill: white !important;
+} */
+
+/* .status-pending {
+  color: blueviolet;
+}
+
+.status-negotiation {
+  color: red;
+}
+
+.status-approved {
+  color: green;
+} */
+.status-pending {
+  background-color: rgb(231, 231, 105);
+  color: lightyellow;
+  text-align: center;
+  border-radius: 5px;
+  width:76%
+
+}
+
+.status-negotiation {
+  background-color: rgb(222, 161, 161);
+  /* background-color: red; */
+  color: red;
+  text-align: center;
+  border-radius: 5px;
+  width:76%
+}
+
+.status-approved {
+  background-color: rgb(117, 215, 117);
+  color: green;
+  text-align: center;
+  border-radius: 5px;
+  width:76%
+
+}
+
+.mat-elevation-z8 {
+  margin: 20px;
+}
+
+table {
+  width: 150%;
+}
+
+/* th.mat-sort-header-sorted {
+  color: white;
+  fill: white;
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: center;
+  color:white
+
+}
+
+.th{
+  color:white;
+} */
+/*
+th{
+  background-color: red;
+} */
+
+/* mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+} */
+
+
+
+
+/* .mat-header-cell.custom-header {
+  background-color: #1976d2;
+  color: white;
+}
+
+::ng-deep .mat-header-cell.custom-header {
+  background-color: #1976d2;
+  color: white;
+} */
+
+
+mat-header-cell {
+  background-color: #1976d2 !important;
+  color: white !important;
+
+}
+
+mat-sort-header{
+  color:white;
+}
+
+.mat-header-cell{
+  color: white
+}
+
+
+.ad{
+  color: white;
+}
+
+/* .back{
+  backgroundcolor: blue;
+  background: #1976d2;
+} */
+
+.mat-sort-header{
+  color: white !important;
+}
+
+/* .custom-header{
+  background-color: red;
+} */
+
+
+
+
+

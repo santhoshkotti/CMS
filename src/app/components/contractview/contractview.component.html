@@ -44,30 +44,21 @@
   <div class="flex w-full">
     <button
       class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300 rounded-t-lg"
-      [ngClass]="{
-        'bg-white text-blue-500': activeSection === 'focus',
-        'bg-slate-300 text-white': activeSection !== 'focus'
-      }"
+
       (click)="setActiveSection('focus')"
     >
       Contract Focus
     </button>
     <button
       class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300"
-      [ngClass]="{
-        'bg-white text-blue-500': activeSection === 'dates',
-        'bg-slate-300 text-white': activeSection !== 'dates'
-      }"
+
       (click)="setActiveSection('dates')"
     >
       Dates
     </button>
     <button
       class="flex-1 px-4 py-2 border-b-2 border-gray-300 rounded-t-lg"
-      [ngClass]="{
-        'bg-white text-blue-500': activeSection === 'classification',
-        'bg-slate-300 text-white': activeSection !== 'classification'
-      }"
+
       (click)="setActiveSection('classification')"
     >
       Classification
