@@ -7,7 +7,7 @@ import { Contracts } from 'src/app/interfaces/options';
   providedIn: 'root',
 })
 export class ContractformService {
-  private apiUrl = 'http://127.0.0.1:5000';
+  private apiUrl = 'http://127.0.0.1:3001';
   constructor(private http: HttpClient) {}
 
   getContractFormdetails(): Observable<any[]> {

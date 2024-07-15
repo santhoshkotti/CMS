@@ -10,11 +10,13 @@ import { GenericOptionsComponent } from './components/generic-options/generic-op
 import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
 import { ContractviewComponent } from './components/contractview/contractview.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: DashBoardComponent },
   { path: 'layout', component: LayoutComponent },
   { path: 'header', component: HeaderComponent },
+  { path: 'footer', component: FooterComponent },
   { path: 'dashboard', component: DashBoardComponent },
   { path: 'formcontract', component: FormContractComponent },
   { path: 'category', component: CategoryComponent },

@@ -1,0 +1,51 @@
+<div *ngIf="key === 'Category'" class="mt-4">
+  <label class="flex items-center space-x-2">
+    <span>Add Additional Fields?</span>
+    <input
+      type="checkbox"
+      (change)="toggleFields($event)"
+      [checked]="showFields"
+      class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+    />
+  </label>
+
+  <div *ngIf="showFields" class="mt-4 p-4">
+    <table class="table-auto w-fit">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Field Name</th>
+          <th class="px-4 py-2">Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let field of additionalFields" class="mb-2 p-3">
+          <td class="border px-4 py-2">{{ field.Value }}</td>
+          <td class="border px-4 py-2 text-center">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event, field)"
+              class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+              [checked]="SelectedField.includes(field.Id)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      *ngIf="!IsEdit; else otherButton"
+      (click)="addFieldsToCategory()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+    >
+      Add Selected Fields
+    </button>
+
+    <ng-template #otherButton>
+      <button
+        (click)="EditCategoryField()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+      >
+        Save changes
+      </button>
+    </ng-template>
+  </div>
+</div>

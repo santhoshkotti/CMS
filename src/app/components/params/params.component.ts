@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,18 +15,9 @@ export class ParamsComponent {
     'manage_accounts',
     'security',
     'person_add',
+    'additionalfield', // Add the new field here
   ];
-  // params: string[] = [
-  //   'category',
-  //   'description',
-  //   'group',
-  //   'done_outline',
-  //   'title',
-  //   'timer',
-  //   'person_add',
-  // ];
-  //names:string[] = ['category','form','user','status','types','limitset','role']
-  //names:string[] = ['Category','Forms','user','Status','types','ExpirationLimit','Role']
+
   names: string[] = [
     'Category',
     'Forms',
@@ -35,18 +26,20 @@ export class ParamsComponent {
     'Role',
     'Permissions',
     'Users',
+    'AdditionalField', // Add the new field here
   ];
 
   constructor(private router: Router) {}
 
-  // navigateToComponent(item: string) {
-  //   this.router.navigate([`/${item}`]);
-  // }
   navigateToComponent(item: string) {
-    if (item !== 'Users') {
-      this.router.navigate(['/options'], { queryParams: { key: item } });
-    } else{
+    if (item === 'Users') {
       this.router.navigate(['/users']);
+    } else {
+      this.router.navigate(['/options'], { queryParams: { key: item } });
     }
   }
 }
+
+// navigateToComponent(item: string) {
+//   this.router.navigate([`/${item}`]);
+// }

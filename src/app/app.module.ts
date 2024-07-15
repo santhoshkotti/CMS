@@ -17,6 +17,7 @@ import { FormContractComponent } from './components/form-contract/form-contract.
 import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
+import { AdditionalFieldsComponent } from './components/additional-fields/additional-fields.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,6 +40,7 @@ import { UserComponent } from './components/user/user.component';
     FooterComponent,
     GenericOptionsComponent,
     UserComponent,
+    AdditionalFieldsComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
