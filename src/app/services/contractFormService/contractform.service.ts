@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { additionalFields, Contracts } from 'src/app/interfaces/options';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContractformService {
  private apiUrl = "http://127.0.0.1:3001/contracts";
@@ -12,12 +12,12 @@ export class ContractformService {
  private addtionalUrl = "http://127.0.0.1:3001/contract-additional-fields-values";
   constructor(private http:HttpClient) { }
 
-  getContractFormdetails():Observable<any[]>{
-    return this.http.get<any[]>(this.apiUrl);
+  getContractFormdetails(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/contracts`);
   }
 
-  postContractFormdetails(newContract:Contracts):Observable<any[]>{
-    return this.http.post<any[]>(this.apiUrl,newContract);
+  postContractFormdetails(newContract: Contracts): Observable<any[]> {
+    return this.http.post<any[]>(this.apiUrl, newContract);
   }
 
   deleteContract(contractId: number): Observable<void> {
@@ -52,4 +52,9 @@ export class ContractformService {
     alert("nadhanda mass");
     return this.http.post<any[]>(this.addtionalUrl,additionalFiels);
    }
+
+   getContractAdditionalFieldsValues(contractId: number) {
+    return this.http.get<any[]>(`${this.baseUrl}/contract-additional-fields-values/${contractId}`);
+
+  }
 }

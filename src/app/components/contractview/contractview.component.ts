@@ -1,8 +1,7 @@
-import { ContractviewserviceService } from '../../services/Contractview/contractviewservice.service';
+import { ContractformService } from './../../services/contractFormService/contractform.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-contractview',
   templateUrl: './contractview.component.html',
@@ -12,151 +11,60 @@ export class ContractviewComponent implements OnInit {
   activeSection: string = 'focus'; // Default active section
   selectedContract: any;
   responseContracts: any[] = []; // Initialize empty array
-
-  // responseContracts = [
-  //   {
-  //     Id: 1,
-  //     UniqueNo: 'Yes',
-  //     Version: 1.0,
-  //     Current: true,
-  //     CategoryId: 'Financial Contracts',
-  //     TypeId: 'Statement of work',
-  //     CounterParty: 'Synechron',
-  //     Account: 'Synechron',
-  //     Client: 'PNC',
-  //     Project: 'Midland',
-  //     CounterPartyOwner: 'Brij Goyal',
-  //     LegalOwner: 'Srinivasan Damodaran',
-  //     BusinessOwner: 'Srinivasan Damodaran',
-  //     StatusId: 'Fully signed',
-  //     SigningDate: '2024-05-14',
-  //     StartingDate: '2024-05-01',
-  //     TerminationDate: '2024-10-31',
-  //     Value: 50000.0,
-  //     Jurisdiction: 'Pune, India',
-  //     Notes: ['SOW for Mid Land Loan Services'],
-  //     OpenIssues: ['Billing Yet to start'],
-  //     FormId: 'Paper/esigning',
-  //     AutoRenewal: true,
-  //     ContractCode: 'SYN_PNC_MID_01',
-  //     Filename: 'SOW.pdf',
-  //     DurationYears: 0.5,
-  //     AnnualizedValue: 0,
-  //     TotalValueCategory: '#REF!',
-  //     TotalAnnualizedValueCategory: '#REF!',
-  //   },
-  //   {
-  //     Id: 2,
-  //     UniqueNo: 'XYZ456',
-  //     Version: 2.0,
-  //     Current: true,
-  //     CategoryId: 'Sample Category 2',
-  //     TypeId: 'Sample Type 2',
-  //     CounterParty: 'Company B',
-  //     Account: 'Account 456',
-  //     Client: 'Client Y',
-  //     Project: 'Project Z',
-  //     CounterPartyOwner: 'Jane Doe',
-  //     LegalOwner: 'Legal Owner 2',
-  //     BusinessOwner: 'Business Owner 1',
-  //     StatusId: 'Pending',
-  //     SigningDate: '2024-07-01',
-  //     StartingDate: '2024-07-02',
-  //     TerminationDate: '2025-07-01',
-  //     Value: 8000.0,
-  //     Jurisdiction: 'California',
-  //     Notes: ['This is another sample contract.'],
-  //     OpenIssues: ['Pending review'],
-  //     FormId: 'Form 18',
-  //     AutoRenewal: true,
-  //     ContractCode: 'CONTRACT-002',
-  //     Filename: 'contract2.pdf',
-  //     DurationYears: 1,
-  //     AnnualizedValue: 8000,
-  //     TotalValueCategory: '#REF!',
-  //     TotalAnnualizedValueCategory: '#REF!',
-  //   },
-  //   {
-  //     Id: 3,
-  //     UniqueNo: 'PQR789',
-  //     Version: 1.5,
-  //     Current: true,
-  //     CategoryId: 'Sample Category 3',
-  //     TypeId: 'Sample Type 1',
-  //     CounterParty: 'Company C',
-  //     Account: 'Account 789',
-  //     Client: 'Client Z',
-  //     Project: 'Project W',
-  //     CounterPartyOwner: 'Sarah Lee',
-  //     LegalOwner: 'Legal Owner 1',
-  //     BusinessOwner: 'Business Owner 3',
-  //     StatusId: 'Awaiting Feedback',
-  //     SigningDate: '2024-07-02',
-  //     StartingDate: '2024-07-03',
-  //     TerminationDate: '2025-07-02',
-  //     Value: 10000.0,
-  //     Jurisdiction: 'Texas',
-  //     Notes: ['This is a third sample contract.', 'note 2'],
-  //     OpenIssues: ['Awaiting feedback', 'issue2', 'issue3'],
-  //     FormId: 'Form 16',
-  //     AutoRenewal: true,
-  //     ContractCode: 'CONTRACT-003',
-  //     Filename: 'contract3.pdf',
-  //     DurationYears: 1,
-  //     AnnualizedValue: 10000,
-  //     TotalValueCategory: '#REF!',
-  //     TotalAnnualizedValueCategory: '#REF!',
-  //   },
-  //   {
-  //     Id: 4,
-  //     UniqueNo: 'LMN012',
-  //     Version: 3.0,
-  //     Current: true,
-  //     CategoryId: 'Sample Category 4',
-  //     TypeId: 'Sample Type 2',
-  //     CounterParty: 'Company D',
-  //     Account: 'Account 012',
-  //     Client: 'Client W',
-  //     Project: 'Project X',
-  //     CounterPartyOwner: 'Michael Brown',
-  //     LegalOwner: 'Legal Owner 2',
-  //     BusinessOwner: 'Business Owner 2',
-  //     StatusId: 'None',
-  //     SigningDate: '2024-07-03',
-  //     StartingDate: '2024-07-04',
-  //     TerminationDate: '2025-07-03',
-  //     Value: 12000.0,
-  //     Jurisdiction: 'Florida',
-  //     Notes: ['This is another sample contract.'],
-  //     OpenIssues: ['None'],
-  //     FormId: 'Form 17',
-  //     AutoRenewal: true,
-  //     ContractCode: 'CONTRACT-004',
-  //     Filename: 'contract4.pdf',
-  //     DurationYears: 1,
-  //     AnnualizedValue: 12000,
-  //     TotalValueCategory: '#REF!',
-  //     TotalAnnualizedValueCategory: '#REF!',
-  //   },
-  // ];
+  additionalFields: any[] = []; // Initialize additionalFields as an empty array
+  additionalFieldNames: any[] = [];
+  combinedAdditionalFields: any[] = []; // Combined array of additional fields with names
 
   constructor(
     private http: HttpClient,
-    private contractService: ContractviewserviceService
+    private contractService: ContractformService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
+  // ngOnInit(): void {
+  //   this.contractService.getContracts().subscribe(
+  //     (contracts) => {
+  //       this.responseContracts = contracts;
+  //       this.calculateAnnualizedValue();
+  //       if (this.responseContracts.length > 0) {
+  //         this.selectedContract = this.responseContracts[0]; // Set default selection
+  //         this.loadAdditionalFields(this.selectedContract.Id);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching contracts:', error);
+  //       // Handle error as needed
+  //     }
+  //   );
+  // }
   ngOnInit(): void {
-    this.contractService.getContracts().subscribe(
-      (contracts) => {
-        this.responseContracts = contracts;
-        this.calculateAnnualizedValue();
-        this.selectedContract = this.responseContracts[0]; // Set default selection
-      },
-      (error) => {
-        console.error('Error fetching contracts:', error);
-        // Handle error as needed
-      }
-    );
+    this.route.queryParams.subscribe((params) => {
+      const contractId = params['contractId'];
+
+      this.contractService.getContractFormdetails().subscribe(
+        (contracts) => {
+          this.responseContracts = contracts;
+          this.calculateAnnualizedValue();
+
+          if (contractId) {
+            this.selectedContract = this.responseContracts.find(
+              (contract) => contract.Id === +contractId
+            );
+          }
+
+          if (!this.selectedContract) {
+            this.selectedContract = this.responseContracts[0]; // Set default selection
+          }
+
+          this.loadAdditionalFields(this.selectedContract.Id);
+        },
+        (error) => {
+          console.error('Error fetching contracts:', error);
+          // Handle error as needed
+        }
+      );
+    });
   }
 
   private calculateAnnualizedValue(): void {
@@ -174,5 +82,99 @@ export class ContractviewComponent implements OnInit {
     this.selectedContract = this.responseContracts.find(
       (contract) => contract.Id === selectedId
     );
+    this.loadAdditionalFields(selectedId);
+  }
+
+  // private loadAdditionalFields(contractId: number): void {
+  //   this.contractService.getAdditionalFieldNames(contractId).subscribe(
+  //     (additionalFields) => {
+  //       console.log('API Response - Additional Fields:', additionalFields); // Log API response
+  //       this.additionalFields = Array.isArray(additionalFields)
+  //         ? additionalFields
+  //         : []; // Ensure additionalFields is an array
+  //       console.log('Additional Fields:', this.additionalFields);
+
+  //       // Check if CategoryId exists and load additional field names
+  //       if (this.selectedContract && this.selectedContract.CategoryId) {
+  //         // Iterate through additionalFields and make API calls
+  //         this.additionalFields.forEach((field) => {
+  //           this.contractService
+  //             .getContractAdditionalFields(contractId, field.AdditionalFieldId)
+  //             .subscribe(
+  //               (additionalFieldData) => {
+  //                 console.log(
+  //                   'API Response - Additional Field Data:',
+  //                   additionalFieldData
+  //                 ); // Log API response
+  //                 // Add fetched data to additionalFieldNames
+  //                 this.additionalFieldNames.push({
+  //                   additionalFieldData, // Assuming 'Value' is the relevant property from the response
+  //                 });
+  //                 console.log(
+  //                   'Updated Additional Field Names:',
+  //                   this.additionalFieldNames
+  //                 );
+
+  //                 // Combine additional fields with names
+  //                 this.combineAdditionalFields();
+  //               },
+  //               (error) => {
+  //                 console.error(
+  //                   `Error fetching additional field data for AdditionalFieldId ${field.AdditionalFieldId}:`,
+  //                   error
+  //                 );
+  //               }
+  //             );
+  //         });
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching additional fields:', error);
+  //     }
+  //   );
+  // }
+
+  // private combineAdditionalFields(): void {
+  //   this.combinedAdditionalFields = [];
+
+  //   // Flatten the additionalFieldData structure to simplify matching
+  //   const flattenedData = this.additionalFieldNames.map((item) => ({
+  //     AdditionalFieldId: item.additionalFieldData.AdditionalFieldId,
+  //     Value: item.additionalFieldData.Value,
+  //   }));
+
+  //   this.additionalFields.forEach((field) => {
+  //     const matchingName = flattenedData.find(
+  //       (name) => name.AdditionalFieldId === field.AdditionalFieldId
+  //     );
+  //     if (matchingName) {
+  //       this.combinedAdditionalFields.push({
+  //         AdditionalFieldId: field.AdditionalFieldId,
+  //         Value: matchingName.Value,
+  //         FieldName: field.Value,
+  //       });
+  //     }
+  //   });
+
+  //   console.log('Combined Additional Fields:', this.combinedAdditionalFields);
+  // }
+  private loadAdditionalFields(contractId: number): void {
+    this.contractService
+      .getContractAdditionalFieldsValues(contractId)
+      .subscribe(
+        (additionalFields) => {
+          console.log('API Response - Additional Fields:', additionalFields); // Log API response
+          this.combinedAdditionalFields = Array.isArray(additionalFields)
+            ? additionalFields
+            : []; // Ensure additionalFields is an array
+          console.log(
+            'Combined Additional Fields:',
+            this.combinedAdditionalFields
+          );
+        },
+        (error) => {
+          console.error('Error fetching additional fields:', error);
+        }
+      );
   }
 }
