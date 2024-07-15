@@ -19,8 +19,12 @@ export class FilterContractPipe implements PipeTransform {
     }
 
     if(statusFilter){
+      alert("ddd"+statusFilter);
+      console.log("hello"+value);
       for(const contract of value){
+        console.log("hello"+contract["Account"]);
         if(contract['status']=== statusFilter){
+          alert("helloddd"+statusFilter);
           contracts.push(contract)
         }
       }
@@ -28,8 +32,11 @@ export class FilterContractPipe implements PipeTransform {
 
     }
     if(filteredString){
+      alert("filteredstring"+filteredString.Value);
       for(const contract of value){
-        if(contract['contract']=== filteredString){
+        alert(contract['Category']);
+
+        if(contract['Category']=== filteredString){
           contracts.push(contract)
         }
       }
@@ -49,7 +56,7 @@ export class FilterContractPipe implements PipeTransform {
   //  }
     // return contracts;
     if(value.length === 0 || !filteredString || statusFilter==null){
-      alert(statusFilter+"sss");
+      // alert(statusFilter+"sss");
       return value;
     }
 

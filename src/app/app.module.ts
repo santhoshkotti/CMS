@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,10 +11,43 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterContractPipe } from './filter-contract.pipe';
 import { FormContractComponent } from './components/form-contract/form-contract.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { NgModel } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
+import { NgMultiSelectDropDownModule, IDropdownSettings } from 'ng-multiselect-dropdown';
+import {MatCheckboxChange} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
+
+
+
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LayoutComponent,FormContractComponent,DashBoardComponent,FilterContractPipe],
-  imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule,RouterModule,HttpClientModule, BrowserAnimationsModule
+    ,MatTableModule,
+     MatSortModule,
+     MatPaginatorModule,
+     CdkDrag,
+     CdkDropList,
+     MatFormFieldModule,
+     MatInputModule,
+     MatSelectModule,
+     MatOptionModule,
+     MatCheckboxModule,
+     MatMenuModule,
+     NgMultiSelectDropDownModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

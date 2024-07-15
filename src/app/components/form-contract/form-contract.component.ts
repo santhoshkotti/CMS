@@ -1,8 +1,11 @@
+import { additionalFields, Contracts } from './../../interfaces/options';
 import { ContractformService } from './../../services/contractFormService/contractform.service';
 import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { FormGroup,FormBuilder } from '@angular/forms';
-import { Contracts } from 'src/app/interfaces/options';
+import { Options } from 'src/app/interfaces/options';
+import { NgModel } from '@angular/forms';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-form-contract',
@@ -10,119 +13,213 @@ import { Contracts } from 'src/app/interfaces/options';
   styleUrls: ['./form-contract.component.css']
 })
 export class FormContractComponent {
-
-  financialContractForm!: FormGroup;
-
-  newContract!:Contracts;
+  responseOptions:Options[]=[];
+  newContract!: Contracts ;
+  additionalFields:any;
 
   constructor(private fb: FormBuilder,private contractservice:ContractformService) {
     this.newContract = {
-    Staus:'',
-    StatusId:13,
     Id: 0,
     UniqueNo:null,
     Version: null,
     Current: true,
+    CategoryId:null,
+    TypeId:null,
     CounterParty: '',
     Account: '',
     Client: '',
     Project: '',
     CounterPartyOwner: '',
-    SigningDate:new Date(),
-    StartingDate: new Date(),
-    TerminationDate: new Date(),
-    RenewalDateFlagOff: false,
+    LegalOwnerId:null,
+    BuissenessOWnerId:null,
+    StatusId:null,
+    SigningDate:null,
+    StartingDate: null,
+    TerminationDate: null,
+    RenewalDateFlagOff: null,
     Value: null,
     Jurisdiction:'',
-    LiabilitiesCap: 0,
+    LiabilitiesCap: null,
     Notes: 'This is another sample Contract',
     OpenIssues: 'None',
+    ExpirationLimitId:null,
+    FormsId:null,
     Link: 'https://example.com/contract5',
-    AutoRenewal: false,
+    AutoRenewal:null ,
     ContractCode: '',
     Filename: null
     }
 
   }
-
   ngOnInit(): void {
-    this.financialContractForm = this.fb.group({
-      account: ['', Validators.required],
-      client: ['', [Validators.required]],
-      project: ['', Validators.required],
-      form: ['', Validators.required],
-      counterPartyOwner: ['', Validators.required],
-      businessOwner: ['', Validators.required],
-      legalOwner: ['', Validators.required],
-      signingDate: ['', Validators.required],
-      terminationDate: ['', Validators.required],
-      renewalFlagOffDate: ['', Validators.required],
-      startingDate: ['', Validators.required],
-      noticeDate: ['', Validators.required],
-    });
-
-    // this.getContracts();
-    this.deleteContract(5);
-    // this.createContract();
+    this.getContractsTypes();
+    this.getTypes();
+    this.getUsers();
   }
-
-  printFormData() {
-    console.log(this.financialContractForm.value);
-  }
-
   onSubmit(){
-    console.log(this.financialContractForm.value);
-    console.log("monnies");
-    console.log(this.newContract);
-    this.createContract(this.newContract);
+    if(!this.additionalFields){
+      this.createContract(this.newContract);
+    }
   }
 
-  getContracts() {
-    this.contractservice.getContractFormdetails().subscribe(response => {
+  categoriess:{id:number,value:string}[]=[];
+  status:{id:number,value:string}[]=[];
+  forms:{id:number,value:string}[]=[];
+  types:{id:number,value:String}[]=[];
+  expirationLimit:{id:number,value:String}[]=[];
+  usersOwners:{id:number,value:string}[]=[];
+  getContractsTypes() {
+    this.contractservice.getContractTypes().subscribe(response => {
+      this.responseOptions = response;
+      this.categoriess = response.filter(option => option.Key === 'Category')
+                    .map(option => ({id:option.Id,value:option.Value}));
 
-      console.log('Contracts retrieved:', response);
+      this.status = response.filter(option => option.Key=== 'Status')
+                    .map(option=>({id:option.Id,value:option.Value}));
+
+      this.forms = response.filter(option => option.Key === 'Forms' )
+                   .map(option=>({id:option.Id,value:option.Value}));
+
+      this.expirationLimit = response.filter(option => option.Key === 'ExpirationLimit')
+                    .map(option=>({id:option.Id,value:option.Value}));
+
+      this.openModal('contracttypes-modal');
     });
+
   }
-  // newContract: Contracts = {
-  //   Id: 0,
-  //   UniqueNo: 'MKL123',
-  //   Version: 1.0,
-  //   Current: true,
-  //   CounterParty: 'Prime Soft',
-  //   Account: 'Account 012',
-  //   Client: 'Client X',
-  //   Project: 'Project K',
-  //   CounterPartyOwner: 'JOHNO DOE',
-  //   SigningDate: new Date('12/2/2024'),
-  //   StartingDate: new Date('7/3/2024'),
-  //   TerminationDate: new Date('12/8/2024'),
-  //   RenewalDateFlagOff: false,
-  //   Value: 12000,
-  //   Jurisdiction: 'FLORIDA',
-  //   LiabilitiesCap: 25000,
-  //   Notes: 'This is another sample Contract',
-  //   OpenIssues: 'None',
-  //   Link: 'https://example.com/contract4',
-  //   AutoRenewal: false,
-  //   ContractCode: 'CONTRACT-005',
-  //   Filename: 'contract4.pdf'
-  // };
 
+  getTypes(){
+     this.contractservice.getTypes().subscribe(response=>{
+      this.types = response.map(type=>({
+        id:type.Id,
+        value:type.Name
+      }))
+     })
+  }
+  getUsers(){
+    this.contractservice.getUserForOwners().subscribe(response=>{
+      console.log("Aaa",response);
+       this.usersOwners = response.map(users=>({
+         id:users.Id,
+         value:users.FirstName
+       }))
+    })
+  }
 
-
-
+  openModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
 
   createContract(newContraact:Contracts) {
     this.contractservice.postContractFormdetails(newContraact).subscribe(response => {
-      console.log('Contract created:', response);
-      this.getContracts(); // Refresh the list of contracts after creating a new one
+      this.data = response;
+      this.contractId = this.data.Id;
+    });
+  }
+  category!:string;
+
+  handleCategoryClick(category: any) {
+    this.openModal('static-modal');
+    this.category = category.value;
+    this.checkAdditionalFields(category.id);
+    this.newContract.CategoryId=category.id;
+  }
+
+  checkAdditionalFields(id:any){
+    this.contractservice.getAddtionalFields(id).subscribe(response=>{
+          this.additionalFields = response;
     });
   }
 
-  deleteContract(contractId: number) {
-    this.contractservice.deleteContract(contractId).subscribe(() => {
+  contractId!: number ;
+  data:any;
 
-    });
+  onAdditionalSubmit(form: NgForm):void{
+    if (form.valid) {
+     const formateddata:additionalFields[] = this.additionalFields.map((field:any) => ({
+      ContractId: this.contractId,
+      AdditionalFieldId: field.AdditionalFieldId,
+      Value: field.inputValue || ''
+    }));
+    if(formateddata!==null){
+      this.postAdditionalFields(formateddata);
+      this.createContract(this.newContract);
+      this.closeModal('additional-field-modal');
+    }
+  }
+  else{
+    alert("invalid");
+  }
+
+  }
+  submitField(field: { AdditionalFieldId: number, Value: string, inputValue?: string }): void {
+    const formattedField: additionalFields = {
+      ContractId: this.contractId,
+      AdditionalFieldId: field.AdditionalFieldId,
+      Value: field.inputValue || ''
+    };
+  }
+  postAdditionalFields(data:additionalFields[]){
+    this.contractservice.postAdditionalField(data).subscribe(response=>{
+     });
+  }
+  submitted=false;
+ change!:string;
+
+  validateAndProceed(currentModalId: string, nextModalId: string): void {
+    this.submitted = true; // Set the submitted flag to true
+    if (this.isCurrentModalValid(currentModalId)) {
+      const currentModal = document.getElementById(currentModalId);
+      const nextModal = document.getElementById(nextModalId);
+      if(currentModalId == "datee-modal" ){
+         this.change='submit';
+      }
+      if (currentModal && nextModal) {
+        currentModal.classList.add('hidden');
+        nextModal.classList.remove('hidden');
+        nextModal?.classList.add('flex');
+      }
+      this.submitted = false;
+    }
+  }
+
+  previous(currentModalId: string, nextModalId: string): void {
+    const currentModal = document.getElementById(currentModalId);
+    const nextModal = document.getElementById(nextModalId);
+        currentModal?.classList.add('hidden');
+        nextModal?.classList.remove('hidden');
+        nextModal?.classList.add('flex');
+  }
+
+  closeModal(modalId: string) {
+    this.ngOnInit();
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      console.log('Modal should now be visible');
+    }
+  }
+
+  isCurrentModalValid(modalId: string): boolean {
+    switch (modalId) {
+      case 'static-modal':
+        return this.newContract.Account!==null && this.newContract.Client!==null && this.newContract.Project!==null && this.newContract.UniqueNo!==null && this.newContract.CategoryId!==null;
+      case 'default-modal':
+        return this.newContract.CounterPartyOwner!==null && this.newContract.CounterParty!==null && this.newContract.BuissenessOWnerId !== null && this.newContract.LegalOwnerId !== null;
+      case 'formdetails-modal':
+        return this.newContract.FormsId!==null && this.newContract.TypeId!==null && this.newContract.StatusId!==null && this.newContract.Version!==null && this.newContract.Filename!==null && this.newContract.Link!==null;
+      case 'status-modal':
+        return this.newContract.ContractCode!==null && this.newContract.Value!==null && this.newContract.LiabilitiesCap!==null&& this.newContract.Jurisdiction!==null&&this.newContract.AutoRenewal!==null;
+      case 'datee-modal':
+        return this.newContract.RenewalDateFlagOff!==null && this.newContract.SigningDate!==null && this.newContract.StartingDate!==null&& this.newContract.TerminationDate!==null && this.newContract.ExpirationLimitId!==null;
+      default:
+        return true;
+    }
   }
 
 }
