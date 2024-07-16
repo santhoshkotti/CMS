@@ -1,0 +1,55 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #000;
+}
+
+
+/* input {
+  background-color: white;
+}
+
+input:focus {
+  background-color: white;
+}
+
+input:active {
+  background-color: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: #000;
+} */
+
+
+.no-arrow {
+  -webkit-appearance: none; /* Removes default dropdown arrow for Webkit browsers */
+  -moz-appearance: none;    /* Removes default dropdown arrow for Mozilla browsers */
+  appearance: none;         /* Removes default dropdown arrow for other browsers */
+  background: transparent;  /* Ensures no background arrow is shown */
+  position: relative;
+}
+
+.no-arrow:after {
+  content: ""; /* Removes the pseudo-element that often shows the arrow */
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+}
+
+.custom-select {
+  color: black; /* Sets the text color for enabled state */
+}
+
+.custom-select[disabled] {
+  color: black; /* Sets the text color for disabled state */
+  opacity: 1; /* Removes the greyed-out appearance */
+}

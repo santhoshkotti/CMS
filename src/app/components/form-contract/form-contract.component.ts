@@ -3,7 +3,7 @@ import { ContractformService } from './../../services/contractFormService/contra
 import { Component } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { FormGroup,FormBuilder } from '@angular/forms';
-import { Options } from 'src/app/interfaces/options';
+import { Options,} from 'src/app/interfaces/options';
 import { NgModel } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 
@@ -114,12 +114,28 @@ export class FormContractComponent {
     }
   }
 
-  createContract(newContraact:Contracts) {
-    this.contractservice.postContractFormdetails(newContraact).subscribe(response => {
-      this.data = response;
-      this.contractId = this.data.Id;
-    });
-  }
+//  async createContract(newContraact:Contracts):Promise<boolean> {
+//     this.contractservice.postContractFormdetails(newContraact).subscribe(response => {
+//       this.data = response;
+//       this.contractId = this.data.Id;
+//       alert("contractid"+this.contractId);
+
+
+//     });
+
+
+
+//   return true;
+//   }
+async createContract(newContract: Contracts): Promise<boolean> {
+
+    const response = await this.contractservice.postContractFormdetails(newContract).toPromise();
+    this.data = response;
+    this.contractId = this.data.Id;
+    alert("contractId: " + this.contractId);
+    return true;
+
+}
   category!:string;
 
   handleCategoryClick(category: any) {
@@ -127,6 +143,7 @@ export class FormContractComponent {
     this.category = category.value;
     this.checkAdditionalFields(category.id);
     this.newContract.CategoryId=category.id;
+
   }
 
   checkAdditionalFields(id:any){
@@ -136,25 +153,58 @@ export class FormContractComponent {
   }
 
   contractId!: number ;
+  formatdata!:additionalFields[];
   data:any;
 
-  onAdditionalSubmit(form: NgForm):void{
+  sendData(additionalFields:any){
+  alert("hello");
+  }
+  async onAdditionalSubmit(form: NgForm): Promise<void> {
+    const contractCreated = await this.createContract(this.newContract);
+
+    if(contractCreated){
+      alert(this.contractId);
+    }
+
+      if (form.valid) {
+        const formatedData: additionalFields[] = this.additionalFields.map((field: any) => ({
+          ContractId: this.contractId,
+          AdditionalFieldId: field.AdditionalFieldId,
+          Value: field.inputValue || ''
+        }));
+
+
+          alert("Inside additional fields processing");
+          this.postAdditionalFields(formatedData);
+          this.closeModal('additional-field-modal');
+
+      }
+
+  }
+async onAdditionalSubmitt(form: NgForm): Promise<void>{
+  //  const id = this.createContract(this.newContract);
+  // await this.createContract(this.newContract);
+  //     alert(this.contractId);
     if (form.valid) {
-     const formateddata:additionalFields[] = this.additionalFields.map((field:any) => ({
+     const formatdata:additionalFields[] = this.additionalFields.map((field:any) => ({
       ContractId: this.contractId,
       AdditionalFieldId: field.AdditionalFieldId,
       Value: field.inputValue || ''
     }));
-    if(formateddata!==null){
-      this.postAdditionalFields(formateddata);
-      this.createContract(this.newContract);
-      this.closeModal('additional-field-modal');
-    }
+    if(formatdata!==null){
+
+    this.createContract(this.newContract);
+
+      //   alert("additinal kulla iruku");
+      //  this.postAdditionalFields(formateddata);
+
+      // this.closeModal('additional-field-modal');
+
   }
   else{
     alert("invalid");
   }
-
+   }
   }
   submitField(field: { AdditionalFieldId: number, Value: string, inputValue?: string }): void {
     const formattedField: additionalFields = {
@@ -164,6 +214,7 @@ export class FormContractComponent {
     };
   }
   postAdditionalFields(data:additionalFields[]){
+
     this.contractservice.postAdditionalField(data).subscribe(response=>{
      });
   }
@@ -201,7 +252,6 @@ export class FormContractComponent {
     if (modal) {
       modal.classList.add('hidden');
       modal.classList.remove('flex');
-      console.log('Modal should now be visible');
     }
   }
 

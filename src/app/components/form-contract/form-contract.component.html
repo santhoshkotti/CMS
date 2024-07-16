@@ -3,7 +3,7 @@
   <div class="relative w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
            <div *ngFor="let items of categoriess" class="p-4 md:p-5 space-y-4 border-t border-gray-200 rounded-b dark:border-gray-600"  >
-               <button data-modal-target="static-modal" data-modal-toggle="static-modal"  (click)="handleCategoryClick(items)" type="button">{{items.value}}</button>
+               <button data-modal-target="static-modal" data-modal-toggle="static-modal"   (click)="handleCategoryClick(items)" type="button">{{items.value}}</button>
            </div>
       </div>
   </div>

@@ -13,7 +13,7 @@ export class ContractformService {
   constructor(private http:HttpClient) { }
 
   getContractFormdetails(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/contracts`);
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   postContractFormdetails(newContract: Contracts): Observable<any[]> {
@@ -49,12 +49,13 @@ export class ContractformService {
 
   //to add the additional fields based on the contract id and additional field id
    postAdditionalField(additionalFiels:additionalFields[]):Observable<any[]>{
-    alert("nadhanda mass");
+    console.log("hello",additionalFiels);
     return this.http.post<any[]>(this.addtionalUrl,additionalFiels);
    }
 
-   getContractAdditionalFieldsValues(contractId: number) {
-    return this.http.get<any[]>(`${this.baseUrl}/contract-additional-fields-values/${contractId}`);
+   getContractAdditionalFieldsValues(contractId: number):Observable<any[]> {
+    // return this.http.get<any[]>(`${this.baseUrl}/contract-additional-fields-values/${contractId}`);
+    return this.http.get<any[]>(`${this.baseUrl}categoryadditionalfeildnames/${contractId}`);
 
   }
 }

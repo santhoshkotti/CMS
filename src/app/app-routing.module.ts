@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'layout', component: LayoutComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'dashboard', component: DashBoardComponent },
-  { path: 'formcontract', component: FormContractComponent },
+  { path: 'formContract', component: FormContractComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'options', component: GenericOptionsComponent },
   { path: 'users', component: UserComponent },

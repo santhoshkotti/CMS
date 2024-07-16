@@ -1,7 +1,11 @@
+import { Options } from './../../interfaces/options';
 import { ContractformService } from './../../services/contractFormService/contractform.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Contracts } from 'src/app/interfaces/options';
+
 @Component({
   selector: 'app-contractview',
   templateUrl: './contractview.component.html',
@@ -9,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ContractviewComponent implements OnInit {
   activeSection: string = 'focus'; // Default active section
-  selectedContract: any;
+  selectedContract!:Contracts;
   responseContracts: any[] = []; // Initialize empty array
   additionalFields: any[] = []; // Initialize additionalFields as an empty array
   additionalFieldNames: any[] = [];
@@ -39,6 +43,7 @@ export class ContractviewComponent implements OnInit {
   //   );
   // }
   ngOnInit(): void {
+    this.getContractsTypes();
     this.route.queryParams.subscribe((params) => {
       const contractId = params['contractId'];
 
@@ -58,6 +63,7 @@ export class ContractviewComponent implements OnInit {
           }
 
           this.loadAdditionalFields(this.selectedContract.Id);
+          alert("hello"+this.selectedContract.Id);
         },
         (error) => {
           console.error('Error fetching contracts:', error);
@@ -120,7 +126,7 @@ export class ContractviewComponent implements OnInit {
   //               },
   //               (error) => {
   //                 console.error(
-  //                   `Error fetching additional field data for AdditionalFieldId ${field.AdditionalFieldId}:`,
+  //                   Error fetching additional field data for AdditionalFieldId ${field.AdditionalFieldId}:,
   //                   error
   //                 );
   //               }
@@ -177,4 +183,36 @@ export class ContractviewComponent implements OnInit {
         }
       );
   }
+
+  editable:boolean=true;
+  edit(){
+   this.editable=false;
+  }
+
+  categoriess:{id:number,value:string}[]=[];
+  status:{id:number,value:string}[]=[];
+  forms:{id:number,value:string}[]=[];
+  types:{id:number,value:String}[]=[];
+  expirationLimit:{id:number,value:String}[]=[];
+  usersOwners:{id:number,value:string}[]=[];
+  responseOptions:Options[]=[];
+  getContractsTypes() {
+    this.contractService.getContractTypes().subscribe(response => {
+      this.responseOptions = response;
+      this.categoriess = response.filter(option => option.Key === 'Category')
+                    .map(option => ({id:option.Id,value:option.Value}));
+
+      this.status = response.filter(option => option.Key=== 'Status')
+                    .map(option=>({id:option.Id,value:option.Value}));
+                    
+      this.forms = response.filter(option => option.Key === 'Forms' )
+                   .map(option=>({id:option.Id,value:option.Value}));
+
+      this.expirationLimit = response.filter(option => option.Key === 'ExpirationLimit')
+                    .map(option=>({id:option.Id,value:option.Value}));
+
+    });
+
+  }
+
 }

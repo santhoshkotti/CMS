@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,9 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class DashBoardComponent {
 
-   constructor(private contractService:ContractformService){   }
+   constructor(private contractService:ContractformService,private router :Router){
+
+     }
       ngOnInit(){
          this.getCombinedData();
        }
@@ -147,5 +150,27 @@ export class DashBoardComponent {
       this.selectedStatuses = this.selectedStatuses.filter(stat => stat !== status);
     }
     this.applyFilters();
+  }
+
+
+  selectedContract!:Contracts;
+  onRowClick(tabledetails: any): void {
+    this.selectedContract = tabledetails;
+    this.router.navigate(['/contractview'], {
+      queryParams: { contractId: tabledetails.Id },
+    });
+
+
+    console.log('select in dash');
+    console.log(this.selectedContract);
+  }
+  hello(){
+    alert("hello");
+  }
+
+  deleteContract(id:number){
+    this.contractService.deleteContract(id).subscribe({
+
+    });
   }
 }
