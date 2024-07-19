@@ -1,7 +1,7 @@
 <div>
   <div style="margin-top: 4%;margin-left: 89%;">
 
-<button id="multiLevelDropdownButton" data-dropdown-toggle="multi-dropdown" style="width:86%;" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;text-align:center" type="button"><span style="margin: auto;">FILTER</span>
+<button id="multiLevelDropdownButton" data-dropdown-toggle="multi-dropdown" style="width:86%;background-color: #084d93;margin-top: 4%;" class="text-white bg-blue-200 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;text-align:center" type="button"><span style="margin: auto;">FILTER</span>
 </button>
 
 
@@ -67,19 +67,20 @@
    <div class="overflow-x-auto">
      <table mat-table [dataSource]="dataSource" matSort cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
     <ng-container matColumnDef="Id">
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2" class="text-white ad" > Id </th>
+      <!-- <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2" class="text-white ad" > Id </th> -->
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="text-white ad" > Id </th>
       <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
     </ng-container>
     <ng-container matColumnDef="UniqueNo">
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2"  class="ad"> UniqueNo </th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93"  class="ad"> UniqueNo </th>
       <td mat-cell *matCellDef="let element"> {{element.UniqueNo}} </td>
     </ng-container>
     <ng-container matColumnDef="Version">
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >Version </th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad" >Version </th>
       <td mat-cell *matCellDef="let element"> {{element.Version}} </td>
     </ng-container>
     <ng-container matColumnDef="Current">
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >Current</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad" >Current</th>
       <td mat-cell *matCellDef="let element" style="width:5%">
         <span *ngIf="element.Current">
         <svg style="width:24%;height:24%;margin-left:12%" fill="green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
@@ -87,35 +88,35 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="Category" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad"   >Category</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad"   >Category</th>
       <td mat-cell *matCellDef="let element"> {{element.Category}} </td>
     </ng-container>
     <ng-container matColumnDef="Account" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >Account</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad" >Account</th>
       <td mat-cell *matCellDef="let element"> {{element.Account}} </td>
     </ng-container>
     <ng-container matColumnDef="Client" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >Client</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad" >Client</th>
       <td mat-cell *matCellDef="let element" (click)="onRowClick(element)"> {{element.Client}} </td>
     </ng-container>
     <ng-container matColumnDef="Project" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >Project</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93;" class="ad" >Project</th>
       <td mat-cell *matCellDef="let element"> {{element.Project}} </td>
     </ng-container>
     <ng-container matColumnDef="SigningDate" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >SigningDate</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93;" class="ad" >SigningDate</th>
       <td mat-cell *matCellDef="let element"> {{element.SigningDate | date:'yyyy-MM-dd'}} </td>
     </ng-container>
     <ng-container matColumnDef="StartingDate" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >StartingDate</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93;" class="ad" >StartingDate</th>
       <td mat-cell *matCellDef="let element"> {{element.StartingDate | date:'yyyy-MM-dd'}} </td>
     </ng-container>
     <ng-container matColumnDef="TerminationDate" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >TerminationDate</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93;" class="ad" >TerminationDate</th>
       <td mat-cell *matCellDef="let element"> {{element.TerminationDate | date:'yyyy-MM-dd'}} </td>
     </ng-container>
     <ng-container matColumnDef="AutoRenewal" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >AutoRenewal</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93;" class="ad" >AutoRenewal</th>
       <td mat-cell *matCellDef="let element" style="width:4%">
         <span *ngIf="element.AutoRenewal">
           <svg style="width:18%;height:18%;margin-left:10%" fill="green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
@@ -126,12 +127,18 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="ContractCode" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #1976d2;" class="ad" >ContractCode</th>
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header style="background-color: #084d93" class="ad" >ContractCode</th>
       <td mat-cell *matCellDef="let element"> {{element.ContractCode}} </td>
     </ng-container>
     <ng-container matColumnDef="status" >
-      <th mat-header-cell cdkDrag *matHeaderCellDef style="background-color: #1976d2;" class="ad"  mat-sort-header> Status </th>
-      <td mat-cell *matCellDef="let element" > <div [ngClass]="{'status-pending': element.Status === 'Pending','status-negotiation': element.Status === 'Negotiation','status-approved': element.Status === 'Approved' }" >{{ element.Status }} </div></td>
+      <th mat-header-cell cdkDrag *matHeaderCellDef style="background-color: #084d93" class="ad"  mat-sort-header> Status </th>
+      <!-- <td mat-cell *matCellDef="let element" > <div [ngClass]="{'status-pending': element.Status === 'Pending','status-negotiation': element.Status === 'Negotiation','status-approved': element.Status === 'Approved' }" >{{ element.Status }} </div></td> -->
+      <td mat-cell *matCellDef="let element" >
+        <button [ngClass]="{'status-pending': element.Status === 'Pending','status-negotiation': element.Status === 'Negotiation','status-approved': element.Status === 'Approved' }"  type="button" class="text-green-600 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-0 font-medium rounded-lg text-xs px-2 py-1 text-center me-2 mb-2">
+          {{ element.Status }}
+        </button>
+      </td>
+
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

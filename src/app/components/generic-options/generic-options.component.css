@@ -1,3 +1,24 @@
+/* .material-icons:hover {
+  cursor: pointer;
+} */
+
 .material-icons:hover {
   cursor: pointer;
+}
+.bg{
+  background-color: #6fb9ff;
+  color:black;
+  font-weight:500;
+ }
+
+.del{
+  color: rgb(235, 62, 62);
+}
+
+.edit{
+  color: #b9bf40;
+}
+
+.material-icons{
+  color:"bg-blue-50";
 }

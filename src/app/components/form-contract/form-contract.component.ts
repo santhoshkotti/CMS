@@ -173,7 +173,7 @@ async createContract(newContract: Contracts): Promise<boolean> {
           Value: field.inputValue || ''
         }));
 
-
+         console.log("formateddata",formatedData);
           alert("Inside additional fields processing");
           this.postAdditionalFields(formatedData);
           this.closeModal('additional-field-modal');

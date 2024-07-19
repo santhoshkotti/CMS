@@ -41,6 +41,7 @@ import { Routes } from '@angular/router';
 import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
+import { AdditionalFieldsComponent } from './components/additional-fields/additional-fields.component';
 @NgModule({
 
   imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule,RouterModule,HttpClientModule, BrowserAnimationsModule
@@ -71,7 +72,9 @@ import { UserComponent } from './components/user/user.component';
     FooterComponent,
     GenericOptionsComponent,
     UserComponent,
-   MainComponent
+    MainComponent,
+    AdditionalFieldsComponent
+
   ],
   providers: [],
   bootstrap: [AppComponent],

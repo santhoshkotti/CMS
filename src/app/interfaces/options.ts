@@ -6,6 +6,11 @@ export interface Options {
   Value: string;
 }
 
+export interface FieldsIn {
+  AdditionalFieldId: number;
+  CategoryId: number;
+}
+
 export interface Users{
     Id :number,
     FirstName :string,

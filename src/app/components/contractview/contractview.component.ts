@@ -1,10 +1,10 @@
-import { Options } from './../../interfaces/options';
 import { ContractformService } from './../../services/contractFormService/contractform.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { Contracts } from 'src/app/interfaces/options';
+import { additionalFields, Contracts } from 'src/app/interfaces/options';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contractview',
@@ -13,9 +13,10 @@ import { Contracts } from 'src/app/interfaces/options';
 })
 export class ContractviewComponent implements OnInit {
   activeSection: string = 'focus'; // Default active section
+  // selectedContract: any;
   selectedContract!:Contracts;
   responseContracts: any[] = []; // Initialize empty array
-  additionalFields: any[] = []; // Initialize additionalFields as an empty array
+  // additionalFields: any[] = []; // Initialize additionalFields as an empty array
   additionalFieldNames: any[] = [];
   combinedAdditionalFields: any[] = []; // Combined array of additional fields with names
 
@@ -43,7 +44,6 @@ export class ContractviewComponent implements OnInit {
   //   );
   // }
   ngOnInit(): void {
-    this.getContractsTypes();
     this.route.queryParams.subscribe((params) => {
       const contractId = params['contractId'];
 
@@ -63,7 +63,8 @@ export class ContractviewComponent implements OnInit {
           }
 
           this.loadAdditionalFields(this.selectedContract.Id);
-          alert("hello"+this.selectedContract.Id);
+          this.checkAdditionalFields(this.selectedContract.CategoryId);
+          console.log("values",this.selectedContract);
         },
         (error) => {
           console.error('Error fetching contracts:', error);
@@ -185,34 +186,85 @@ export class ContractviewComponent implements OnInit {
   }
 
   editable:boolean=true;
-  edit(){
-   this.editable=false;
+ edit(){
+    this.editable=false;
+    this.isedit=false;
+    this.isSubmit=true;
   }
 
-  categoriess:{id:number,value:string}[]=[];
-  status:{id:number,value:string}[]=[];
-  forms:{id:number,value:string}[]=[];
-  types:{id:number,value:String}[]=[];
-  expirationLimit:{id:number,value:String}[]=[];
-  usersOwners:{id:number,value:string}[]=[];
-  responseOptions:Options[]=[];
-  getContractsTypes() {
-    this.contractService.getContractTypes().subscribe(response => {
-      this.responseOptions = response;
-      this.categoriess = response.filter(option => option.Key === 'Category')
-                    .map(option => ({id:option.Id,value:option.Value}));
+  onSubmit(fa:NgForm){
+    this.isSubmit=false;
+    this.isedit=true;
+    console.log(this.selectedContract);
+  }
+  // additionalFieldss:any;
+  // async onAdditionalSubmit(form: NgForm): Promise<void> {
 
-      this.status = response.filter(option => option.Key=== 'Status')
-                    .map(option=>({id:option.Id,value:option.Value}));
-                    
-      this.forms = response.filter(option => option.Key === 'Forms' )
-                   .map(option=>({id:option.Id,value:option.Value}));
+  //     if (form.valid) {
+  //       const formatedData: additionalFields[] = this.additionalFields.map((field: any) => ({
+  //         ContractId: this.selectedContract.Id,
+  //         AdditionalFieldId: field.AdditionalFieldId,
+  //         Value: field.C_value || ''
+  //       }));
 
-      this.expirationLimit = response.filter(option => option.Key === 'ExpirationLimit')
-                    .map(option=>({id:option.Id,value:option.Value}));
 
+
+  //   console.log("common fields",this.selectedContract);
+  //   console.log("addiionalfiels",formatedData);
+  //     }
+
+  // }
+  additionalFields:any;
+  checkAdditionalFields(id:any){
+    this.contractService.getAddtionalFields(id).subscribe(response=>{
+          this.additionalFields = response;
     });
+  }
+
+  data:any;
+  async createContract(newContract: Contracts): Promise<boolean> {
+
+    const response = await this.contractService.postContractFormdetails(newContract).toPromise();
+    this.data = response;
+    this.selectedContract.Id = this.data.Id;
+
+    return true;
+
+}
+  formatdata!:additionalFields[];
+  async onAdditionalSubmit(form: NgForm): Promise<void> {
+    const contractCreated = await this.createContract(this.selectedContract);
+
+
+      if (form.valid) {
+        const formatedData: additionalFields[] = this.combinedAdditionalFields.map((field: any) => ({
+          ContractId: this.selectedContract.Id,
+          AdditionalFieldId: field.AdditionalFieldId,
+          Value: field.C_Value || ''
+        }));
+
+       console.log("formatedddata",formatedData);
+          
+          this.postAdditionalFields(formatedData);
+
+
+      }
 
   }
+
+  postAdditionalFields(data:additionalFields[]){
+
+    this.contractService.postAdditionalField(data).subscribe(response=>{
+     });
+  }
+
+  isedit=true;
+  isSubmit=false;
+  editt(){
+    this.isedit=false;
+    this.isSubmit=true;
+  }
+
+
 
 }
