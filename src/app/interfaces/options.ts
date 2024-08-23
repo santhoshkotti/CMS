@@ -11,12 +11,12 @@ export interface FieldsIn {
   CategoryId: number;
 }
 
-export interface Users{
-    Id :number,
-    FirstName :string,
-    LastName :string,
-    Email:string,
-    HashPassword :string
+export interface Users {
+  Id: number;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  HashPassword: string;
 }
 export interface PermissionPayload {
   RoleId: number;
@@ -38,54 +38,49 @@ export interface UserRole {
 }
 
 export interface Contracts {
-    Id :number,
-    UniqueNo:string|null,
-    // UniqueNo :number,
-    Version :number|null,
-    Current :boolean|null,
-    // Staus: string|null,
-    CategoryId:number|null,
-    TypeId:number|null,
-    CounterParty :string,
-    Account :string|null,
-    Client :string,
-    Project:string,
-    CounterPartyOwner:string,
-    LegalOwnerId:number|null,
-    BuissenessOWnerId:number|null,
-    StatusId:number|null,
-    SigningDate:Date|null,
-    StartingDate :Date|null,
-    TerminationDate:Date|null,
-    RenewalDateFlagOff :boolean|null,
-    Value:number|null,
-    Jurisdiction :string,
-    LiabilitiesCap :number|null,
-    ExpirationLimitId:Number|null,
-    Notes :string,
-    OpenIssues :string,
-    FormsId:number|null,
-    Link: string,
-    AutoRenewal :boolean|null,
-    ContractCode :string,
-    Filename :File|null,
-
+  Id: number;
+  UniqueNo: string | null;
+  // UniqueNo :number,
+  Version: number | null;
+  Current: boolean | null;
+  // Staus: string|null,
+  CategoryId: number | null;
+  TypeId: number | null;
+  CounterParty: string;
+  Account: string | null;
+  Client: string;
+  Project: string;
+  CounterPartyOwner: string;
+  LegalOwnerId: number | null;
+  BuissenessOWnerId: number | null;
+  StatusId: number | null;
+  SigningDate: Date | null;
+  StartingDate: Date | null;
+  TerminationDate: Date | null;
+  RenewalDateFlagOff: boolean | null;
+  Value: number | null;
+  Jurisdiction: string;
+  LiabilitiesCap: number | null;
+  ExpirationLimitId: Number | null;
+  Notes: string;
+  OpenIssues: string;
+  FormsId: number | null;
+  Link: string;
+  AutoRenewal: boolean | null;
+  ContractCode: string;
+  Filename: File | null;
 }
 
-
-
-export interface additionalFields{
-  ContractId:number,
-  AdditionalFieldId:number,
-  Value:string
-
+export interface additionalFields {
+  ContractId: number;
+  AdditionalFieldId: number;
+  Value: string;
 }
 
 export interface Category {
-  id: number,
-  value: string
+  id: number;
+  value: string;
 }
-
 
 //combinedata
 
@@ -124,9 +119,5 @@ export interface CombinedData {
   CreatedAt: string;
   UpdatedBy: string;
   UpdatedAt: string;
-  Status:string
+  Status: string;
 }
-
-
-
-

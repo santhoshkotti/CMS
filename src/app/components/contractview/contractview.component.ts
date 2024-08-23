@@ -14,11 +14,12 @@ import { NgForm } from '@angular/forms';
 export class ContractviewComponent implements OnInit {
   activeSection: string = 'focus'; // Default active section
   // selectedContract: any;
-  selectedContract!:Contracts;
+  selectedContract!: Contracts;
   responseContracts: any[] = []; // Initialize empty array
   // additionalFields: any[] = []; // Initialize additionalFields as an empty array
   additionalFieldNames: any[] = [];
   combinedAdditionalFields: any[] = []; // Combined array of additional fields with names
+  contractVersions: Contracts[] = []; // Array to hold versions of the selected contract
 
   constructor(
     private http: HttpClient,
@@ -64,7 +65,8 @@ export class ContractviewComponent implements OnInit {
 
           this.loadAdditionalFields(this.selectedContract.Id);
           this.checkAdditionalFields(this.selectedContract.CategoryId);
-          console.log("values",this.selectedContract);
+          this.filterContractVersions(this.selectedContract.ContractCode);
+          console.log('values', this.selectedContract);
         },
         (error) => {
           console.error('Error fetching contracts:', error);
@@ -90,6 +92,7 @@ export class ContractviewComponent implements OnInit {
       (contract) => contract.Id === selectedId
     );
     this.loadAdditionalFields(selectedId);
+    this.filterContractVersions(this.selectedContract.ContractCode);
   }
 
   // private loadAdditionalFields(contractId: number): void {
@@ -185,16 +188,17 @@ export class ContractviewComponent implements OnInit {
       );
   }
 
-  editable:boolean=true;
- edit(){
-    this.editable=false;
-    this.isedit=false;
-    this.isSubmit=true;
+  editable: boolean = true;
+  edit() {
+    this.editable = false;
+    this.isedit = false;
+    this.isSubmit = true;
   }
 
-  onSubmit(fa:NgForm){
-    this.isSubmit=false;
-    this.isedit=true;
+  onSubmit(fa: NgForm) {
+    this.isSubmit = false;
+    this.isedit = true;
+    this.editable = true;
     console.log(this.selectedContract);
   }
   // additionalFieldss:any;
@@ -207,64 +211,59 @@ export class ContractviewComponent implements OnInit {
   //         Value: field.C_value || ''
   //       }));
 
-
-
   //   console.log("common fields",this.selectedContract);
   //   console.log("addiionalfiels",formatedData);
   //     }
 
   // }
-  additionalFields:any;
-  checkAdditionalFields(id:any){
-    this.contractService.getAddtionalFields(id).subscribe(response=>{
-          this.additionalFields = response;
+  additionalFields: any;
+  checkAdditionalFields(id: any) {
+    this.contractService.getAddtionalFields(id).subscribe((response) => {
+      this.additionalFields = response;
     });
   }
 
-  data:any;
+  data: any;
   async createContract(newContract: Contracts): Promise<boolean> {
-
-    const response = await this.contractService.postContractFormdetails(newContract).toPromise();
+    const response = await this.contractService
+      .postContractFormdetails(newContract)
+      .toPromise();
     this.data = response;
     this.selectedContract.Id = this.data.Id;
 
     return true;
-
-}
-  formatdata!:additionalFields[];
+  }
+  formatdata!: additionalFields[];
   async onAdditionalSubmit(form: NgForm): Promise<void> {
     const contractCreated = await this.createContract(this.selectedContract);
 
-
-      if (form.valid) {
-        const formatedData: additionalFields[] = this.combinedAdditionalFields.map((field: any) => ({
+    if (form.valid) {
+      const formatedData: additionalFields[] =
+        this.combinedAdditionalFields.map((field: any) => ({
           ContractId: this.selectedContract.Id,
           AdditionalFieldId: field.AdditionalFieldId,
-          Value: field.C_Value || ''
+          Value: field.C_Value || '',
         }));
 
-       console.log("formatedddata",formatedData);
-          
-          this.postAdditionalFields(formatedData);
+      console.log('formatedddata', formatedData);
 
-
-      }
-
+      this.postAdditionalFields(formatedData);
+    }
   }
 
-  postAdditionalFields(data:additionalFields[]){
-
-    this.contractService.postAdditionalField(data).subscribe(response=>{
-     });
+  postAdditionalFields(data: additionalFields[]) {
+    this.contractService.postAdditionalField(data).subscribe((response) => {});
   }
 
-  isedit=true;
-  isSubmit=false;
-  editt(){
-    this.isedit=false;
-    this.isSubmit=true;
+  isedit = true;
+  isSubmit = false;
+  editt() {
+    this.isedit = false;
+    this.isSubmit = true;
   }
-
-
-
+  private filterContractVersions(contractCode: string): void {
+    this.contractVersions = this.responseContracts.filter(
+      (contract) => contract.ContractCode === contractCode
+    );
+  }
 }

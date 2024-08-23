@@ -1,4 +1,4 @@
-<div class="m-10  items-center">
+<div class="m-10 items-center">
   <label
     for="default-input"
     class="block m-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
@@ -20,7 +20,7 @@
     type="text"
     [(ngModel)]="newLastName"
     id="last-name-input"
-    class="w-1/4 m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+    class="w-1/4 m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
   />
 
   <label
@@ -42,12 +42,21 @@
   <select
     [(ngModel)]="selectedItem"
     id="dropdown"
-    class="w-1/4 m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+    class="w-1/4 m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
   >
     <option *ngFor="let item of items" [value]="item.Id">
       {{ item.Value }}
     </option>
   </select>
+  <div class="ml-64">
+    <button
+      style="background-color: #084d93; color: white"
+      (click)="callBoth()"
+      class="m-4 px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      Submit
+    </button>
+  </div>
 </div>
 <!-- <div class="m-10 items-center"style="background-color:yellow">
   <label
@@ -65,174 +74,68 @@
     </option>
   </select>
 </div> -->
-
-<div class="block max-w-screen  m-10 bg-white border border-gray-200 rounded-lg shadow ">
+<!--
+<div
+  class="block max-w-screen m-10 bg-white border border-gray-200 rounded-lg shadow"
+>
   <div class="overflow-x-auto">
-<table class="w-full text-sm text-left rtl:text-right text-black-500 ">
-  <thead class="text-md bg text-gray-700  " style="background-color:#084d93 ;color:white">
-
-    <tr>
-      <th scope="col" class="px-8 py-3">S.NO</th>
-      <th scope="col" class="px-6 py-3">Category</th>
-      <th scope="col" class="px-6 py-3">Read</th>
-      <th scope="col" class="px-6 py-3">Write</th>
-      <th scope="col" class="px-6 py-3">Update</th>
-      <th scope="col" class="px-6 py-3">View</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let item of categories; let i = index" class="">
-    <td scope="col" class="px-9 py-4 text-center">{{ i + 1 }}</td>
-    <td scope="col" class="px-6 py-4 ">{{ item.Value }}</td>
-    <td >
-      <input scope="col" class="mx-7 px-3 py-3 text-center" type="checkbox"  [(ngModel)]="item.Read" />
-    </td>
-    <td >
-      <input scope="col" class="mx-7 px-3 py-3 text-center" type="checkbox" [(ngModel)]="item.Write" />
-    </td>
-    <td >
-      <input scope="col" class=" mx-7 px-3 py-3 text-center" type="checkbox" [(ngModel)]="item.Update" />
-    </td>
-    <td >
-      <input scope="col" class="mx-7 px-3 py-3  text-center" type="checkbox" [(ngModel)]="item.View" />
-    </td>
-  </tr>
-</table>
-<button
-style="background-color:#084d93 ;color:white;margin-left: 93%;"
-  (click)="callBoth()"
-  class=" m-4 px-4 py-2 bg-blue-500 text-white rounded"
->
-  Submit
-</button>
-
+    <table class="w-full text-sm text-left rtl:text-right text-black-500">
+      <thead
+        class="text-md bg text-gray-700"
+        style="background-color: #084d93; color: white"
+      >
+        <tr>
+          <th scope="col" class="px-8 py-3">S.NO</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Read</th>
+          <th scope="col" class="px-6 py-3">Write</th>
+          <th scope="col" class="px-6 py-3">Update</th>
+          <th scope="col" class="px-6 py-3">View</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let item of categories; let i = index" class="">
+        <td scope="col" class="px-9 py-4 text-center">{{ i + 1 }}</td>
+        <td scope="col" class="px-6 py-4">{{ item.Value }}</td>
+        <td>
+          <input
+            scope="col"
+            class="mx-7 px-3 py-3 text-center"
+            type="checkbox"
+            [(ngModel)]="item.Read"
+          />
+        </td>
+        <td>
+          <input
+            scope="col"
+            class="mx-7 px-3 py-3 text-center"
+            type="checkbox"
+            [(ngModel)]="item.Write"
+          />
+        </td>
+        <td>
+          <input
+            scope="col"
+            class="mx-7 px-3 py-3 text-center"
+            type="checkbox"
+            [(ngModel)]="item.Update"
+          />
+        </td>
+        <td>
+          <input
+            scope="col"
+            class="mx-7 px-3 py-3 text-center"
+            type="checkbox"
+            [(ngModel)]="item.View"
+          />
+        </td>
+      </tr>
+    </table>
+    <button
+      style="background-color: #084d93; color: white; margin-left: 93%"
+      (click)="callBoth()"
+      class="m-4 px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      Submit
+    </button>
   </div>
-  </div>
-
-
-<!-- <div class="mb-6 items-center">
-  <label
-    for="default-input"
-    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
-    >First Name</label
-  >
-  <input
-    type="text"
-    [(ngModel)]="newFirstName"
-    id="first-name-input"
-    class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4"
-  />
-
-  <label
-    for="default-input"
-    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
-    >Last Name</label
-  >
-  <input
-    type="text"
-    [(ngModel)]="newLastName"
-    id="last-name-input"
-    class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4"
-  />
-
-  <label
-    for="default-input"
-    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
-    >Email</label
-  >
-  <input
-    type="text"
-    [(ngModel)]="newEmail"
-    id="email-input"
-    class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4"
-  />
-</div>
-<div class="mb-6 items-center">
-  <label
-    for="dropdown"
-    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
-    >Select Role</label
-  >
-  <select
-    [(ngModel)]="selectedItem"
-    id="dropdown"
-    class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4"
-  >
-    <option *ngFor="let item of items" [value]="item.Id">
-      {{ item.Value }}
-    </option>
-  </select>
-</div>
-
-<table
-  class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
->
-  <thead>
-    <tr>
-      <th scope="col" class="px-6 py-3"></th>
-      <th scope="col" class="px-6 py-3">Category</th>
-      <th scope="col" class="px-6 py-3">Read</th>
-      <th scope="col" class="px-6 py-3">Write</th>
-      <th scope="col" class="px-6 py-3">Update</th>
-      <th scope="col" class="px-6 py-3">View</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let item of categories; let i = index" class="bg-gray-200">
-    <td class="px-6 py-4 text-center">{{ i + 1 }}</td>
-    <td class="px-6 py-4">{{ item.Value }}</td>
-    <td class="px-6 py-4 text-center">
-      <input type="checkbox" [(ngModel)]="item.Read" />
-    </td>
-    <td class="px-6 py-4 text-center">
-      <input type="checkbox" [(ngModel)]="item.Write" />
-    </td>
-    <td class="px-6 py-4 text-center">
-      <input type="checkbox" [(ngModel)]="item.Update" />
-    </td>
-    <td class="px-6 py-4 text-center">
-      <input type="checkbox" [(ngModel)]="item.View" />
-    </td>
-  </tr>
-</table>
-<button
-  (click)="callBoth()"
-  class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
->
-  Submit
-</button>-->
-<!-- <div class="mb-6 flex items-center">
-  <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4">
-    <div>
-      {{ isEditMode ? 'Edit ' + getEditLabel(this.key) : 'Add New ' + getEnterLabel(this.key) }}
-    </div>
-
-  </label>
-  <input *ngIf="!isEditMode" type="text" [(ngModel)]="newValue" id="category-input" class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4">
-  <input *ngIf="isEditMode" type="text"placeholder="editValue" [(ngModel)]="editValue" id="category-input" class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4">
-
-  <button *ngIf="!isEditMode" (click)="saveItem()" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Save</button>
-  <button *ngIf="isEditMode" (click)="updateItem()" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Update</button>
-
-  <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="clearInput()">Cancel</button>
-
-</div>
-
-<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-  <thead>
-    <tr>
-      <th scope="col" class="px-6 py-3"></th>
-      <th scope="col" class="px-6 py-3">{{key}}</th>
-      <th scope="col" class="px-6 py-3">Edit</th>
-      <th scope="col" class="px-6 py-3">Delete</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let item of items; let i = index" class="bg-gray-200">
-    <td class="px-6 py-4 text-center">{{ i + 1 }}</td>
-      <td class="px-6 py-4">{{ item.Value }}</td>
-    <td class="px-6 py-4 text-center">
-      <span class="material-icons" (click)="handleEdit({id: item.Id, value: item.Value})">edit</span>
-    </td>
-    <td>
-      <span class="material-icons" (click)="handleDelete({id: item.Id})">delete</span>
-    </td>
-  </tr>
-</table> -->
+</div> -->

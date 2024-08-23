@@ -1,389 +1,590 @@
-<!-- <button (click)="this.edit()">edit</button> -->
-<form #form="ngForm" (ngSubmit)="onSubmit(form)" #additionalFieldsForm="ngForm" (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)">
-<div class="flex items-center m-4 ml-1  pt-4 px-20">
-  <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/5 bg-white">
-    <div class="flex ">
-      <label for="contractSelect" class="mr-2 text-fontblue px-2">Contract: {{ selectedContract.ContractCode }}</label>
-    </div>
-  </div>
-  <!-- <button (click)="this.edit()">edit</button> -->
-   <!-- <div class="flex h-11 w-11 items-center bg-white text-fontblue">
-  <span class="material-icons  text-gray-600 text-fontblue">edit_document</span>
-    </div> -->
-
-  <ng-container *ngIf="this.isedit" >
-    <button style="margin-left:79%" class="mt-1 flex rounded-lg hover:text-fontblue "
+<form
+  #form="ngForm"
+  (ngSubmit)="onSubmit(form)"
+  #additionalFieldsForm="ngForm"
+  (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)"
 >
-                <span type="button"
-                (click)="this.edit()"
-                  class="material-icons text-fontblue "
-                  >edit_document</span
-                >
-  </button>
-</ng-container>
-<ng-container *ngIf="this.isSubmit" >
-  <!-- <button style="margin-left:79%" class="mt-1 flex rounded-lg hover:text-fontblue "> -->
-
-    <button  class="bg-fontblue text-white w-20 h-8 rounded-md" style="margin-left: 75%;"  type="submit"[disabled]="!form.valid" >Submit</button>
-<!-- </button> -->
-</ng-container>
-</div>
-
-
-
-<!-- <form #form="ngForm" (ngSubmit)="onSubmit(form)" #additionalFieldsForm="ngForm" (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)"> -->
-<div *ngIf="selectedContract" class="flex flex-col items-center mb-4 w-full rounded-lg shadow-lg border-gray-100 border-2 px-20 py-4">
-  <!-- New Fields Section -->
-  <div class="w-full p-4 border-2 shadow-lg mb-4 border-gray-100 mx-100 rounded-lg">
-    <h3 class="text-lg font-semibold mb-2">Primary Details</h3>
-    <div class="grid grid-cols-4 gap-4">
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Counter Party:</strong>
+  <div class="flex items-center m-4 ml-1 pt-4 px-20">
+    <div class="p-3 border border-gray-300 rounded-lg shadow-md w-1/5 bg-white">
+      <div class="flex">
+        <label for="contractSelect" class="mr-2 text-fontblue px-2"
+          >Contract: {{ selectedContract.ContractCode }}</label
+        >
       </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="CounterParty" name="CounterParty"
-        [(ngModel)]="this.selectedContract.CounterParty" type="text" aria-label="Full name" required >
-        <div *ngIf="!selectedContract.CounterParty "  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-          <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-           Please Fill The Required Fieldd
+      <div class="flex items-center">
+        <label for="versionSelect" class="mr-2 ml-3">Version:</label>
+        <select
+          class="rounded-lg"
+          id="versionSelect"
+          (change)="onContractChange($event)"
+          [value]="selectedContract?.Id"
+        >
+          <option
+            *ngFor="let contract of contractVersions"
+            [value]="contract.Id"
+          >
+            {{ contract.Version }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <ng-container *ngIf="this.isedit">
+      <button
+        style="margin-left: 79%"
+        class="mt-1 flex rounded-lg hover:text-fontblue"
+      >
+        <span
+          type="button"
+          (click)="this.edit()"
+          class="material-icons text-fontblue"
+          >edit_document</span
+        >
+      </button>
+    </ng-container>
+    <ng-container *ngIf="this.isSubmit">
+      <button
+        class="bg-fontblue text-white w-20 h-8 rounded-md"
+        style="margin-left: 75%"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Submit
+      </button>
+    </ng-container>
+  </div>
+
+  <div
+    *ngIf="selectedContract"
+    class="flex flex-col items-center mb-4 w-full rounded-lg shadow-lg border-gray-100 border-2 px-20 py-4"
+  >
+    <!-- New Fields Section -->
+    <div
+      class="w-full p-4 border-2 shadow-lg mb-4 border-gray-100 mx-100 rounded-lg"
+    >
+      <p class="text-md text-fontblue bg-white mb-2">Primary Details</p>
+      <div class="grid grid-cols-4 gap-4">
+        <div class="bg-white p-2 rounded">
+          <p class="">Counter Party:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="CounterParty"
+            name="CounterParty"
+            [(ngModel)]="this.selectedContract.CounterParty"
+            type="text"
+            aria-label="Full name"
+            required
+          />
+          <div
+            *ngIf="!selectedContract.CounterParty"
+            class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert"
+          >
+            <svg
+              class="flex-shrink-0 inline w-4 h-4 me-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+              />
+            </svg>
+            Please fill the required field
+          </div>
+        </div>
+
+        <div class="p-2 rounded">
+          <p class="">Counter Party Owner:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="CounterPartyOwner "
+            name="CounterPartyOwner "
+            [(ngModel)]="this.selectedContract.CounterPartyOwner"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Business Owner:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="BuissenessOWnerId "
+            name="BuissenessOWnerId"
+            [(ngModel)]="this.selectedContract.BuissenessOWnerId"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Legal Owner:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="LegalOwnerId "
+            name="LegalOwnerId "
+            [(ngModel)]="this.selectedContract.LegalOwnerId"
+            type="number"
+            aria-label="Full name"
+          />
         </div>
       </div>
-
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Counter Party Owner:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="CounterPartyOwner " name="CounterPartyOwner "
-        [(ngModel)]="this.selectedContract.CounterPartyOwner " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Business Owner:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="BuissenessOWnerId " name="BuissenessOWnerId"
-        [(ngModel)]="this.selectedContract.BuissenessOWnerId " type="number" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Legal Owner:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="LegalOwnerId " name="LegalOwnerId "
-        [(ngModel)]="this.selectedContract.LegalOwnerId" type="number" aria-label="Full name" >
-      </div>
     </div>
-  </div>
 
-  <!-- Section Buttons -->
-   <div class="border-2 flex flex-col items-center mb-4 w-full shadow-lg rounded-lg">
-  <div class="flex w-full px-2 pt-2 shadow-lg">
-    <button
-      class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300 rounded-tl-lg"
-      [ngClass]="{
-        'bg-fontblue text-white': activeSection === 'focus',
-        'text-fontblue bg-white': activeSection !== 'focus'
-      }"
-      (click)="setActiveSection('focus')"
-      type="button"
-    >
-      Contract Focus
-    </button>
-    <button
-      class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300"
-      [ngClass]="{
-        'bg-fontblue text-white': activeSection === 'dates',
-        'text-fontblue bg-white': activeSection !== 'dates'
-      }"
-      (click)="setActiveSection('dates')"
-      type="button"
-    >
-      Dates
-    </button>
-    <button
-      class="flex-1 px-4 py-2 border-b-2 border-gray-300 "
-      [ngClass]="{
-        'bg-fontblue text-white': activeSection === 'classification',
-        'text-fontblue bg-white': activeSection !== 'classification'
-      }"
-      (click)="setActiveSection('classification')"
-      type="button"
-    >
-      Classification
-    </button>
-    <button
-      *ngIf="combinedAdditionalFields.length > 0"
-      class="flex-1 px-4 py-2 border-b-2 border-gray-300 rounded-tr-lg"
-      [ngClass]="{
-        'bg-fontblue text-white': activeSection === 'additionalFields',
-        'text-fontblue bg-white': activeSection !== 'additionalFields'
-      }"
-      (click)="setActiveSection('additionalFields')" type="button"
-    >
-      Additional Fields
-    </button>
-  </div>
-
-
-  <!-- Contract Focus Section -->
-  <div
-    *ngIf="activeSection === 'focus'"
-    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
-  >
-    <h3 class="text-lg font-semibold mb-2">Contract Focus</h3>
-    <div class="grid grid-cols-4 gap-4">
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Account:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Account " name="Account "
-        [(ngModel)]="this.selectedContract.Account " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Jurisdiction:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Jurisdiction " name="Jurisdiction "
-        [(ngModel)]="this.selectedContract.Jurisdiction " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Client:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Client " name="Client "
-        [(ngModel)]="this.selectedContract.Client" type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Current:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Current " name="Current "
-        [(ngModel)]="this.selectedContract.Current " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Project:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Project " name="Project"
-        [(ngModel)]="this.selectedContract.Project " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Link:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Link " name="Link "
-        [(ngModel)]="this.selectedContract.Link " type="text" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Form:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="FormsId " name="FormsId"
-        [(ngModel)]="this.selectedContract.FormsId " type="number" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Status:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="StatusId " name="StatusId"
-        [(ngModel)]="this.selectedContract.StatusId " type="number" aria-label="Full name" >
-      </div>
+    <!-- Section Buttons -->
+    <div class="flex w-full rounded-lg shadow-lg bg-customBlue">
+      <button
+        class="flex-1 px-4 py-2 border-b-2 border-l-2 border-gray-300 rounded-tl-lg border-t-2"
+        [ngClass]="{
+          'bg-fontblue text-white border-gray-300 border-t-2 border-l-2':
+            activeSection === 'focus',
+          'text-fontblue bg-white': activeSection !== 'focus'
+        }"
+        (click)="setActiveSection('focus')"
+        type="button"
+      >
+        Contract Focus
+      </button>
+      <button
+        class="flex-1 px-4 py-2 border-b-2 border-gray-300 border-t-2"
+        [ngClass]="{
+          'bg-fontblue text-white border-gray-300 border-t-2 border-l-2':
+            activeSection === 'dates',
+          'text-fontblue bg-white': activeSection !== 'dates'
+        }"
+        (click)="setActiveSection('dates')"
+        type="button"
+      >
+        Dates
+      </button>
+      <button
+        class="flex-1 px-4 py-2 border-b-2 border-gray-300 border-t-2"
+        [ngClass]="{
+          'bg-fontblue text-white border-gray-300 border-t-2 border-l-2':
+            activeSection === 'classification',
+          'text-fontblue bg-white': activeSection !== 'classification'
+        }"
+        (click)="setActiveSection('classification')"
+        type="button"
+      >
+        Classification
+      </button>
+      <button
+        *ngIf="combinedAdditionalFields.length > 0"
+        class="flex-1 px-4 py-2 border-b-2 border-r-2 border-gray-300 rounded-tr-lg border-t-2"
+        [ngClass]="{
+          'bg-fontblue text-white border-gray-300 border-t-2 border-l-2':
+            activeSection === 'additionalFields',
+          'text-fontblue bg-white': activeSection !== 'additionalFields'
+        }"
+        (click)="setActiveSection('additionalFields')"
+        type="button"
+      >
+        Others
+      </button>
     </div>
-  </div>
 
-  <!-- Dates Section -->
-  <div
-    *ngIf="activeSection === 'dates'"
-    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
-  >
-    <h3 class="text-lg font-semibold mb-2">Dates</h3>
-    <div class="grid grid-cols-4 gap-4">
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Signing Date:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="SigningDate " name="SigningDate"
-        [(ngModel)]="this.selectedContract.SigningDate" type="date" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Start Date:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="StartingDate " name="StartingDate "
-        [(ngModel)]="this.selectedContract.StartingDate" type="date" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Termination Date:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="TerminationDate " name="TerminationDate"
-        [(ngModel)]="this.selectedContract.TerminationDate" type="date" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Renewal Date Flag Off:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="RenewalDateFlagOff" name="RenewalDateFlagOff "
-        [(ngModel)]="this.selectedContract.RenewalDateFlagOff " type="boolean" aria-label="Full name" >
-      </div>
-    </div>
-  </div>
-
-  <!-- Classification Section -->
-  <div
-    *ngIf="activeSection === 'classification'"
-    class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
-  >
-    <h3 class="text-lg font-semibold mb-2">Classification</h3>
-    <div class="grid grid-cols-4 gap-4">
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Type:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="TypeId " name="TypeId"
-        [(ngModel)]="this.selectedContract.TypeId" type="number" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Category:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="CategoryId" name="CategoryId"
-        [(ngModel)]="this.selectedContract.CategoryId" type="number" aria-label="Full name" >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Annualized Value:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        {{ selectedContract.Account }}
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Value:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Value " name="Value "
-        [(ngModel)]="this.selectedContract.Value " type="number" aria-label="Full name" required >
-      </div>
-      <div class="bg-blue-100 p-2 rounded">
-        <strong class="opacity-70">Liabilities Cap:</strong>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="LiabilitiesCap" name="LiabilitiesCap"
-        [(ngModel)]="this.selectedContract.LiabilitiesCap" type="number" aria-label="Full name" >
-      </div>
-    </div>
-  </div>
-
-  <!-- Additional Fields Section -->
-  <div *ngIf="activeSection === 'additionalFields'" class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg">
-    <h3 class="text-lg font-semibold mb-2">Additional Fields</h3>
-    <div class="grid grid-cols-4 gap-4">
-      <!-- <form #additionalFieldsForm="ngForm" (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)">
-        <div *ngFor="let field of combinedAdditionalFields" class="mb-4 col-span-1" style="margin-bottom: 7%;">
-          <label [for]="field.AdditionalFieldId" class="block text-sm font-medium text-gray-700">{{ field.Value }}</label>
+    <!-- Contract Focus Section -->
+    <div
+      *ngIf="activeSection === 'focus'"
+      class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+    >
+      <!-- <h3 class="text-lg font-semibold mb-2">Contract Focus</h3> -->
+      <div class="grid grid-cols-4 gap-4">
+        <div class="p-2 rounded">
+          <p class="">Account:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
           <input
-            [id]="field.AdditionalFieldId"
-            [name]="field.AdditionalFieldId"
-            [(ngModel)]="field.C_Value"
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Account "
+            name="Account "
+            [(ngModel)]="this.selectedContract.Account"
             type="text"
-            class="mt-1 block w-full rounded-lg"
-            required
-          >
-
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Jurisdiction:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Jurisdiction "
+            name="Jurisdiction "
+            [(ngModel)]="this.selectedContract.Jurisdiction"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Client:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Client "
+            name="Client "
+            [(ngModel)]="this.selectedContract.Client"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Current:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Current "
+            name="Current "
+            [(ngModel)]="this.selectedContract.Current"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Project:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Project "
+            name="Project"
+            [(ngModel)]="this.selectedContract.Project"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Link:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Link "
+            name="Link "
+            [(ngModel)]="this.selectedContract.Link"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Form:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="FormsId "
+            name="FormsId"
+            [(ngModel)]="this.selectedContract.FormsId"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Status:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="StatusId "
+            name="StatusId"
+            [(ngModel)]="this.selectedContract.StatusId"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
       </div>
-
-
-        <button  type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-          Submit
-        </button>
-
-      </form> -->
-      <ng-container *ngFor="let field of combinedAdditionalFields">
-
-
-      <div  class="bg-blue-100 p-2 rounded">
-      <strong class="opacity-70">{{ field.Value }}:</strong>
     </div>
-      <div class="bg-white p-2 rounded">
 
-          <!-- <div *ngFor="let field of combinedAdditionalFields" class="mb-4 col-span-1" style="margin-bottom: 7%;"> -->
-            <!-- <label [for]="field.AdditionalFieldId" class="block text-sm font-medium text-gray-700">{{ field.Value }}</label> -->
+    <!-- Dates Section -->
+    <div
+      *ngIf="activeSection === 'dates'"
+      class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+    >
+      <!-- <h3 class="text-lg font-semibold mb-2">Dates</h3> -->
+      <div class="grid grid-cols-4 gap-4">
+        <div class="p-2 rounded">
+          <p class="">Signing Date:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="SigningDate "
+            name="SigningDate"
+            [(ngModel)]="this.selectedContract.SigningDate"
+            type="date"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Start Date:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="StartingDate "
+            name="StartingDate "
+            [(ngModel)]="this.selectedContract.StartingDate"
+            type="date"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Termination Date:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="TerminationDate "
+            name="TerminationDate"
+            [(ngModel)]="this.selectedContract.TerminationDate"
+            type="date"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Renewal Date Flag Off:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="RenewalDateFlagOff"
+            name="RenewalDateFlagOff "
+            [(ngModel)]="this.selectedContract.RenewalDateFlagOff"
+            type="boolean"
+            aria-label="Full name"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Classification Section -->
+    <div
+      *ngIf="activeSection === 'classification'"
+      class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+    >
+      <!-- <h3 class="text-lg font-semibold mb-2">Classification</h3> -->
+      <div class="grid grid-cols-4 gap-4">
+        <div class="p-2 rounded">
+          <p class="">Type:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="TypeId "
+            name="TypeId"
+            [(ngModel)]="this.selectedContract.TypeId"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Category:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="CategoryId"
+            name="CategoryId"
+            [(ngModel)]="this.selectedContract.CategoryId"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Annualized Value:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          {{ selectedContract.Account }}
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Value:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Value "
+            name="Value "
+            [(ngModel)]="this.selectedContract.Value"
+            type="number"
+            aria-label="Full name"
+            required
+          />
+        </div>
+        <div class="p-2 rounded">
+          <p class="">Liabilities Cap:</p>
+        </div>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="LiabilitiesCap"
+            name="LiabilitiesCap"
+            [(ngModel)]="this.selectedContract.LiabilitiesCap"
+            type="number"
+            aria-label="Full name"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Fields Section -->
+    <div
+      *ngIf="activeSection === 'additionalFields'"
+      class="w-full p-4 border border-gray-300 shadow-md mb-4 rounded-b-lg"
+    >
+      <div class="grid grid-cols-4 gap-4">
+        <ng-container *ngFor="let field of combinedAdditionalFields">
+          <div class="p-2 rounded">
+            <p class="">{{ field.Value }}:</p>
+          </div>
+          <div
+            class="border-2 p-2 rounded-lg"
+            [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+          >
             <input
               [id]="field.AdditionalFieldId"
               [name]="field.AdditionalFieldId"
               [(ngModel)]="field.C_Value"
-              disabled={{this.editable}}
+              disabled="{{ this.editable }}"
               type="text"
               class="mt-1 block w-full rounded-lg appearance-none bg-transparent border-none"
               required
-            >
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
 
-        <!-- </div> -->
-
-
-        <!-- <button  type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-          Submit
-        </button> -->
-
-
+    <div class="flex w-full gap-4">
+      <!-- Issues Section -->
+      <div class="w-1/2 p-4 border shadow-md mb-4 rounded-lg">
+        <p class="text-lg text-fontblue bg-white mb-2">Issues</p>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="OpenIssues "
+            name="OpenIssues"
+            [(ngModel)]="this.selectedContract.OpenIssues"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
       </div>
 
-  </ng-container>
-
+      <!-- Notes Section -->
+      <div class="w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
+        <p class="text-lg text-fontblue bg-white mb-2">Notes</p>
+        <div
+          class="border-2 p-2 rounded-lg"
+          [ngClass]="editable ? 'border-gray-200' : 'border-gray-400'"
+        >
+          <input
+            disabled="{{ this.editable }}"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0"
+            id="Notes "
+            name="Notes "
+            [(ngModel)]="this.selectedContract.Notes"
+            type="text"
+            aria-label="Full name"
+          />
+        </div>
+      </div>
     </div>
-    <!-- <button  type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-      Submit
-    </button> -->
   </div>
-  <!-- div shadow -->
-</div>
-  <div class="flex w-full gap-4">
-    <!-- Issues Section -->
-    <div class="w-1/2 p-4 border bg-blue-100 shadow-md mb-4 rounded-lg">
-      <h3 class="text-lg font-semibold mb-2">Issues</h3>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="OpenIssues " name="OpenIssues"
-        [(ngModel)]="this.selectedContract.OpenIssues " type="text" aria-label="Full name" >
-      </div>
-    </div>
-
-    <!-- Notes Section -->
-    <div class="w-1/2 p-4 border border-gray-300 shadow-md mb-4 rounded-lg">
-      <h3 class="text-lg font-semibold mb-2">Notes</h3>
-      <div class="bg-white p-2 rounded">
-        <input  disabled={{this.editable}} class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-0 leading-tight focus:outline-none focus:ring-0" id="Notes " name="Notes "
-        [(ngModel)]="this.selectedContract.Notes " type="text" aria-label="Full name" >
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <ng-container *ngIf="this.selectedContract.Value!=null"> -->
-  <!-- <button style="color:white;background-color: red;"  type="submit"[disabled]="!form.valid"  class="btn">subddmit</button> -->
-<!-- </ng-container> -->
-
 </form>
-
-<!-- Issues and Notes Section -->
-
-
-
-
-  <!-- <form #additionalFieldsForm="ngForm" (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)">
-    <div *ngFor="let field of combinedAdditionalFields" class="bg-blue-100 p-2 rounded">
-      <strong class="opacity-70">{{ field.Value }}:</strong>
-
-        {{ field.C_Value }}
-        <label [for]="field.AdditionalFieldId" class="block text-sm font-medium text-gray-700">{{ field.Value }}</label>
-        <input
-
-        [id]="field.AdditionalFieldId"
-        [name]="field.AdditionalFieldId"
-        [(ngModel)]="field.inputValue"
-        type="text"
-        required
-      >
-      </div>
-
-    <button type="submit">submit</button>
-    </form> -->
-
-
-

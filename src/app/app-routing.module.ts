@@ -24,7 +24,6 @@ const routes: Routes = [
   { path: 'users', component: UserComponent },
   { path: 'contractview', component: ContractviewComponent },
   { path: 'params', component: ParamsComponent },
-
 ];
 
 @NgModule({

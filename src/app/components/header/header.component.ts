@@ -1,8 +1,452 @@
+// import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+// import { FormBuilder, NgForm } from '@angular/forms';
+// import { Router } from '@angular/router';
+// import { initFlowbite } from 'flowbite';
+// import {
+//   additionalFields,
+//   Contracts,
+//   Options,
+// } from 'src/app/interfaces/options';
+// import { ContractformService } from 'src/app/services/contractFormService/contractform.service';
+
+// @Component({
+//   selector: 'app-header',
+//   templateUrl: './header.component.html',
+//   styleUrls: ['./header.component.css'],
+// })
+// export class HeaderComponent implements OnInit {
+//   // contractTypes = [
+//   //   'Financial Contract',
+//   //   'Employee Agreement',
+//   //   'Business Contract',
+//   //   'ThirdParty Contract',
+//   // ];
+
+//   // isDropdownOpen = false;
+
+//   // toggleDropdown() {
+//   //   this.isDropdownOpen = !this.isDropdownOpen;
+//   // }
+
+//   isDropdownOpen = false;
+//   toggleDropdown(event: Event) {
+//     event.stopPropagation();
+//     this.isDropdownOpen = !this.isDropdownOpen;
+//   }
+
+//   isFlyoutMenuVisible = false;
+
+//   toggleFlyoutMenu() {
+//     this.isFlyoutMenuVisible = !this.isFlyoutMenuVisible;
+//   }
+
+//   newContract!: Contracts;
+//   additionalFields: any;
+
+//   constructor(
+//     private fb: FormBuilder,
+//     private contractservice: ContractformService,
+//     private router: Router,
+//     private render: Renderer2,
+//     private el: ElementRef
+//   ) {
+//     this.newContract = {
+//       Id: 0,
+//       UniqueNo: null,
+//       Version: null,
+//       Current: true,
+//       CategoryId: null,
+//       TypeId: null,
+//       CounterParty: '',
+//       Account: '',
+//       Client: '',
+//       Project: '',
+//       CounterPartyOwner: '',
+//       LegalOwnerId: null,
+//       BuissenessOWnerId: null,
+//       StatusId: null,
+//       SigningDate: null,
+//       StartingDate: null,
+//       TerminationDate: null,
+//       RenewalDateFlagOff: null,
+//       Value: null,
+//       Jurisdiction: '',
+//       LiabilitiesCap: null,
+//       Notes: 'This is another sample Contract',
+//       OpenIssues: 'None',
+//       ExpirationLimitId: null,
+//       FormsId: null,
+//       Link: 'https://example.com/contract5',
+//       AutoRenewal: null,
+//       ContractCode: '',
+//       Filename: null,
+//     };
+
+//     this.render.listen('window', 'click', (e: Event) => {
+//       if (this.isDropdownOpen && !this.el.nativeElement.contains(e.target)) {
+//         this.isDropdownOpen = false;
+//       }
+//     });
+//   }
+
+//   onDocumentClick(event: Event) {
+//     if (!this.el.nativeElement.contains(event.target)) {
+//       this.isDropdownOpen = false;
+//     }
+//   }
+
+//   ngOnInit(): void {
+//     this.getContractsTypes();
+//     this.getTypes();
+//     this.getUsers();
+//     initFlowbite();
+//   }
+
+//   onSubmit() {
+//     if (!this.additionalFields) {
+//       this.createContract(this.newContract);
+//     }
+//   }
+
+//   navigateToFormContract(category: string): void {
+//     this.router.navigate(['/formcontract'], {
+//       queryParams: { contractType: category },
+//     });
+//   }
+
+//   categoriess: { id: number; value: string }[] = [];
+//   status: { id: number; value: string }[] = [];
+//   forms: { id: number; value: string }[] = [];
+//   types: { id: number; value: String }[] = [];
+//   expirationLimit: { id: number; value: String }[] = [];
+//   usersOwners: { id: number; value: string }[] = [];
+//   responseOptions: Options[] = [];
+//   getContractsTypes() {
+//     this.contractservice.getContractTypes().subscribe((response) => {
+//       this.responseOptions = response;
+//       this.categoriess = response
+//         .filter((option) => option.Key === 'Category')
+//         .map((option) => ({ id: option.Id, value: option.Value }));
+
+//       this.status = response
+//         .filter((option) => option.Key === 'Status')
+//         .map((option) => ({ id: option.Id, value: option.Value }));
+
+//       this.forms = response
+//         .filter((option) => option.Key === 'Forms')
+//         .map((option) => ({ id: option.Id, value: option.Value }));
+
+//       this.expirationLimit = response
+//         .filter((option) => option.Key === 'ExpirationLimit')
+//         .map((option) => ({ id: option.Id, value: option.Value }));
+//     });
+//   }
+
+//   getTypes() {
+//     this.contractservice.getTypes().subscribe((response) => {
+//       this.types = response.map((type) => ({
+//         id: type.Id,
+//         value: type.Name,
+//       }));
+//     });
+//   }
+//   getUsers() {
+//     this.contractservice.getUserForOwners().subscribe((response) => {
+//       console.log('Aaa', response);
+//       this.usersOwners = response.map((users) => ({
+//         id: users.Id,
+//         value: users.FirstName,
+//       }));
+//     });
+//   }
+
+//   openModal(modalId: string) {
+//     const modal = document.getElementById(modalId);
+//     if (modal) {
+//       modal.classList.remove('hidden');
+//       modal.classList.add('flex');
+//     }
+//   }
+
+//   //  async createContract(newContraact:Contracts):Promise<boolean> {
+//   //     this.contractservice.postContractFormdetails(newContraact).subscribe(response => {
+//   //       this.data = response;
+//   //       this.contractId = this.data.Id;
+//   //       alert("contractid"+this.contractId);
+
+//   //     });
+
+//   //   return true;
+//   //   }
+//   async createContract(newContract: Contracts): Promise<boolean> {
+//     const response = await this.contractservice
+//       .postContractFormdetails(newContract)
+//       .toPromise();
+//     this.data = response;
+//     this.contractId = this.data.Id;
+//     alert('contractId: ' + this.contractId);
+//     return true;
+//   }
+//   category!: string;
+//   clickk() {
+//     alert('modal');
+//   }
+//   handleCategoryClick(category: any) {
+//     this.openModal('static-modal');
+//     this.category = category.value;
+//     this.checkAdditionalFields(category.id);
+//     this.newContract.CategoryId = category.id;
+//   }
+
+//   checkAdditionalFields(id: any) {
+//     this.contractservice.getAddtionalFields(id).subscribe((response) => {
+//       this.additionalFields = response;
+//     });
+//   }
+
+//   contractId!: number;
+//   formatdata!: additionalFields[];
+//   data: any;
+
+//   sendData(additionalFields: any) {
+//     alert('hello');
+//   }
+//   async onAdditionalSubmit(form: NgForm): Promise<void> {
+//     const contractCreated = await this.createContract(this.newContract);
+
+//     if (contractCreated) {
+//       alert(this.contractId);
+//     }
+
+//     if (form.valid) {
+//       const formatedData: additionalFields[] = this.additionalFields.map(
+//         (field: any) => ({
+//           ContractId: this.contractId,
+//           AdditionalFieldId: field.AdditionalFieldId,
+//           Value: field.inputValue || '',
+//         })
+//       );
+
+//       console.log('formateddata', formatedData);
+//       alert('Inside additional fields processing');
+//       this.postAdditionalFields(formatedData);
+//       this.closeModal('additional-field-modal');
+//     }
+//   }
+//   async onAdditionalSubmitt(form: NgForm): Promise<void> {
+//     //  const id = this.createContract(this.newContract);
+//     // await this.createContract(this.newContract);
+//     //     alert(this.contractId);
+//     if (form.valid) {
+//       const formatdata: additionalFields[] = this.additionalFields.map(
+//         (field: any) => ({
+//           ContractId: this.contractId,
+//           AdditionalFieldId: field.AdditionalFieldId,
+//           Value: field.inputValue || '',
+//         })
+//       );
+//       if (formatdata !== null) {
+//         this.createContract(this.newContract);
+
+//         //   alert("additinal kulla iruku");
+//         //  this.postAdditionalFields(formateddata);
+
+//         // this.closeModal('additional-field-modal');
+//       } else {
+//         alert('invalid');
+//       }
+//     }
+//   }
+//   submitField(field: {
+//     AdditionalFieldId: number;
+//     Value: string;
+//     inputValue?: string;
+//   }): void {
+//     const formattedField: additionalFields = {
+//       ContractId: this.contractId,
+//       AdditionalFieldId: field.AdditionalFieldId,
+//       Value: field.inputValue || '',
+//     };
+//   }
+//   postAdditionalFields(data: additionalFields[]) {
+//     this.contractservice.postAdditionalField(data).subscribe((response) => {});
+//   }
+//   submitted = false;
+//   change!: string;
+
+//   validateAndProceed(currentModalId: string, nextModalId: string): void {
+//     this.submitted = true; // Set the submitted flag to true
+//     if (this.isCurrentModalValid(currentModalId)) {
+//       const currentModal = document.getElementById(currentModalId);
+//       const nextModal = document.getElementById(nextModalId);
+//       if (currentModalId == 'datee-modal') {
+//         this.change = 'submit';
+//       }
+//       if (currentModal && nextModal) {
+//         currentModal.classList.add('hidden');
+//         nextModal.classList.remove('hidden');
+//         nextModal?.classList.add('flex');
+//       }
+//       this.submitted = false;
+//     }
+//   }
+
+//   previous(currentModalId: string, nextModalId: string): void {
+//     const currentModal = document.getElementById(currentModalId);
+//     const nextModal = document.getElementById(nextModalId);
+//     currentModal?.classList.add('hidden');
+//     nextModal?.classList.remove('hidden');
+//     nextModal?.classList.add('flex');
+//   }
+
+//   closeModal(modalId: string) {
+//     this.ngOnInit();
+//     const modal = document.getElementById(modalId);
+//     if (modal) {
+//       modal.classList.add('hidden');
+//       modal.classList.remove('flex');
+//     }
+//   }
+
+//   isCurrentModalValid(modalId: string): boolean {
+//     switch (modalId) {
+//       case 'static-modal':
+//         return (
+//           this.newContract.Account !== null &&
+//           this.newContract.Client !== null &&
+//           this.newContract.Project !== null &&
+//           this.newContract.UniqueNo !== null &&
+//           this.newContract.CategoryId !== null
+//         );
+//       case 'default-modal':
+//         return (
+//           this.newContract.CounterPartyOwner !== null &&
+//           this.newContract.CounterParty !== null &&
+//           this.newContract.BuissenessOWnerId !== null &&
+//           this.newContract.LegalOwnerId !== null
+//         );
+//       case 'formdetails-modal':
+//         return (
+//           this.newContract.FormsId !== null &&
+//           this.newContract.TypeId !== null &&
+//           this.newContract.StatusId !== null &&
+//           this.newContract.Version !== null &&
+//           this.newContract.Filename !== null &&
+//           this.newContract.Link !== null
+//         );
+//       case 'status-modal':
+//         return (
+//           this.newContract.ContractCode !== null &&
+//           this.newContract.Value !== null &&
+//           this.newContract.LiabilitiesCap !== null &&
+//           this.newContract.Jurisdiction !== null &&
+//           this.newContract.AutoRenewal !== null
+//         );
+//       case 'datee-modal':
+//         return (
+//           this.newContract.RenewalDateFlagOff !== null &&
+//           this.newContract.SigningDate !== null &&
+//           this.newContract.StartingDate !== null &&
+//           this.newContract.TerminationDate !== null &&
+//           this.newContract.ExpirationLimitId !== null
+//         );
+//       default:
+//         return true;
+//     }
+//   }
+
+//   params: string[] = [
+//     'category',
+//     'description',
+//     'done_outline',
+//     'timer',
+//     'manage_accounts',
+//     // 'security',
+//     'person_add',
+//     'add',
+//   ];
+
+//   names: string[] = [
+//     'Category',
+//     'Forms',
+//     'Status',
+//     'ExpirationLimit',
+//     'Role',
+//     // 'Permissions',
+//     'Users',
+//     'AdditionalField',
+//   ];
+
+//   descriptions: string[] = [
+//     'Manage categories',
+//     'Fill out forms',
+//     'Check status',
+//     'Set expiration limits',
+//     'Define roles',
+//     // 'Manage permissions',
+//     'Add users',
+//     'Add additional fields',
+//   ];
+
+//   // Splitting the items into two columns
+//   // firstColumnItems = this.params.slice(0, 4);
+//   // secondColumnItems = this.params.slice(4);
+//   // firstColumnNames = this.names.slice(0, 4);
+//   // secondColumnNames = this.names.slice(4);
+//   // firstColumnDescriptions = this.descriptions.slice(0, 4);
+//   // secondColumnDescriptions = this.descriptions.slice(4);
+
+//   dropdownOpen = false;
+
+//   toggleDropdownn() {
+//     this.dropdownOpen = !this.dropdownOpen;
+//     const mainContent = document.getElementById('mainContent');
+//     if (mainContent) {
+//       if (this.dropdownOpen) {
+//         mainContent.classList.add('blur');
+//         document.addEventListener('click', this.closeDropdownOnOutsideClick);
+//       } else {
+//         mainContent.classList.remove('blur');
+//         document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+//       }
+//     }
+//   }
+
+//   closeDropdownOnOutsideClick = (event: MouseEvent) => {
+//     const dropdown = document.querySelector('.relative');
+//     if (dropdown && !dropdown.contains(event.target as Node)) {
+//       this.dropdownOpen = false;
+//       const mainContent = document.getElementById('mainContent');
+//       if (mainContent) {
+//         mainContent.classList.remove('blur');
+//       }
+//       document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+//     }
+//   };
+
+//   navigateToComponent(item: string) {
+//     this.dropdownOpen = false;
+//     const mainContent = document.getElementById('mainContent');
+//     if (mainContent) {
+//       mainContent.classList.remove('blur');
+//     }
+//     if (item === 'Users') {
+//       this.router.navigate(['/users']);
+//     } else {
+//       this.router.navigate(['/options'], { queryParams: { key: item } });
+//     }
+//   }
+// }
+
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { additionalFields, Contracts, Options } from 'src/app/interfaces/options';
+import {
+  additionalFields,
+  Contracts,
+  Options,
+} from 'src/app/interfaces/options';
 import { ContractformService } from 'src/app/services/contractFormService/contractform.service';
 
 @Component({
@@ -11,26 +455,11 @@ import { ContractformService } from 'src/app/services/contractFormService/contra
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  // contractTypes = [
-  //   'Financial Contract',
-  //   'Employee Agreement',
-  //   'Business Contract',
-  //   'ThirdParty Contract',
-  // ];
-
-  // isDropdownOpen = false;
-
-  // toggleDropdown() {
-  //   this.isDropdownOpen = !this.isDropdownOpen;
-  // }
-
   isDropdownOpen = false;
   toggleDropdown(event: Event) {
     event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-
-
 
   isFlyoutMenuVisible = false;
 
@@ -38,48 +467,53 @@ export class HeaderComponent implements OnInit {
     this.isFlyoutMenuVisible = !this.isFlyoutMenuVisible;
   }
 
-  newContract!: Contracts ;
-  additionalFields:any;
+  newContract!: Contracts;
+  additionalFields: any;
 
-  constructor(private fb: FormBuilder,private contractservice:ContractformService,private router:Router,private render:Renderer2,private el:ElementRef) {
+  constructor(
+    private fb: FormBuilder,
+    private contractservice: ContractformService,
+    private router: Router,
+    private render: Renderer2,
+    private el: ElementRef
+  ) {
     this.newContract = {
-    Id: 0,
-    UniqueNo:null,
-    Version: null,
-    Current: true,
-    CategoryId:null,
-    TypeId:null,
-    CounterParty: '',
-    Account: '',
-    Client: '',
-    Project: '',
-    CounterPartyOwner: '',
-    LegalOwnerId:null,
-    BuissenessOWnerId:null,
-    StatusId:null,
-    SigningDate:null,
-    StartingDate: null,
-    TerminationDate: null,
-    RenewalDateFlagOff: null,
-    Value: null,
-    Jurisdiction:'',
-    LiabilitiesCap: null,
-    Notes: 'This is another sample Contract',
-    OpenIssues: 'None',
-    ExpirationLimitId:null,
-    FormsId:null,
-    Link: 'https://example.com/contract5',
-    AutoRenewal:null ,
-    ContractCode: '',
-    Filename: null
-    }
+      Id: 0,
+      UniqueNo: null,
+      Version: null,
+      Current: true,
+      CategoryId: null,
+      TypeId: null,
+      CounterParty: '',
+      Account: '',
+      Client: '',
+      Project: '',
+      CounterPartyOwner: '',
+      LegalOwnerId: null,
+      BuissenessOWnerId: null,
+      StatusId: null,
+      SigningDate: null,
+      StartingDate: null,
+      TerminationDate: null,
+      RenewalDateFlagOff: null,
+      Value: null,
+      Jurisdiction: '',
+      LiabilitiesCap: null,
+      Notes: 'This is another sample Contract',
+      OpenIssues: 'None',
+      ExpirationLimitId: null,
+      FormsId: null,
+      Link: 'https://example.com/contract5',
+      AutoRenewal: null,
+      ContractCode: '',
+      Filename: null,
+    };
 
     this.render.listen('window', 'click', (e: Event) => {
       if (this.isDropdownOpen && !this.el.nativeElement.contains(e.target)) {
         this.isDropdownOpen = false;
       }
     });
-
   }
 
   onDocumentClick(event: Event) {
@@ -88,18 +522,26 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  FieldStepper: number = 5;
 
   ngOnInit(): void {
     this.getContractsTypes();
     this.getTypes();
     this.getUsers();
-    initFlowbite();
 
+    initFlowbite();
   }
 
-  onSubmit(){
-    if(!this.additionalFields){
-      this.createContract(this.newContract);
+  async onSubmit() {
+    if (this.additionalFields == 0) {
+      alert('nadhandamass');
+      if (this.currentstep < this.steps) {
+        this.currentstep++;
+      }
+      const check = await this.createContract(this.newContract);
+      if (check) {
+        this.closeModal('datee-modal');
+      }
     }
   }
 
@@ -109,308 +551,412 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-
-  categoriess:{id:number,value:string}[]=[];
-  status:{id:number,value:string}[]=[];
-  forms:{id:number,value:string}[]=[];
-  types:{id:number,value:String}[]=[];
-  expirationLimit:{id:number,value:String}[]=[];
-  usersOwners:{id:number,value:string}[]=[];
-  responseOptions:Options[]=[];
+  categoriess: { id: number; value: string }[] = [];
+  status: { id: number; value: string }[] = [];
+  forms: { id: number; value: string }[] = [];
+  types: { id: number; value: String }[] = [];
+  expirationLimit: { id: number; value: String }[] = [];
+  usersOwners: { id: number; value: string }[] = [];
+  responseOptions: Options[] = [];
   getContractsTypes() {
-    this.contractservice.getContractTypes().subscribe(response => {
+    this.contractservice.getContractTypes().subscribe((response) => {
       this.responseOptions = response;
-      this.categoriess = response.filter(option => option.Key === 'Category')
-                    .map(option => ({id:option.Id,value:option.Value}));
+      this.categoriess = response
+        .filter((option) => option.Key === 'Category')
+        .map((option) => ({ id: option.Id, value: option.Value }));
 
-      this.status = response.filter(option => option.Key=== 'Status')
-                    .map(option=>({id:option.Id,value:option.Value}));
+      this.status = response
+        .filter((option) => option.Key === 'Status')
+        .map((option) => ({ id: option.Id, value: option.Value }));
 
-      this.forms = response.filter(option => option.Key === 'Forms' )
-                   .map(option=>({id:option.Id,value:option.Value}));
+      this.forms = response
+        .filter((option) => option.Key === 'Forms')
+        .map((option) => ({ id: option.Id, value: option.Value }));
 
-      this.expirationLimit = response.filter(option => option.Key === 'ExpirationLimit')
-                    .map(option=>({id:option.Id,value:option.Value}));
-
+      this.expirationLimit = response
+        .filter((option) => option.Key === 'ExpirationLimit')
+        .map((option) => ({ id: option.Id, value: option.Value }));
     });
-
   }
 
-
-  getTypes(){
-    this.contractservice.getTypes().subscribe(response=>{
-     this.types = response.map(type=>({
-       id:type.Id,
-       value:type.Name
-     }))
-    })
- }
- getUsers(){
-   this.contractservice.getUserForOwners().subscribe(response=>{
-     console.log("Aaa",response);
-      this.usersOwners = response.map(users=>({
-        id:users.Id,
-        value:users.FirstName
-      }))
-   })
- }
-
- openModal(modalId: string) {
-   const modal = document.getElementById(modalId);
-   if (modal) {
-     modal.classList.remove('hidden');
-     modal.classList.add('flex');
-   }
- }
-
-//  async createContract(newContraact:Contracts):Promise<boolean> {
-//     this.contractservice.postContractFormdetails(newContraact).subscribe(response => {
-//       this.data = response;
-//       this.contractId = this.data.Id;
-//       alert("contractid"+this.contractId);
-
-
-//     });
-
-
-
-//   return true;
-//   }
-async createContract(newContract: Contracts): Promise<boolean> {
-
-   const response = await this.contractservice.postContractFormdetails(newContract).toPromise();
-   this.data = response;
-   this.contractId = this.data.Id;
-   alert("contractId: " + this.contractId);
-   return true;
-
-}
- category!:string;
- clickk(){
-  alert("modal");
- }
- handleCategoryClick(category: any) {
-  
-   this.openModal('static-modal');
-   this.category = category.value;
-   this.checkAdditionalFields(category.id);
-   this.newContract.CategoryId=category.id;
-
- }
-
- checkAdditionalFields(id:any){
-   this.contractservice.getAddtionalFields(id).subscribe(response=>{
-         this.additionalFields = response;
-   });
- }
-
- contractId!: number ;
- formatdata!:additionalFields[];
- data:any;
-
- sendData(additionalFields:any){
- alert("hello");
- }
- async onAdditionalSubmit(form: NgForm): Promise<void> {
-   const contractCreated = await this.createContract(this.newContract);
-
-   if(contractCreated){
-     alert(this.contractId);
-   }
-
-     if (form.valid) {
-       const formatedData: additionalFields[] = this.additionalFields.map((field: any) => ({
-         ContractId: this.contractId,
-         AdditionalFieldId: field.AdditionalFieldId,
-         Value: field.inputValue || ''
-       }));
-
-        console.log("formateddata",formatedData);
-         alert("Inside additional fields processing");
-         this.postAdditionalFields(formatedData);
-         this.closeModal('additional-field-modal');
-
-     }
-
- }
-async onAdditionalSubmitt(form: NgForm): Promise<void>{
- //  const id = this.createContract(this.newContract);
- // await this.createContract(this.newContract);
- //     alert(this.contractId);
-   if (form.valid) {
-    const formatdata:additionalFields[] = this.additionalFields.map((field:any) => ({
-     ContractId: this.contractId,
-     AdditionalFieldId: field.AdditionalFieldId,
-     Value: field.inputValue || ''
-   }));
-   if(formatdata!==null){
-
-   this.createContract(this.newContract);
-
-     //   alert("additinal kulla iruku");
-     //  this.postAdditionalFields(formateddata);
-
-     // this.closeModal('additional-field-modal');
-
- }
- else{
-   alert("invalid");
- }
-  }
- }
- submitField(field: { AdditionalFieldId: number, Value: string, inputValue?: string }): void {
-   const formattedField: additionalFields = {
-     ContractId: this.contractId,
-     AdditionalFieldId: field.AdditionalFieldId,
-     Value: field.inputValue || ''
-   };
- }
- postAdditionalFields(data:additionalFields[]){
-
-   this.contractservice.postAdditionalField(data).subscribe(response=>{
+  getTypes() {
+    this.contractservice.getTypes().subscribe((response) => {
+      this.types = response.map((type) => ({
+        id: type.Id,
+        value: type.Name,
+      }));
     });
- }
- submitted=false;
-change!:string;
+  }
+  getUsers() {
+    this.contractservice.getUserForOwners().subscribe((response) => {
+      console.log('Aaa', response);
+      this.usersOwners = response.map((users) => ({
+        id: users.Id,
+        value: users.FirstName,
+      }));
+    });
+  }
 
- validateAndProceed(currentModalId: string, nextModalId: string): void {
-   this.submitted = true; // Set the submitted flag to true
-   if (this.isCurrentModalValid(currentModalId)) {
-     const currentModal = document.getElementById(currentModalId);
-     const nextModal = document.getElementById(nextModalId);
-     if(currentModalId == "datee-modal" ){
-        this.change='submit';
-     }
-     if (currentModal && nextModal) {
-       currentModal.classList.add('hidden');
-       nextModal.classList.remove('hidden');
-       nextModal?.classList.add('flex');
-     }
-     this.submitted = false;
-   }
- }
-
- previous(currentModalId: string, nextModalId: string): void {
-   const currentModal = document.getElementById(currentModalId);
-   const nextModal = document.getElementById(nextModalId);
-       currentModal?.classList.add('hidden');
-       nextModal?.classList.remove('hidden');
-       nextModal?.classList.add('flex');
- }
-
- closeModal(modalId: string) {
-   this.ngOnInit();
-   const modal = document.getElementById(modalId);
-   if (modal) {
-     modal.classList.add('hidden');
-     modal.classList.remove('flex');
-   }
- }
-
- isCurrentModalValid(modalId: string): boolean {
-   switch (modalId) {
-     case 'static-modal':
-       return this.newContract.Account!==null && this.newContract.Client!==null && this.newContract.Project!==null && this.newContract.UniqueNo!==null && this.newContract.CategoryId!==null;
-     case 'default-modal':
-       return this.newContract.CounterPartyOwner!==null && this.newContract.CounterParty!==null && this.newContract.BuissenessOWnerId !== null && this.newContract.LegalOwnerId !== null;
-     case 'formdetails-modal':
-       return this.newContract.FormsId!==null && this.newContract.TypeId!==null && this.newContract.StatusId!==null && this.newContract.Version!==null && this.newContract.Filename!==null && this.newContract.Link!==null;
-     case 'status-modal':
-       return this.newContract.ContractCode!==null && this.newContract.Value!==null && this.newContract.LiabilitiesCap!==null&& this.newContract.Jurisdiction!==null&&this.newContract.AutoRenewal!==null;
-     case 'datee-modal':
-       return this.newContract.RenewalDateFlagOff!==null && this.newContract.SigningDate!==null && this.newContract.StartingDate!==null&& this.newContract.TerminationDate!==null && this.newContract.ExpirationLimitId!==null;
-     default:
-       return true;
-   }
- }
-
-
- //shiva ts file
-
- params: string[] = [
-  'category',
-  'description',
-  'done_outline',
-  'timer',
-  'manage_accounts',
-  'security',
-  'person_add',
-  'add',
-];
-
-names: string[] = [
-  'Category',
-  'Forms',
-  'Status',
-  'ExpirationLimit',
-  'Role',
-  'Permissions',
-  'Users',
-  'AdditionalField',
-];
-
-descriptions: string[] = [
-  'Manage categories',
-  'Fill out forms',
-  'Check status',
-  'Set expiration limits',
-  'Define roles',
-  'Manage permissions',
-  'Add users',
-  'Add additional fields',
-];
-
-// Splitting the items into two columns
-firstColumnItems = this.params.slice(0, 4);
-secondColumnItems = this.params.slice(4);
-firstColumnNames = this.names.slice(0, 4);
-secondColumnNames = this.names.slice(4);
-firstColumnDescriptions = this.descriptions.slice(0, 4);
-secondColumnDescriptions = this.descriptions.slice(4);
-
-dropdownOpen = false;
-
-
-toggleDropdownn() {
-  this.dropdownOpen = !this.dropdownOpen;
-  const mainContent = document.getElementById('mainContent');
-  if (mainContent) {
-    if (this.dropdownOpen) {
-      mainContent.classList.add('blur');
-      document.addEventListener('click', this.closeDropdownOnOutsideClick);
-    } else {
-      mainContent.classList.remove('blur');
-      document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+  openModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
     }
   }
-}
 
-closeDropdownOnOutsideClick = (event: MouseEvent) => {
-  const dropdown = document.querySelector('.relative');
-  if (dropdown && !dropdown.contains(event.target as Node)) {
+  async createContract(newContract: Contracts): Promise<boolean> {
+    const response = await this.contractservice
+      .postContractFormdetails(newContract)
+      .toPromise();
+    this.data = response;
+    this.contractId = this.data.Id;
+    alert('contractId: ' + this.contractId);
+    return true;
+  }
+  category!: string;
+  clickk() {
+    alert('modal');
+  }
+  handleCategoryClick(category: any) {
+    this.openModal('static-modal');
+    this.category = category.value;
+    this.checkAdditionalFields(category.id);
+    this.newContract.CategoryId = category.id;
+  }
+
+  checkAdditionalFields(id: any) {
+    this.contractservice.getAddtionalFields(id).subscribe((response) => {
+      this.additionalFields = response;
+      if (this.additionalFields.length != 0) {
+        alert('heloodddddddddddd');
+        this.FieldStepper = 6;
+        alert(this.FieldStepper);
+      }
+    });
+  }
+
+  contractId!: number;
+  formatdata!: additionalFields[];
+  data: any;
+
+  sendData(additionalFields: any) {
+    alert('hello');
+  }
+  async onAdditionalSubmit(form: NgForm): Promise<void> {
+    //  const contractCreated = await this.createContract(this.newContract);
+
+    //  if(contractCreated){
+    //    alert(this.contractId);
+    //  }
+
+    if (form.valid) {
+      const contractCreated = await this.createContract(this.newContract);
+      const formatedData: additionalFields[] = this.additionalFields.map(
+        (field: any) => ({
+          ContractId: this.contractId,
+          AdditionalFieldId: field.AdditionalFieldId,
+          Value: field.inputValue || '',
+        })
+      );
+
+      console.log('formateddata', formatedData);
+      alert('Inside additional fields processing');
+      this.postAdditionalFields(formatedData);
+      this.closeModal('additional-field-modal');
+    }
+  }
+  async onAdditionalSubmitt(form: NgForm): Promise<void> {
+    if (form.valid) {
+      const formatdata: additionalFields[] = this.additionalFields.map(
+        (field: any) => ({
+          ContractId: this.contractId,
+          AdditionalFieldId: field.AdditionalFieldId,
+          Value: field.inputValue || '',
+        })
+      );
+      if (formatdata !== null) {
+        this.createContract(this.newContract);
+      } else {
+        alert('invalid');
+      }
+    }
+  }
+  submitField(field: {
+    AdditionalFieldId: number;
+    Value: string;
+    inputValue?: string;
+  }): void {
+    const formattedField: additionalFields = {
+      ContractId: this.contractId,
+      AdditionalFieldId: field.AdditionalFieldId,
+      Value: field.inputValue || '',
+    };
+  }
+  postAdditionalFields(data: additionalFields[]) {
+    this.contractservice.postAdditionalField(data).subscribe((response) => {});
+  }
+  submitted = false;
+  change!: string;
+
+  validateAndProceed(currentModalId: string, nextModalId: string): void {
+    this.submitted = true; // Set the submitted flag to true
+    if (this.isCurrentModalValid(currentModalId)) {
+      const currentModal = document.getElementById(currentModalId);
+      const nextModal = document.getElementById(nextModalId);
+      if (currentModalId == 'datee-modal') {
+        this.change = 'submit';
+      }
+      if (currentModal && nextModal) {
+        currentModal.classList.add('hidden');
+        nextModal.classList.remove('hidden');
+        nextModal?.classList.add('flex');
+      }
+
+      if (this.currentstep < this.steps) {
+        this.currentstep++;
+      }
+
+      this.submitted = false;
+    }
+  }
+
+  previous(currentModalId: string, nextModalId: string): void {
+    const currentModal = document.getElementById(currentModalId);
+    const nextModal = document.getElementById(nextModalId);
+    currentModal?.classList.add('hidden');
+    nextModal?.classList.remove('hidden');
+    nextModal?.classList.add('flex');
+    if (this.currentstep > 0) {
+      this.currentstep--;
+    }
+  }
+
+  closeModal(modalId: string) {
+    this.ngOnInit();
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  isCurrentModalValid(modalId: string): boolean {
+    switch (modalId) {
+      case 'static-modal':
+        return (
+          this.newContract.Account !== null &&
+          this.newContract.Client !== null &&
+          this.newContract.Project !== null &&
+          this.newContract.UniqueNo !== null &&
+          this.newContract.CategoryId !== null
+        );
+      case 'default-modal':
+        return (
+          this.newContract.CounterPartyOwner !== null &&
+          this.newContract.CounterParty !== null &&
+          this.newContract.BuissenessOWnerId !== null &&
+          this.newContract.LegalOwnerId !== null
+        );
+      case 'formdetails-modal':
+        return (
+          this.newContract.FormsId !== null &&
+          this.newContract.TypeId !== null &&
+          this.newContract.StatusId !== null &&
+          this.newContract.Version !== null &&
+          this.newContract.Filename !== null &&
+          this.newContract.Link !== null
+        );
+      case 'status-modal':
+        return (
+          this.newContract.ContractCode !== null &&
+          this.newContract.Value !== null &&
+          this.newContract.LiabilitiesCap !== null &&
+          this.newContract.Jurisdiction !== null &&
+          this.newContract.AutoRenewal !== null
+        );
+      case 'datee-modal':
+        return (
+          this.newContract.RenewalDateFlagOff !== null &&
+          this.newContract.SigningDate !== null &&
+          this.newContract.StartingDate !== null &&
+          this.newContract.TerminationDate !== null &&
+          this.newContract.ExpirationLimitId !== null
+        );
+      default:
+        return true;
+    }
+  }
+
+  orubutton(id: number) {
+    alert('vanakamda mapla');
+    console.log('mnnies');
+    console.log(id);
+  }
+  selectedStatus: any;
+  onStatusChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected status ID:', selectedValue);
+    // Call your desired method or perform an action with the selected value
+    this.handleStatusChange(selectedValue);
+  }
+
+  handleStatusChange(statusId: any | null): void {
+    // Implement your logic here
+    this.checkAdditionalFields(statusId);
+    // if(this.additionalFields.length==0){
+    //   alert("ddd");
+
+    // }
+    this.newContract.CategoryId = statusId;
+    console.log('Handling status change for ID:', statusId);
+  }
+
+  onStatusChangee(): void {
+    console.log('Selected status ID:', this.selectedStatus.id);
+    this.handleStatusChange(this.selectedStatus.id);
+    // this.checkAdditionalFields(this.newContract.CategoryId);
+
+    this.category = this.selectedStatus.value;
+  }
+
+  opennmodal() {
+    this.openModal('static-modal');
+  }
+
+  params: string[] = [
+    'category',
+    'description',
+    'done_outline',
+    'timer',
+    'manage_accounts',
+    // 'security',
+    'person_add',
+    'add',
+  ];
+
+  names: string[] = [
+    'Category',
+    'Forms',
+    'Status',
+    'ExpirationLimit',
+    'Role',
+    // 'Permissions',
+    'Users',
+    'AdditionalField',
+  ];
+
+  descriptions: string[] = [
+    'Manage categories',
+    'Fill out forms',
+    'Check status',
+    'Set expiration limits',
+    'Define roles',
+    /// 'Manage permissions',
+    'Add users',
+    'Add additional fields',
+  ];
+
+  // Splitting the items into two columns
+  // firstColumnItems = this.params.slice(0, 4);
+  // secondColumnItems = this.params.slice(4);
+  // firstColumnNames = this.names.slice(0, 4);
+  // secondColumnNames = this.names.slice(4);
+  // firstColumnDescriptions = this.descriptions.slice(0, 4);
+  // secondColumnDescriptions = this.descriptions.slice(4);
+
+  dropdownOpen = false;
+
+  toggleDropdownn() {
+    this.dropdownOpen = !this.dropdownOpen;
+    const mainContent = document.getElementById('mainContent');
+    if (mainContent) {
+      if (this.dropdownOpen) {
+        mainContent.classList.add('blur');
+        document.addEventListener('click', this.closeDropdownOnOutsideClick);
+      } else {
+        mainContent.classList.remove('blur');
+        document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+      }
+    }
+  }
+
+  closeDropdownOnOutsideClick = (event: MouseEvent) => {
+    const dropdown = document.querySelector('.relative');
+    if (dropdown && !dropdown.contains(event.target as Node)) {
+      this.dropdownOpen = false;
+      const mainContent = document.getElementById('mainContent');
+      if (mainContent) {
+        mainContent.classList.remove('blur');
+      }
+      document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+    }
+  };
+
+  navigateToComponent(item: string) {
     this.dropdownOpen = false;
     const mainContent = document.getElementById('mainContent');
     if (mainContent) {
       mainContent.classList.remove('blur');
     }
-    document.removeEventListener('click', this.closeDropdownOnOutsideClick);
+    if (item === 'Users') {
+      this.router.navigate(['/users']);
+    } else {
+      this.router.navigate(['/options'], { queryParams: { key: item } });
+    }
   }
-};
 
-navigateToComponent(item: string) {
-  this.dropdownOpen = false;
-  const mainContent = document.getElementById('mainContent');
-  if (mainContent) {
-    mainContent.classList.remove('blur');
+  step: number = 1;
+  submittedd: boolean = false;
+  newContractt: any = {};
+
+  setStep(step: number) {
+    this.step = step;
   }
-  if (item === 'Users') {
-    this.router.navigate(['/users']);
-  } else {
-    this.router.navigate(['/options'], { queryParams: { key: item } });
+
+  // nextStep() {
+  //   if (this.step < 3) {
+  //     this.step++;
+  //   }
+  // }
+
+  // prevStep() {
+  //   if (this.step > 1) {
+  //     this.step--;
+  //   }
+  // }
+
+  closeModall(id: string) {
+    // Add logic to close the modal
+    this.closeModal(id);
   }
-}
 
+  onSubmitt() {
+    this.submitted = true;
+    if (this.validateForm()) {
+      // Handle form submission
+    }
+  }
 
+  validateForm() {
+    // Add your form validation logic
+    return true;
+  }
+
+  currentstep = 0;
+  steps = 5;
+
+  // nextStep() {
+  //   if (this.currentStep < this.steps.length) {
+  //     this.currentStep++;
+  //   }
+  // }
+
+  // prevStep() {
+  //   if (this.currentStep > 0) {
+  //     this.currentStep--;
+  //   }
+  // }
 }
 // import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 // import { Router } from '@angular/router';
@@ -430,8 +976,6 @@ navigateToComponent(item: string) {
 //   //  this.isModalOpen=true;
 //   }
 
-
-
 //     contractTypes = [
 //       "Financial Contract",
 //       "Employee Agreement",
@@ -449,5 +993,3 @@ navigateToComponent(item: string) {
 //       });
 //     }
 // }
-
-

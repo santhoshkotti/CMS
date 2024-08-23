@@ -9,9 +9,10 @@ import { additionalFields, Contracts } from 'src/app/interfaces/options';
 export class ContractformService {
   // private apiUrl = 'http://127.0.0.1:5000';
 
- private apiUrl = "http://127.0.0.1:3001/contracts";
- private baseUrl = "http://127.0.0.1:3001/";
- private addtionalUrl = "http://127.0.0.1:3001/contract-additional-fields-values";
+  private apiUrl = 'http://127.0.0.1:3001/contracts';
+  private baseUrl = 'http://127.0.0.1:3001/';
+  private addtionalUrl =
+    'http://127.0.0.1:3001/contract-additional-fields-values';
 
   constructor(private http: HttpClient) {}
 
@@ -58,6 +59,15 @@ export class ContractformService {
   getContractAdditionalFieldsValues(contractId: number) {
     return this.http.get<any[]>(
       `${this.baseUrl}/contract-additional-fields-values/${contractId}`
+    );
+  }
+  getContractVersions(contractCode: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?contractCode=${contractCode}`);
+  }
+
+  getContractDetails(contractCode: string, version: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiUrl}/${contractCode}/version/${version}`
     );
   }
 }

@@ -26,11 +26,10 @@
   /* background-color: rgb(231, 231, 105);
   color: lightyellow; */
   /* background-color: red; */
-  color:yellow;
-  text-align: center;
+  color: rgb(203, 203, 5);
+  /* text-align: center; */
   border-radius: 5px;
-  width:76%
-
+  /* width: 76%; */
 }
 
 .status-negotiation {
@@ -38,21 +37,20 @@
   /* background-color: red; */
   /* color: red; */
   /* background-color: black; */
-  color:red;
-  text-align: center;
+  color: red;
+  /* text-align: center; */
   border-radius: 5px;
-  width:76%
+  /* width: 76%; */
 }
 
 .status-approved {
   /* background-color: rgb(117, 215, 117);
   color: green; */
   /* background-color: green; */
-  color:green;
-  text-align: center;
+  color: green;
+  /* text-align: center; */
   border-radius: 5px;
-  width:76%
-
+  /* width: 76%; */
 }
 
 .mat-elevation-z8 {
@@ -60,63 +58,24 @@
 }
 
 table {
-  width: 150%;
+  /* width: 100vw ; */
+  width: max-content;
 }
-
-/* th.mat-sort-header-sorted {
-  color: white;
-  fill: white;
-}
-
-th.mat-header-cell, td.mat-cell {
-  text-align: center;
-  color:white
-
-}
-
-.th{
-  color:white;
-} */
-/*
-th{
-  background-color: red;
-} */
-
-/* mat-form-field {
-  width: 100%;
-  margin-bottom: 20px;
-} */
-
-
-
-
-/* .mat-header-cell.custom-header {
-  background-color: #1976d2;
-  color: white;
-}
-
-::ng-deep .mat-header-cell.custom-header {
-  background-color: #1976d2;
-  color: white;
-} */
-
 
 mat-header-cell {
   background-color: #1976d2 !important;
   color: white !important;
-
 }
 
-mat-sort-header{
-  color:white;
+mat-sort-header {
+  color: white;
 }
 
-.mat-header-cell{
-  color: white
+.mat-header-cell {
+  color: white;
 }
 
-
-.ad{
+.ad {
   color: white;
 }
 
@@ -125,15 +84,77 @@ mat-sort-header{
   background: #1976d2;
 } */
 
-.mat-sort-header{
+.mat-sort-header {
   color: white !important;
+}
+
+.hidden {
+  display: none;
 }
 
 /* .custom-header{
   background-color: red;
 } */
 
+li {
+  list-style: none;
+}
 
+/* Optional: add styles to the scrollbar for better appearance */
 
+.custom-menu {
+  transform: translateX(-100%) !important;
+  left: auto !important;
+  right: 0 !important;
+}
 
+/* .custom-menu {
+  overflow-y: auto;
+} */
 
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px; /* Optional: add some padding for better appearance */
+}
+
+.mat-checkbox {
+  margin-bottom: 10px; /* Optional: add spacing between checkboxes */
+}
+
+/* Optional: add styles to the scrollbar for better appearance */
+.custom-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-menu::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.custom-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* /// */
+
+/* .example-container {
+  height: 400px;
+  width: 450px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 1100px;
+} */
+
+.ngx-toastr.toast-success .toast-title {
+  color: blue; /* Change the color to your desired blue */
+}
+
+.ngx-toastr.toast-success .toast-icon {
+  color: blue; /* Change the color to your desired blue */
+}

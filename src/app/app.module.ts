@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,43 +20,58 @@ import { NgModel } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
-import { NgMultiSelectDropDownModule, IDropdownSettings } from 'ng-multiselect-dropdown';
-import {MatCheckboxChange} from '@angular/material/checkbox';
+import {
+  CdkDragDrop,
+  CdkDrag,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
+  NgMultiSelectDropDownModule,
+  IDropdownSettings,
+} from 'ng-multiselect-dropdown';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './components/main/main.component';
 import { Router } from '@angular/router';
 import { Routes } from '@angular/router';
-
-
+import { TagInputModule } from 'ngx-chips';
 
 import { GenericOptionsComponent } from './components/generic-options/generic-options.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
 import { AdditionalFieldsComponent } from './components/additional-fields/additional-fields.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 @NgModule({
-
-  imports: [BrowserModule, AppRoutingModule,FormsModule,ReactiveFormsModule,RouterModule,HttpClientModule, BrowserAnimationsModule
-    ,MatTableModule,
-     MatSortModule,
-     MatPaginatorModule,
-     CdkDrag,
-     CdkDropList,
-     MatFormFieldModule,
-     MatInputModule,
-     MatSelectModule,
-     MatOptionModule,
-     MatCheckboxModule,
-     MatMenuModule,
-     NgMultiSelectDropDownModule.forRoot()
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    HttpClientModule,
+    TagInputModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    CdkDrag,
+    CdkDropList,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -73,10 +88,11 @@ import { AdditionalFieldsComponent } from './components/additional-fields/additi
     GenericOptionsComponent,
     UserComponent,
     MainComponent,
-    AdditionalFieldsComponent
-
+    AdditionalFieldsComponent,
+    StepperComponent,
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

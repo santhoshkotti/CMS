@@ -1,84 +1,13 @@
-<!--
-<div class="flex justify-between items-center p-3 bg-customBlue" style="background-color: #9cc6fb;">
+<div
+  class="flex justify-between items-center p-3 bg-white border-b-2 border-fontblue rounded-lg shadow-lg"
+>
   <div class="flex items-center space-x-2">
-    <img src="/assets/synergechlogo2.png" class="h-8" alt="Synergech Logo" />
-  </div>
-  <div class="flex space-x-12 text-sm items-center">
-    <a
-      routerLink="/dashboard"
-      routerLinkActive="border-b-2 border-blue-500"
-      class="font-medium text-blue-700"
-      >DashBoard</a
-    >
-    <a
-      routerLink="/params"
-      routerLinkActive="border-b-2 border-blue-500"
-      class="font-medium text-blue-700"
-      >Parameter</a
-    >
-    <a
-      routerLink="/formContract"
-      data-modal-target="contracttypes-modal"
-      class="font-medium text-blue-700"
-      >New Contract</a
-    >
-    <button
-      type="button"
-      class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-      id="user-menu-button"
-      aria-expanded="false"
-      data-dropdown-toggle="user-dropdown"
-      data-dropdown-placement="bottom"
-    >
-      <span class="sr-only">Open user menu</span>
-      <img
-        class="w-8 h-8 rounded-full"
-        src="/docs/images/people/profile-picture-3.jpg"
-        alt="user photo"
-      />
+    <button type="button" [routerLink]="['/']">
+      <img src="/assets/synergechlogo.png" class="h-8" alt="Synergech Logo" />
     </button>
   </div>
-</div> -->
-
-
-<!--
-<div class="flex justify-between items-center p-3 bg-customBlue" style="background-color: white">
-  <div class="flex items-center space-x-2">
-    <img src="/assets/synergechlogo.png" class="h-8" alt="Synergech Logo" />
-  </div>
   <div class="flex space-x-12 text-sm items-center">
-    <a  routerLink="/dashboard"  routerLinkActive="border-b-2 border-blue-500" style="color:#084d93" class="font-medium text-blue-700">DashBoard</a>
-    <a  routerLink="/params" routerLinkActive="border-b-2 border-blue-500" style="color:#084d93" class="font-medium text-blue-700">Parameter</a>
-    <a id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" style="color:#084d93" class="font-medium text-blue-700">New Contract</a >
-    <button
-      type="button"
-      class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-      id="user-menu-button"
-      aria-expanded="false"
-      data-dropdown-toggle="user-dropdown"
-      data-dropdown-placement="bottom"
-    >
-      <span class="sr-only">Open user menu</span>
-      <img
-        class="w-8 h-8 rounded-full"
-        src="/docs/images/people/profile-picture-3.jpg"
-        alt="user photo"
-      />
-    </button>
-  </div>
-</div> -->
-
-
-
-<div class="flex justify-between items-center p-3 bg-white border-b-2 border-fontblue rounded-lg shadow-lg">
-  <div class="flex items-center space-x-2">
-    <img src="/assets/synergechlogo.png" class="h-8" alt="Synergech Logo" />
-  </div>
-  <div class="flex space-x-12 text-sm items-center">
-    <a routerLink="/"  style="color:#084d93" class="font-semibold text-fontblue">DashBoard</a>
-    <!-- <a routerLink="/params"  style="color:#084d93" class="font-medium text-blue-700">
-      Parameter
-    </a> -->
+    <!-- <a routerLink="/"  style="color:#084d93" class="font-semibold text-fontblue">DashBoard</a> -->
     <div class="relative">
       <button
         type="button"
@@ -86,7 +15,7 @@
         (click)="toggleDropdownn()"
         aria-expanded="false"
       >
-        <a class="font-semibold text-fontblue" >Parameter</a>
+        <a class="font-semibold text-fontblue">Parameter</a>
         <svg
           class="h-5 w-5 text-fontblue"
           viewBox="0 0 20 20"
@@ -110,8 +39,8 @@
         >
           <div class="p-4 grid grid-cols-2 gap-4">
             <div
-              *ngFor="let item of firstColumnItems; let i = index"
-              (click)="navigateToComponent(firstColumnNames[i])"
+              *ngFor="let item of params; let i = index"
+              (click)="navigateToComponent(names[i])"
               class="group relative flex gap-x-4 p-4 rounded-lg hover:bg-blue-50 cursor-pointer"
             >
               <div
@@ -123,17 +52,15 @@
                 >
               </div>
               <div>
-                <span class="font-semibold text-gray-900">{{
-                  firstColumnNames[i]
-                }}</span>
+                <span class="font-semibold text-gray-900">{{ names[i] }}</span>
                 <p class="mt-1 text-gray-600">
-                  {{ firstColumnDescriptions[i] }}
+                  {{ descriptions[i] }}
                 </p>
               </div>
             </div>
-            <div
-              *ngFor="let item of secondColumnItems; let i = index"
-              (click)="navigateToComponent(secondColumnNames[i])"
+            <!-- <div
+              *ngFor="let item of params; let i = index"
+              (click)="navigateToComponent(names[i])"
               class="group relative flex gap-x-4 p-4 rounded-lg hover:bg-blue-50 cursor-pointer"
             >
               <div
@@ -145,676 +72,50 @@
                 >
               </div>
               <div>
-                <span class="font-semibold text-gray-900">{{
-                  secondColumnNames[i]
-                }}</span>
+                <span class="font-semibold text-gray-900">{{ names[i] }}</span>
                 <p class="mt-1 text-gray-600">
-                  {{ secondColumnDescriptions[i] }}
+                  {{ descriptions[i] }}
                 </p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <!-- <a id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" style="color:#084d93" class="font-medium text-blue-700">New Contract</a> -->
-    <a routerLink="/"
-    class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
-    (click)="toggleDropdown($event)"
-    [attr.aria-expanded]="isDropdownOpen"
-     style="color:#084d93" class="font-semibold text-fontblue">
-      New Contract
-    </a>
-    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+    <!-- <a routerLink="/" class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" (click)="opennmodal()" style="color:#084d93" class="font-semibold text-fontblue">New Contract</a> -->
+    <button
+      type="button"
+      class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+      id="user-menu-button"
+      aria-expanded="false"
+      data-dropdown-toggle="user-dropdown"
+      data-dropdown-placement="bottom"
+    >
       <span class="sr-only">Open user menu</span>
-      <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" />
+      <img
+        class="w-8 h-8 rounded-full"
+        src="/docs/images/people/profile-picture-3.jpg"
+        alt="user photo"
+      />
     </button>
   </div>
 </div>
-
-
-
-<!-- <div class="relative">
-  <button type="button" class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
-    <span>Solutions</span>
-    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-    </svg>
-  </button>
-
-
-  <div class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-    <div class="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-      <div class="p-4">
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Analytics
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Get a better understanding of your traffic</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Engagement
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Speak directly to your customers</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Security
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Your customers&#039; data will be safe and secure</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Integrations
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Connect with third-party tools</p>
-          </div>
-        </div>
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-          <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
-          </div>
-          <div>
-            <a href="#" class="font-semibold text-gray-900">
-              Automations
-              <span class="absolute inset-0"></span>
-            </a>
-            <p class="mt-1 text-gray-600">Build strategic funnels that will convert</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-        <a href="#" class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-          <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z" clip-rule="evenodd" />
-          </svg>
-          Watch demo
-        </a>
-        <a href="#" class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-          <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
-          </svg>
-          Contact sales
-        </a>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
-<!-- <div class="relative">
-  <button type="button" class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" (click)="toggleDropdown()" >
-    <span>Solutions</span>
-    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-    </svg>
-  </button>
-
-  <div *ngIf="isDropdownOpen" class="absolute z-10 mt-2 w-156 origin-top-right rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-    <div class="p-4">
-
-      <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
-        <div class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-          <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-          </svg>
-        </div>
-        <div>
-          <a href="#" class="font-semibold text-gray-900">
-            Analytics
-            <span class="absolute inset-0"></span>
-          </a>
-          <p class="mt-1 text-gray-600">Get a better understanding of your traffic</p>
-        </div>
-      </div>
-
-    </div>
-    <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-      <a href="#" class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-        <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm6.39-2.908a.75.75 0 01.766.027l3.5 2.25a.75.75 0 010 1.262l-3.5 2.25A.75.75 0 018 12.25v-4.5a.75.75 0 01.39-.658z" clip-rule="evenodd" />
-        </svg>
-        Watch demo
-      </a>
-      <a href="#" class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100">
-        <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
-        </svg>
-        Contact sales
-      </a>
-    </div>
-  </div>
-</div> -->
-
 <div class="relative" (document:click)="onDocumentClick($event)">
-  <div *ngIf="isDropdownOpen" style="width:23%;margin-left:77%" class="absolute z-10 mt-2 w-247 origin-top-left  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-      <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-blue-50 " *ngFor="let category of categoriess">
-        <div (click)="handleCategoryClick(category)">
-          <a href="#" class="font-semibold text-gray-900"   >
-            <span class="absolute inset-0"></span>
-          </a>
-          <div class="mt-1 font-semibold text-gray-900" >{{category.value}}</div>
-        </div>
+  <div
+    *ngIf="isDropdownOpen"
+    style="width: 23%; margin-left: 77%"
+    class="absolute z-10 mt-2 w-247 origin-top-left rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+  >
+    <div
+      class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-blue-50"
+      *ngFor="let category of categoriess"
+    >
+      <div (click)="handleCategoryClick(category)">
+        <a href="#" class="font-semibold text-gray-900">
+          <span class="absolute inset-0"></span>
+        </a>
+        <div class="mt-1 font-semibold text-gray-900">{{ category.value }}</div>
       </div>
-
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
-  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20">
-  <path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"/>
-  </svg>
-
-  <div class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
-  </button> -->
-
-  <!-- Dropdown menu -->
-  <!-- <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
-
-    <div class="divide-y divide-gray-100 dark:divide-gray-700">
-      <a href="#" class="hover:bg-gray-200 dark:hover:bg-gray-600 flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor="let contract of categoriess">
-
-        <div class="flex-shrink-0">
-
-        </div>
-        <div class="w-full ps-3">
-            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400" (click)="handleCategoryClick(contract)">{{contract.value}} </div>
-        </div>
-
-      </a>
-    </div>
-  </div> -->
-
-
-
-
-
-  <!-- <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
-    <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
-        Notifications
-    </div>
-    <div class="divide-y divide-gray-100 dark:divide-gray-700">
-      <a *ngFor="let contract for contractTypes"  href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700" >
-
-        <div  class="w-full ps-3 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="h-5 w-5 text-gray-600 dark:text-gray-200"><path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM80 64l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L80 96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2L80 416c-8.8 0-16-7.2-16-16s7.2-16 16-16l8.2 0c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8 54.1 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349l-9.8 32.8z"/></svg>
-          <div lass="text-gray-500 text-sm mb-1.5 dark:text-gray-400" style="margin-left: 3%;">{{contract}}</div>
-        </div>
-      </a>
-    </div>
-  </div> -->
-
-
-  <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed hidden inset-0 flex items-center justify-center bg-gray-800 bg-opacity-110 z-50">
-      <div class="relative p-4 w-full max-w-3xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('static-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <h4 class="">Contract Focus</h4>
-              <div class="mb-4 col-span-2">
-                <label for="Account" class="block text-sm font-medium text-gray-700">Account</label>
-                <input id="Account" name="Account"    type="text" class="mt-1 block w-full rounded-lg" [(ngModel)]="this.newContract.Account">
-                <div *ngIf="!newContract.Account && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                  Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="client" class="block text-sm font-medium text-gray-700">Client</label>
-                <input id="client" name="client" [(ngModel)]="this.newContract.Client" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Client && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                  Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="project" class="block text-sm font-medium text-gray-700">Project</label>
-                <input id="project" name="Project"  [(ngModel)]="this.newContract.Project" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Project && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                  Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="UniqueNo" class="block text-sm font-medium text-gray-700">Unique No</label>
-                <input id="UniqueNo"  name="UniqueNo" type="text" [(ngModel)]="this.newContract.UniqueNo" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.UniqueNo && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                  Please Fill The Required Field
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Modal footer -->
-          <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button (click)="closeModal('static-modal')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Close
-            </button>
-            <button (click)="validateAndProceed('static-modal', 'default-modal')" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 ...">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div  id="default-modal" tabindex="-1" aria-hidden="true"  class="fixed hidden inset-0 flex items-center justify-center bg-gray-800 bg-opacity-110 z-50" >
-      <div class=" p-4 w-full max-w-3xl max-h-full">
-        <div class=" bg-white rounded-lg shadow dark:bg-gray-700">
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('default-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <h4 class="">Contacts</h4>
-              <div class="mb-4 col-span-2">
-                <label for="counterPartyOwner" class="block text-sm font-medium text-gray-700">CounterParty Owner</label>
-                <input id="counterPartyOwner" name="counterPartyOwner"  [(ngModel)]="this.newContract.CounterPartyOwner" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.CounterPartyOwner && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Provide a Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="CounterParty" class="block text-sm font-medium text-gray-700">CounterParty</label>
-                <input id="CounterParty" name="CounterParty" [(ngModel)]="this.newContract.CounterParty" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.CounterParty && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="BuissenessOWnerId" class="block text-sm font-medium text-gray-700">Buissness Owner</label>
-                <select id="BuissenessOWnerId" name="BuissenessOWnerId" [(ngModel)]="newContract.BuissenessOWnerId" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>select</option>
-                  <option *ngFor="let user of usersOwners" [value]="user.id">{{user.value}}</option>
-                </select>
-                <div *ngIf="!newContract.BuissenessOWnerId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="LegalOwnerId" class="block text-sm font-medium text-gray-700">Legal Owner</label>
-                <select id="LegalOwnerId" name="LegalOwnerId" [(ngModel)]="newContract.LegalOwnerId" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>select</option>
-                  <option *ngFor="let user of usersOwners" [value]="user.id">{{user.value}}</option>
-                </select>
-                <div *ngIf="!newContract.LegalOwnerId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button (click)="previous('default-modal', 'static-modal')" type="button" class="formdetails-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Previous
-            </button>
-            <button (click)="validateAndProceed('default-modal', 'formdetails-modal')" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 ...">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="formdetails-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-gray-800 z-50 bg-opacity-110 max-h-full">
-      <div class="relative p-4 w-full max-w-3xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('formdetails-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <h4 class="">Contract Details</h4>
-              <div class="mb-4 col-span-2">
-                <label for="Form" class="block text-sm font-medium text-gray-700">Form</label>
-                <select id="Form" name="Form" [(ngModel)]="newContract.FormsId" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>Select</option>
-                  <option *ngFor="let form of forms" [ngValue]="form.id">{{form.value}}</option>
-                </select>
-                <div *ngIf="!newContract.FormsId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="Type" class="block text-sm font-medium text-gray-700">Type</label>
-                <select id="Type" name="Type" [(ngModel)]="newContract.TypeId" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>Select</option>
-                  <option *ngFor="let type of types" [value]="type.id">{{type.value}}</option>
-                </select>
-                <div *ngIf="!newContract.TypeId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-              <label for="Status" class="block text-sm font-medium text-gray-700">Status</label>
-              <select id="Status" name="Status" [(ngModel)]="newContract.StatusId"  class="mt-1 block w-full rounded-lg">
-                <option [ngValue]="null" disabled selected>Select</option>
-                <option *ngFor="let statuses of status" [ngValue]="statuses.id">{{statuses.value}}</option>
-              </select>
-              <div *ngIf="!newContract.StatusId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                 Please Fill The Required Field
-              </div>
-            </div>
-              <div class="mb-4 col-span-1">
-                <label for="version" class="block text-sm font-medium text-gray-700">Version</label>
-                <input id="version" name="version" [(ngModel)]="this.newContract.Version" type="number" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Version && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="Filename" class="block text-sm font-medium text-gray-700">FileName</label>
-                <input id="Filename" name="Filename" [(ngModel)]="this.newContract.Filename"   type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Filename && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="Link" class="block text-sm font-medium text-gray-700">Link</label>
-                <input id="Link" name="legalOwner" [(ngModel)]="this.newContract.Link"   type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Link && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button (click)="previous('formdetails-modal','default-modal')" type="button" class="formdetails-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Previous
-            </button>
-            <button (click)="validateAndProceed('formdetails-modal','status-modal')" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 ...">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="status-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-gray-800  z-50 bg-opacity-110 max-h-full">
-      <div class="relative p-4 w-full max-w-3xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('status-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <h4 class="">Classification</h4>
-              <div class="mb-4 col-span-2">
-                <label for="ContractCode" class="block text-sm font-medium text-gray-700">Contract Code</label>
-                <input id="ContractCode" name="ContractCode"  [(ngModel)]="this.newContract.ContractCode" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.ContractCode && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="Value" class="block text-sm font-medium text-gray-700">Value</label>
-                <input id="Value" name="Value" [(ngModel)]="this.newContract.Value" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Value && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="LiabilitiesCap" class="block text-sm font-medium text-gray-700">LiabilitiesCap</label>
-                <input id="LiabilitiesCap" name="LiabilitiesCap" [(ngModel)]="this.newContract.LiabilitiesCap" type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.LiabilitiesCap && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="Jurisdiction" class="block text-sm font-medium text-gray-700">Jurisdiction</label>
-                <input id="Jurisdiction" name="Jurisdiction" [(ngModel)]="this.newContract.Jurisdiction"   type="text" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.Jurisdiction && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="AutoRenewal" class="block text-sm font-medium text-gray-700">AutoRenewal</label>
-                <select id="AutoRenewal" name="AutoRenewal" type="boolean" [(ngModel)]="newContract.AutoRenewal" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>select </option>
-                  <option [ngValue]="true">True</option>
-                  <option [ngValue]="false">False</option>
-                </select>
-                <div *ngIf="!newContract.AutoRenewal && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button (click)="previous('status-modal','formdetails-modal')" type="button" class="formdetails-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Previous
-            </button>
-            <button (click)="validateAndProceed('status-modal','datee-modal')" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 ...">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="datee-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-gray-800  z-50 bg-opacity-110 max-h-full">
-      <div class="relative p-4 w-full max-w-3xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('datee-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <h4 class="col-span-2">Dates</h4>
-              <div class="mb-4 col-span-1">
-                <label for="SigningDate" class="block text-sm font-medium text-gray-700">Signing Date</label>
-                <input type="date" id="SigningDate" name="SigningDate" [(ngModel)]="this.newContract.SigningDate" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.SigningDate && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="starting-date" class="block text-sm font-medium text-gray-700">Starting Date</label>
-                <input type="date" id="starting-date" name="startingDate" [(ngModel)]="this.newContract.StartingDate" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.StartingDate && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-2">
-                <label for="termination-date" class="block text-sm font-medium text-gray-700">Termination Date</label>
-                <input type="date" id="termination-date" name="TerminationDate" [(ngModel)]="this.newContract.TerminationDate" class="mt-1 block w-full rounded-lg">
-                <div *ngIf="!newContract.TerminationDate && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="RenewalFlagOff" class="block text-sm font-medium text-gray-700">Renewal FlagOff</label>
-                <select id="RenewalFlagOff" name="RenewalFlagOff" [(ngModel)]="newContract.RenewalDateFlagOff" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>select </option>
-                  <option [value]="true">True</option>
-                  <option [value]="false">False</option>
-                </select>
-                <div *ngIf="!newContract.RenewalDateFlagOff && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="mb-4 col-span-1">
-                <label for="ExpirationLimitId" class="block text-sm font-medium text-gray-700">Expiration Limit</label>
-                <select id="ExpirationLimitId" name="ExpirationLimitId" [(ngModel)]="newContract.ExpirationLimitId" class="mt-1 block w-full rounded-lg">
-                  <option [ngValue]="null" disabled selected>select</option>
-                  <option *ngFor="let limit of expirationLimit" [value]="limit.id">{{limit.value}}</option>
-                </select>
-                <div *ngIf="!newContract.ExpirationLimitId && this.submitted"  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button (click)="previous('datee-modal','status-modal')" type="button" class="formdetails-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Previous
-            </button>
-            <button *ngIf="this.additionalFields==0" data-modal-hide="datee-modal" type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-              Submit
-            </button>
-            <button (click)="validateAndProceed('datee-modal','additional-field-modal')" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 ...">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-
-    <div id="additional-field-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-gray-800  z-50 bg-opacity-110 max-h-full">
-      <div class="relative p-4 w-full max-w-3xl max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              {{category}}
-            </h3>
-            <button type="button" (click)="closeModal('additional-modal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="additional-field-modal">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <div class="max-h-[380px] overflow-y-auto p-6 bg-white rounded-lg shadow-md" >
-            <div class="grid gap-4 mb-4 grid-cols-1">
-              <h4>Additional Field</h4>
-              <form #additionalFieldsForm="ngForm" (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)">
-                <div *ngFor="let field of additionalFields" class="mb-4 col-span-1" style="margin-bottom: 7%;">
-                  <label [for]="field.AdditionalFieldId" class="block text-sm font-medium text-gray-700">{{ field.Value }}</label>
-                  <input
-                    [id]="field.AdditionalFieldId"
-                    [name]="field.AdditionalFieldId"
-                    [(ngModel)]="field.inputValue"
-                    type="text"
-                    class="mt-1 block w-full rounded-lg"
-                    required
-                  >
-                <div *ngIf="additionalFieldsForm.submitted && !field.inputValue "  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
-                   Please Fill The Required Field
-                </div>
-              </div>
-              <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button (click)="previous('additional-field-modal','datee-modal')" type="button" class="formdetails-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Previous
-                </button>
-                <button data-modal-hide="additional-field-modal"  type="submit" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                  Submit
-                </button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
