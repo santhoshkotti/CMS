@@ -1,0 +1,10 @@
+.hover:bg-blue-100:hover {
+  background-color: #ebf8ff; /* Light blue background color */
+}
+
+
+.blur
+{
+  filter:blur(5px);
+  transition:filter 0.3s;
+}

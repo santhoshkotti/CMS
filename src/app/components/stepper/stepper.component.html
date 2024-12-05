@@ -1,0 +1,42 @@
+<div class="container pl-4 pr-4 pt-4" style="width: 115%; padding-right: 3%">
+  <ol class="flex items-center w-full sm:mb-5">
+    <li
+      *ngFor="let step of displayedSteps; let i = index"
+      [class.text-fontblue]="i < currentStep"
+      [class.after:border-fontblue]="i < currentStep"
+      [class.after:border-gray-100]="i >= currentStep"
+      class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block dark:after:border-gray-700"
+      [ngClass]="{ 'last-step': i === displayedSteps.length - 1 }"
+    >
+      <div
+        class="flex items-center justify-center w-full h-10 rounded-full lg:h-12 lg:w-12 shrink-0"
+        [ngClass]="
+          i < currentStep
+            ? 'bg-blue-100 dark:bg-fontblue text-fontblue'
+            : 'bg-gray-100 dark:bg-gray-700'
+        "
+      >
+        <svg
+          *ngIf="i < currentStep"
+          class="w-4 h-4 lg:w-6 lg:h-6 text-fontblue dark:text-blue-300"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M10 15.172L5.414 10.586 4 12l6 6 12-12-1.414-1.414z" />
+        </svg>
+        <svg
+          *ngIf="i >= currentStep"
+          class="w-4 h-4 lg:w-6 lg:h-6 dark:text-fontblue"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          [attr.viewBox]="step.iconViewBox"
+        >
+          <path [attr.d]="step.iconPath" />
+        </svg>
+      </div>
+    </li>
+  </ol>
+</div>

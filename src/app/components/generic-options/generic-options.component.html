@@ -1,0 +1,210 @@
+<div class="flex items-center">
+  <button
+    (click)="openaddnew()"
+    class="group bg-fontblue border border-solid border-fontblue font-medium text-sm px-5 mt-20 mb-7 ml-6 px-5 py-2.5 text-center inline-flex items-center text-align:center rounded-sm"
+  >
+    <p class="material-icons text-white mr-1 text-base">add</p>
+    <p class="text-white text-base">AddNew</p>
+  </button>
+</div>
+
+<div
+  class="block max-w-screen mx-6 bg-white rounded-lg shadow-lg border-gray-300"
+>
+  <div class="overflow-x-auto">
+    <!-- Modal Background -->
+    <div
+      *ngIf="openedit"
+      aria-modal="true"
+      class="fixed inset-0 flex justify-center items-start pt-16 bg-gray-900 bg-opacity-50"
+      (click)="openaddnew()"
+    >
+      <!-- Modal Content -->
+      <div
+        class="bg-white dark:bg-gray-900 w-full max-w-6xl rounded-lg shadow-lg mb-80 mt-20 p-8"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="mb-6 flex items-center">
+          <label
+            for="default-input"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-7"
+          >
+            <div>
+              {{
+                isEditMode
+                  ? "Edit " + getEditLabel(this.key)
+                  : "Add New " + getEnterLabel(this.key)
+              }}
+            </div>
+          </label>
+          <input
+            *ngIf="!isEditMode"
+            type="text"
+            [(ngModel)]="newValue"
+            id="category-input"
+            class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-1"
+          />
+          <input
+            *ngIf="isEditMode"
+            type="text"
+            placeholder="editValue"
+            [(ngModel)]="editValue"
+            id="category-input"
+            class="w-1/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4"
+          />
+
+          <button
+            *ngIf="!isEditMode"
+            (click)="saveItem()"
+            class="m-2 text-white font-bold border border-solid border-fontblue py-2 px-4 rounded"
+            [ngClass]="{
+              'bg-fontblue ': !toggleEvent,
+              'bg-gray-500 cursor-not-allowed': toggleEvent
+            }"
+            [disabled]="toggleEvent"
+          >
+            Save
+          </button>
+
+          <button
+            *ngIf="isEditMode"
+            (click)="updateItem()"
+            class="m-2 bg-fontblue text-white font-bold py-2 px-4 rounded border border-fontblue"
+            [ngClass]="{
+              'bg-fontblue  ': !toggleEvent,
+              'bg-gray-500 cursor-not-allowed': toggleEvent
+            }"
+            [disabled]="toggleEvent"
+          >
+            Update
+          </button>
+
+          <button
+            class="ml-1 py-2 px-4 rounded border border-solid text-fontblue border-fontblue hover:border-2 font-bold"
+            (click)="clearInput()"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <!-- Conditionally render AdditionalFieldsComponent -->
+        <div
+          *ngIf="
+            (key === 'Category' && openedit) ||
+            (key === 'Category' && isEditMode)
+          "
+        >
+          <app-additional-fields
+            [key]="key"
+            [CategoryId]="catId"
+            [IsEdit]="isEditMode"
+            (fieldsSelected)="handleFieldsSelected($event)"
+            (eventToggle)="handleToggle($event)"
+            (selectedAdditionalFields)="handleUpdateAdditionalFields($event)"
+            [SelectedField]="existingAdditionalFields"
+          ></app-additional-fields>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="key === 'Role' && handleEdit" class="p-4 rounded-lg shadow-md">
+      <h3 class="text-fontblue mb-4 pl-2 font-semibold">
+        Manage Role Permissions
+      </h3>
+      <table class="max-w-max rounded-md shadow-sm bg-gray-100">
+        <thead class="text-fontblue">
+          <tr>
+            <th class="py-2 px-10 font-medium">Category</th>
+            <th class="py-2 px-10 font-medium">Read</th>
+            <th class="py-2 px-10 font-medium">Write</th>
+            <th class="py-2 px-10 font-medium">Update</th>
+            <th class="py-2 px-10 font-medium">View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories" class="hover:bg-gray-100">
+            <td class="py-2 px-10">{{ category.Value }}</td>
+            <td class="py-2 px-12">
+              <input
+                type="checkbox"
+                [(ngModel)]="category.Read"
+                class="form-checkbox h-4 w-4 text-blue-600"
+                [disabled]="!category.Id"
+              />
+            </td>
+            <td class="py-2 px-12">
+              <input
+                type="checkbox"
+                [(ngModel)]="category.Write"
+                class="form-checkbox h-4 w-4 text-blue-600"
+                [disabled]="!category.Id"
+              />
+            </td>
+            <td class="py-2 px-12">
+              <input
+                type="checkbox"
+                [(ngModel)]="category.Update"
+                class="form-checkbox h-4 w-4 text-blue-600"
+                [disabled]="!category.Id"
+              />
+            </td>
+            <td class="py-2 px-12">
+              <input
+                type="checkbox"
+                [(ngModel)]="category.View"
+                class="form-checkbox h-4 w-4 text-blue-600"
+                [disabled]="!category.Id"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+        style="background-color: #084d93; color: white; margin-left: 93%"
+        (click)="callBoth()"
+        class="m-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Submit
+      </button>
+    </div>
+
+    <div class="rounded-sm">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-black-500 rounded-lg"
+      >
+        <thead
+          class="text-md rounded-lg text-gray-700 bg-fontblue"
+          style="color: white"
+        >
+          <tr>
+            <th scope="col" class="px-8 py-3">S.NO</th>
+            <th scope="col" class="px-6 py-3">{{ key }}</th>
+            <th scope="col" class="px-6 py-3">Edit</th>
+            <th scope="col" class="px-6 py-3">Delete</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let item of items; let i = index" class="bg-white border-b">
+          <td class="px-9 py-4">{{ i + 1 }}</td>
+          <td class="px-6 py-4">{{ item.Value }}</td>
+
+          <td
+            class="edit px-6 py-4 text-center material-icons color-blue-100"
+            style="color: #3468c0"
+            (click)="handleEdit({ id: item.Id, value: item.Value })"
+          >
+            <i class="material-icons">edit</i>
+          </td>
+          <td>
+            <span
+              class="del px-6 py-4 text-center material-icons"
+              style="color: #3468c0"
+              (click)="handleDelete({ id: item.Id })"
+            >
+              <i class="material-icons">delete</i>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

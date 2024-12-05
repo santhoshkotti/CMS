@@ -1,0 +1,16 @@
+.material-icons:hover {
+  cursor: pointer;
+}
+.bg{
+  background-color: #6ab0f3;
+  color:black;
+  font-weight:500;
+ }
+
+.del{
+  color: rgb(235, 62, 62);
+}
+
+.edit{
+  color: #b9bf40;
+}

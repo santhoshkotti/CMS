@@ -1,0 +1,16 @@
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+
+  width: calc(100% - 2.5rem);
+  border-bottom-width: 1px;
+}
+.last-step::after {
+  content: none;
+}

@@ -1,0 +1,160 @@
+/* ::ng-deep .mat-header-cell.mat-sort-header-sorted {
+  color: white !important;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white !important;
+}
+
+::ng-deep .mat-sort-header-arrow,
+::ng-deep .mat-sort-header-arrow .mat-icon {
+  fill: white !important;
+} */
+
+/* .status-pending {
+  color: blueviolet;
+}
+
+.status-negotiation {
+  color: red;
+}
+
+.status-approved {
+  color: green;
+} */
+.status-pending {
+  /* background-color: rgb(231, 231, 105);
+  color: lightyellow; */
+  /* background-color: red; */
+  color: rgb(203, 203, 5);
+  /* text-align: center; */
+  border-radius: 5px;
+  /* width: 76%; */
+}
+
+.status-negotiation {
+  /* background-color: rgb(222, 161, 161); */
+  /* background-color: red; */
+  /* color: red; */
+  /* background-color: black; */
+  color: red;
+  /* text-align: center; */
+  border-radius: 5px;
+  /* width: 76%; */
+}
+
+.status-approved {
+  /* background-color: rgb(117, 215, 117);
+  color: green; */
+  /* background-color: green; */
+  color: green;
+  /* text-align: center; */
+  border-radius: 5px;
+  /* width: 76%; */
+}
+
+.mat-elevation-z8 {
+  margin: 20px;
+}
+
+table {
+  /* width: 100vw ; */
+  width: max-content;
+}
+
+mat-header-cell {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+mat-sort-header {
+  color: white;
+}
+
+.mat-header-cell {
+  color: white;
+}
+
+.ad {
+  color: white;
+}
+
+/* .back{
+  backgroundcolor: blue;
+  background: #1976d2;
+} */
+
+.mat-sort-header {
+  color: white !important;
+}
+
+.hidden {
+  display: none;
+}
+
+/* .custom-header{
+  background-color: red;
+} */
+
+li {
+  list-style: none;
+}
+
+/* Optional: add styles to the scrollbar for better appearance */
+
+.custom-menu {
+  transform: translateX(-100%) !important;
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* .custom-menu {
+  overflow-y: auto;
+} */
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px; /* Optional: add some padding for better appearance */
+}
+
+.mat-checkbox {
+  margin-bottom: 10px; /* Optional: add spacing between checkboxes */
+}
+
+/* Optional: add styles to the scrollbar for better appearance */
+.custom-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-menu::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.custom-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* /// */
+
+/* .example-container {
+  height: 400px;
+  width: 450px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 1100px;
+} */
+
+.ngx-toastr.toast-success .toast-title {
+  color: blue; /* Change the color to your desired blue */
+}
+
+.ngx-toastr.toast-success .toast-icon {
+  color: blue; /* Change the color to your desired blue */
+}

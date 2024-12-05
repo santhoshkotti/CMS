@@ -1,0 +1,70 @@
+<div class="mt-4">
+  <label class="flex items-center mb-4 max-w-max">
+    <button
+      (click)="toggleFields()"
+      class="group text-fontblue focus:outline-none font-medium text-sm text-center inline-flex items-center dark:bg-blue-600"
+    >
+      <span class="material-icons text-base group-hover:text-blue-500"
+        >add</span
+      >
+      <span class="group-hover:text-blue-500">Additional Fields</span>
+    </button>
+  </label>
+
+  <div *ngIf="showFields" class="mt-4 p-4">
+    <div class="relative">
+      <input
+        type="text"
+        [(ngModel)]="inputValue"
+        (input)="onInput($event)"
+        (keydown.enter)="addTag()"
+        (keydown)="removeLastTag($event)"
+        placeholder="Add fields"
+        class="border rounded p-2 w-full"
+      />
+      <ul
+        *ngIf="showDropdown"
+        class="absolute border rounded bg-white w-full max-h-40 overflow-auto"
+      >
+        <li
+          *ngFor="let item of filteredItems"
+          (click)="selectItem(item)"
+          class="p-2 cursor-pointer hover:bg-gray-200"
+        >
+          {{ item.Value }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-2">
+      <span
+        *ngFor="let tag of selectedFields"
+        class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2"
+      >
+        {{ tag.Value }}
+        <button (click)="removeTag(tag)" class="ml-2 text-white font-bold">
+          &times;
+        </button>
+      </span>
+    </div>
+
+    <button
+      style="background-color: #084d93"
+      *ngIf="!IsEdit; else otherButton"
+      (click)="addFieldsToCategory()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+    >
+      Add Selected Fields
+    </button>
+
+    <ng-template #otherButton>
+      <button
+        style="background-color: #084d93"
+        (click)="EditCategoryField()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+      >
+        Save changes
+      </button>
+    </ng-template>
+  </div>
+</div>

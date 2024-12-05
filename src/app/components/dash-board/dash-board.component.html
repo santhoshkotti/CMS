@@ -1,0 +1,1641 @@
+<div>
+  <div style="display: flex; align-items: center; margin-top: 4%">
+    <div class="ml-5">
+      <button
+        type="button"
+        style="margin-top: 4%"
+        (click)="opennmodal()"
+        class="rounded-sm text-white bg-fontblue font-medium text-sm px-5 py-2.5 text-center inline-flex items-center text-align:center"
+      >
+        <span class="material-icons text-white mr-1" style="font-size: 1rem"
+          >add</span
+        >
+        <span class="text-white" style="font-size: 1rem">AddContract</span>
+      </button>
+    </div>
+    <div class="relative inline-block text-left" style="margin-left: 81%">
+      <button
+        id="dropdownButton"
+        (click)="toggleDropdown()"
+        style="width: 112%; background-color: #084d93; margin-top: 4%"
+        class="rounded-sm text-white bg-blue-200 hover:bg-blue-800 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;text-align:center"
+        type="button"
+      >
+        <span style="margin: auto">FILTER</span>
+      </button>
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute right-0 z-10 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700"
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="dropdownButton"
+      >
+        <li>
+          <button
+            class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+            (click)="toggleSubmenu('category')"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Category
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+        </li>
+        <div
+          *ngIf="activeSubmenu === 'category'"
+          class="absolute right-full top-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          style="margin-top: 10%"
+        >
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <mat-checkbox
+                *ngFor="let category of categoriess"
+                (change)="onCategorySelectionChange($event, category.value)"
+              >
+                {{ category.value }}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <li>
+          <button
+            class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+            (click)="toggleSubmenu('status')"
+            type="button"
+          >
+            Status
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+        </li>
+        <div
+          *ngIf="activeSubmenu === 'status'"
+          class="absolute right-full top-0 z-20 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+        >
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <mat-checkbox
+                *ngFor="let status of status"
+                (change)="onStatusSelectionChange($event, status.value)"
+              >
+                {{ status.value }}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <li>
+          <button
+            class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+            (click)="toggleSubmenu('autoRenewal')"
+            type="button"
+          >
+            Auto Renewal
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+        </li>
+        <div
+          *ngIf="activeSubmenu === 'autoRenewal'"
+          class="absolute right-full top-0 z-20 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+        >
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <mat-checkbox
+                (change)="onAutoRenewalChange($event, true)"
+                [checked]="selectedAutoRenewal === true"
+              >
+                Auto Renewal (True)
+              </mat-checkbox>
+              <mat-checkbox
+                (change)="onAutoRenewalChange($event, false)"
+                [checked]="selectedAutoRenewal === false"
+              >
+                Auto Renewal (False)
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <li>
+          <button
+            class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+            (click)="toggleSubmenu('column')"
+            type="button"
+          >
+            Column
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+        </li>
+        <div
+          *ngIf="activeSubmenu === 'column'"
+          class="absolute right-full top-0 z-20 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 max-h-[185px] overflow-y-auto"
+        >
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <mat-checkbox
+                *ngFor="let column of allColumns"
+                [(ngModel)]="column.selected"
+                (change)="onColumnChange()"
+              >
+                {{ column.name }}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <li>
+          <button
+            class="w-full px-4 py-2 text-blue-500 hover:bg-blue-100 dark:hover:bg-blue-600"
+            (click)="resetFilters()"
+          >
+            Reset
+          </button>
+        </li>
+      </div>
+    </div>
+  </div>
+
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div
+      id="static-modal"
+      data-modal-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+      class="fixed hidden inset-0 flex items-center justify-center bg-gray-800 bg-opacity-110 z-50"
+    >
+      <div class="relative p-4 w-full max-w-4xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div>
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
+              <button
+                type="button"
+                (click)="closeModal('static-modal')"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+          </div>
+          <app-stepper
+            [currentStep]="currentstep"
+            [stepperField]="FieldStepper"
+          ></app-stepper>
+          <div
+            class="max-h-[333px] overflow-y-auto px-6 bg-white rounded-lg shadow-md"
+          >
+            <div class="grid grid-cols-2">
+              <h4 class="">Contract Focus</h4>
+              <div class="mb-4 col-span-2">
+                <select
+                  id="Form"
+                  name="Form"
+                  [(ngModel)]="selectedStatus"
+                  (change)="onStatusChangee()"
+                  class="block text-sm font-medium text-gray-700 rounded-lg my-4 w-full"
+                >
+                  <option [ngValue]="null" disabled selected>
+                    SelectCategory
+                  </option>
+                  <option
+                    *ngFor="let category of categoriess"
+                    [ngValue]="category"
+                  >
+                    {{ category.value }}
+                  </option>
+                </select>
+                <label
+                  for="Account"
+                  class="block text-sm font-medium text-gray-700"
+                  >Account</label
+                >
+                <input
+                  id="Account"
+                  name="Account"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                  [(ngModel)]="this.newContract.Account"
+                />
+                <div
+                  *ngIf="!newContract.Account && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1 mr-2">
+                <label
+                  for="client"
+                  class="block text-sm font-medium text-gray-700"
+                  >Client</label
+                >
+                <input
+                  id="client"
+                  name="client"
+                  [(ngModel)]="this.newContract.Client"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Client && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1 ml-2">
+                <label
+                  for="project"
+                  class="block text-sm font-medium text-gray-700"
+                  >Project</label
+                >
+                <input
+                  id="project"
+                  name="Project"
+                  [(ngModel)]="this.newContract.Project"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Project && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="UniqueNo"
+                  class="block text-sm font-medium text-gray-700"
+                  >Unique No</label
+                >
+                <input
+                  id="UniqueNo"
+                  name="UniqueNo"
+                  type="text"
+                  [(ngModel)]="this.newContract.UniqueNo"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.UniqueNo && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="closeModal('static-modal')"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-fontblue bg-white hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mr-2 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Close
+            </button>
+            <button
+              (click)="validateAndProceed('static-modal', 'default-modal')"
+              style="width: 120px; height: 39px"
+              type="button"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="default-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="fixed hidden inset-0 flex items-center justify-center bg-gray-800 bg-opacity-110 z-50"
+    >
+      <div class="p-4 w-full max-w-4xl max-h-full">
+        <div class="bg-white rounded-lg shadow dark:bg-gray-700">
+          <div>
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
+              <button
+                type="button"
+                (click)="closeModal('default-modal')"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <app-stepper
+              [currentStep]="currentstep"
+              [stepperField]="FieldStepper"
+            ></app-stepper>
+          </div>
+          <div
+            class="max-h-[380px] overflow-y-auto px-6 bg-white rounded-lg shadow-md"
+          >
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <h4 class="">Contacts</h4>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="counterPartyOwner"
+                  class="block text-sm font-medium text-gray-700"
+                  >CounterParty Owner</label
+                >
+                <input
+                  id="counterPartyOwner"
+                  name="counterPartyOwner"
+                  [(ngModel)]="this.newContract.CounterPartyOwner"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.CounterPartyOwner && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Provide a Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="CounterParty"
+                  class="block text-sm font-medium text-gray-700"
+                  >CounterParty</label
+                >
+                <input
+                  id="CounterParty"
+                  name="CounterParty"
+                  [(ngModel)]="this.newContract.CounterParty"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.CounterParty && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="BuissenessOWnerId"
+                  class="block text-sm font-medium text-gray-700"
+                  >Buissness Owner</label
+                >
+                <select
+                  id="BuissenessOWnerId"
+                  name="BuissenessOWnerId"
+                  [(ngModel)]="newContract.BuissenessOWnerId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>select</option>
+                  <option *ngFor="let user of usersOwners" [value]="user.id">
+                    {{ user.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.BuissenessOWnerId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="LegalOwnerId"
+                  class="block text-sm font-medium text-gray-700"
+                  >Legal Owner</label
+                >
+                <select
+                  id="LegalOwnerId"
+                  name="LegalOwnerId"
+                  [(ngModel)]="newContract.LegalOwnerId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>select</option>
+                  <option *ngFor="let user of usersOwners" [value]="user.id">
+                    {{ user.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.LegalOwnerId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="previous('default-modal', 'static-modal')"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="formdetails-modal"
+              type="button"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Previous
+            </button>
+            <button
+              (click)="validateAndProceed('default-modal', 'formdetails-modal')"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="formdetails-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-110"
+    >
+      <div class="p-4 w-full max-w-4xl max-h-full">
+        <div class="bg-white rounded-lg shadow dark:bg-gray-700">
+          <div>
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
+              <button
+                type="button"
+                (click)="closeModal('formdetails-modal')"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <app-stepper
+              [currentStep]="currentstep"
+              [stepperField]="FieldStepper"
+            ></app-stepper>
+          </div>
+          <div
+            class="max-h-[333px] overflow-y-auto px-6 bg-white rounded-lg shadow-md"
+          >
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <h4 class="">Contract Details</h4>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Form"
+                  class="block text-sm font-medium text-gray-700"
+                  >Form</label
+                >
+                <select
+                  id="Form"
+                  name="Form"
+                  [(ngModel)]="newContract.FormsId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>Select</option>
+                  <option *ngFor="let form of forms" [ngValue]="form.id">
+                    {{ form.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.FormsId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Type"
+                  class="block text-sm font-medium text-gray-700"
+                  >Type</label
+                >
+                <select
+                  id="Type"
+                  name="Type"
+                  [(ngModel)]="newContract.TypeId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>Select</option>
+                  <option *ngFor="let type of types" [value]="type.id">
+                    {{ type.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.TypeId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="Status"
+                  class="block text-sm font-medium text-gray-700"
+                  >Status</label
+                >
+                <select
+                  id="Status"
+                  name="Status"
+                  [(ngModel)]="newContract.StatusId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>Select</option>
+                  <option
+                    *ngFor="let statuses of status"
+                    [ngValue]="statuses.id"
+                  >
+                    {{ statuses.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.StatusId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="version"
+                  class="block text-sm font-medium text-gray-700"
+                  >Version</label
+                >
+                <input
+                  id="version"
+                  name="version"
+                  [(ngModel)]="this.newContract.Version"
+                  type="number"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Version && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Filename"
+                  class="block text-sm font-medium text-gray-700"
+                  >FileName</label
+                >
+                <input
+                  id="Filename"
+                  name="Filename"
+                  [(ngModel)]="this.newContract.Filename"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Filename && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Link"
+                  class="block text-sm font-medium text-gray-700"
+                  >Link</label
+                >
+                <input
+                  id="Link"
+                  name="legalOwner"
+                  [(ngModel)]="this.newContract.Link"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Link && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="previous('formdetails-modal', 'default-modal')"
+              style="width: 130px; height: 39px"
+              class="formdetails-modal"
+              type="button"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Previous
+            </button>
+            <button
+              (click)="validateAndProceed('formdetails-modal', 'status-modal')"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="status-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-110"
+    >
+      <div class="relative p-4 w-full max-w-4xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+          >
+            <button
+              type="button"
+              (click)="closeModal('status-modal')"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              <svg
+                class="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <app-stepper
+            [currentStep]="currentstep"
+            [stepperField]="FieldStepper"
+          ></app-stepper>
+          <div
+            class="max-h-[333px] overflow-y-auto p-6 bg-white rounded-lg shadow-md"
+          >
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <h4 class="">Classification</h4>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="ContractCode"
+                  class="block text-sm font-medium text-gray-700"
+                  >Contract Code</label
+                >
+                <input
+                  id="ContractCode"
+                  name="ContractCode"
+                  [(ngModel)]="this.newContract.ContractCode"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.ContractCode && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Value"
+                  class="block text-sm font-medium text-gray-700"
+                  >Value</label
+                >
+                <input
+                  id="Value"
+                  name="Value"
+                  [(ngModel)]="this.newContract.Value"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Value && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="LiabilitiesCap"
+                  class="block text-sm font-medium text-gray-700"
+                  >LiabilitiesCap</label
+                >
+                <input
+                  id="LiabilitiesCap"
+                  name="LiabilitiesCap"
+                  [(ngModel)]="this.newContract.LiabilitiesCap"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.LiabilitiesCap && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-2">
+                <label
+                  for="Jurisdiction"
+                  class="block text-sm font-medium text-gray-700"
+                  >Jurisdiction</label
+                >
+                <input
+                  id="Jurisdiction"
+                  name="Jurisdiction"
+                  [(ngModel)]="this.newContract.Jurisdiction"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.Jurisdiction && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+
+              <div class="mb-4 col-span-2">
+                <label
+                  for="AutoRenewal"
+                  class="block text-sm font-medium text-gray-700"
+                  >AutoRenewal</label
+                >
+                <div class="mt-1 flex items-center space-x-4">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id="AutoRenewalTrue"
+                      name="AutoRenewal"
+                      [(ngModel)]="newContract.AutoRenewal"
+                      [value]="true"
+                      class="form-radio text-blue-500"
+                    />
+                    <span class="ml-2">Yes</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id="AutoRenewalFalse"
+                      name="AutoRenewal"
+                      [(ngModel)]="newContract.AutoRenewal"
+                      [value]="false"
+                      class="form-radio text-blue-500"
+                    />
+                    <span class="ml-2">No</span>
+                  </label>
+                </div>
+                <div
+                  *ngIf="newContract.AutoRenewal === null && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="previous('status-modal', 'formdetails-modal')"
+              class="formdetails-modal"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Previous
+            </button>
+            <button
+              (click)="validateAndProceed('status-modal', 'datee-modal')"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="datee-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-110"
+    >
+      <div class="relative p-4 w-full max-w-4xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+          >
+            <button
+              type="button"
+              (click)="closeModal('datee-modal')"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              <svg
+                class="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <app-stepper
+            [currentStep]="currentstep"
+            [stepperField]="FieldStepper"
+          ></app-stepper>
+          <div
+            class="max-h-[333px] overflow-y-auto p-6 bg-white rounded-lg shadow-md"
+          >
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <h4 class="col-span-2">Dates</h4>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="SigningDate"
+                  class="block text-sm font-medium text-gray-700"
+                  >Signing Date</label
+                >
+                <input
+                  type="date"
+                  id="SigningDate"
+                  name="SigningDate"
+                  [(ngModel)]="this.newContract.SigningDate"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.SigningDate && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="starting-date"
+                  class="block text-sm font-medium text-gray-700"
+                  >Starting Date</label
+                >
+                <input
+                  type="date"
+                  id="starting-date"
+                  name="startingDate"
+                  [(ngModel)]="this.newContract.StartingDate"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.StartingDate && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="termination-date"
+                  class="block text-sm font-medium text-gray-700"
+                  >Termination Date</label
+                >
+                <input
+                  type="date"
+                  id="termination-date"
+                  name="TerminationDate"
+                  [(ngModel)]="this.newContract.TerminationDate"
+                  class="mt-1 block w-full rounded-lg"
+                />
+                <div
+                  *ngIf="!newContract.TerminationDate && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+              <div class="mb-4 col-span-1">
+                <label
+                  for="ExpirationLimitId"
+                  class="block text-sm font-medium text-gray-700"
+                  >Expiration Limit</label
+                >
+                <select
+                  id="ExpirationLimitId"
+                  name="ExpirationLimitId"
+                  [(ngModel)]="newContract.ExpirationLimitId"
+                  class="mt-1 block w-full rounded-lg"
+                >
+                  <option [ngValue]="null" disabled selected>select</option>
+                  <option
+                    *ngFor="let limit of expirationLimit"
+                    [value]="limit.id"
+                  >
+                    {{ limit.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="!newContract.ExpirationLimitId && this.submitted"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+
+              <div class="mb-4 col-span-1">
+                <label
+                  for="RenewalDateFlagOff"
+                  class="block text-sm font-medium text-gray-700"
+                  >RenewalDateFlagOff</label
+                >
+                <div class="mt-2 ml-3 flex items-center space-x-4">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id="RenewalDateFlagOff "
+                      name="RenewalDateFlagOff "
+                      [(ngModel)]="newContract.RenewalDateFlagOff"
+                      [value]="true"
+                      class="form-radio text-blue-500"
+                    />
+                    <span class="ml-2">Yes</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      id="RenewalDateFlagOff "
+                      name="RenewalDateFlagOff "
+                      [(ngModel)]="newContract.RenewalDateFlagOff"
+                      [value]="false"
+                      class="form-radio text-blue-500"
+                    />
+                    <span class="ml-2">No</span>
+                  </label>
+                </div>
+                <div
+                  *ngIf="
+                    newContract.RenewalDateFlagOff === null && this.submitted
+                  "
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="previous('datee-modal', 'status-modal')"
+              type="button"
+              class="formdetails-modal"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Previous
+            </button>
+            <button
+              *ngIf="this.additionalFields == 0"
+              data-modal-hide="datee-modal"
+              type="submit"
+              style="width: 130px; height: 39px"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Submit
+            </button>
+            <button
+              *ngIf="this.additionalFields != 0"
+              (click)="
+                validateAndProceed('datee-modal', 'additional-field-modal')
+              "
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div
+    id="additional-field-modal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="hidden fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-110"
+  >
+    <div class="relative p-4 w-full max-w-4xl max-h-full">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div
+          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+        >
+          <button
+            type="button"
+            (click)="closeModal('additional-field-modal')"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-hide="additional-field-modal"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <app-stepper
+          [currentStep]="currentstep"
+          [stepperField]="FieldStepper"
+        ></app-stepper>
+        <form
+          #additionalFieldsForm="ngForm"
+          (ngSubmit)="onAdditionalSubmit(additionalFieldsForm)"
+        >
+          <div
+            class="max-h-[333px] overflow-y-auto p-6 min-h-[333px] white rounded-lg shadow-md"
+          >
+            <div class="grid gap-4 mb-4 grid-cols-1">
+              <h4>Others</h4>
+              <div
+                *ngFor="let field of additionalFields"
+                class="mb-4 col-span-1"
+                style="margin-bottom: 7%"
+              >
+                <label
+                  [for]="field.AdditionalFieldId"
+                  class="block text-sm font-medium text-gray-700"
+                  >{{ field.Value }}</label
+                >
+                <input
+                  [id]="field.AdditionalFieldId"
+                  [name]="field.AdditionalFieldId"
+                  [(ngModel)]="field.inputValue"
+                  type="text"
+                  class="mt-1 block w-full rounded-lg"
+                  required
+                />
+                <div
+                  *ngIf="additionalFieldsForm.submitted && !field.inputValue"
+                  class="p-1 mb-1 text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    class="flex-shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    />
+                  </svg>
+                  Please Fill The Required Field
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          >
+            <button
+              (click)="previous('additional-field-modal', 'datee-modal')"
+              type="button"
+              class="formdetails-modal"
+              type="button"
+              style="width: 130px; height: 39px"
+              class="text-fontblue bg-white mr-2 hover:text-white hover:bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-2 border-fontblue"
+            >
+              Previous
+            </button>
+            <button
+              data-modal-hide="additional-field-modal"
+              type="submit"
+              style="width: 130px; height: 39px"
+              class="text-white bg-fontblue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8 rounded-lg bg-white">
+    <div class="overflow-x-auto rounded-sm">
+      <table
+        class="w-fit"
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <ng-container
+          class="w-24"
+          *ngFor="let column of allColumns"
+          [matColumnDef]="column.field"
+        >
+          <ng-container *ngIf="column.selected">
+            <th
+              mat-header-cell
+              cdkDrag
+              *matHeaderCellDef
+              mat-sort-header
+              [style.backgroundColor]="column.headerColor"
+              class="w-24text-white ad"
+            >
+              {{ column.name }}
+            </th>
+            <ng-container *ngIf="column.field == 'Status'">
+              <td mat-cell *matCellDef="let element">
+                <div
+                  [ngClass]="{
+                    'status-pending': element.Status === 'Pending',
+                    'status-negotiation': element.Status === 'Negotiation',
+                    'status-approved': element.Status === 'Approved'
+                  }"
+                  class="text-green-600 focus:outline-none focus:ring-0 font-medium text-xs py-1 me-1 mb-2"
+                >
+                  {{ element.Status }}
+                </div>
+              </td>
+            </ng-container>
+            <ng-container
+              *ngIf="column.field == 'Current' || column.field == 'AutoRenewal'"
+            >
+              <td mat-cell *matCellDef="let element" style="width: 7%">
+                <span *ngIf="element[column.field]">
+                  <svg
+                    style="max-width: 17px; max-height: 17px"
+                    fill="green"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                    />
+                  </svg>
+                </span>
+                <span *ngIf="!element[column.field]">
+                  <svg
+                    style="max-width: 17px; max-height: 17px"
+                    fill="red"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"
+                    />
+                  </svg>
+                </span>
+              </td>
+            </ng-container>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="onRowClick(element)"
+            >
+              {{ element[column.field] }}
+            </td>
+          </ng-container>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 60]" showFirstLastButtons></mat-paginator> -->
+    </div>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 60]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

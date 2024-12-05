@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* .mat-header-cell {
+  background-color: #1976d2 !important;
+  color: white !important;
+}*/
+
+.mat-header-cell.mat-sort-header-sorted {
+  color: white !important;
+}
+
+.mat-sort-header-arrow {
+  color: white !important;
+}
+
+.mat-sort-header-arrow .mat-icon {
+  fill: white !important;
+}
+
+.mat-header-cell {
+  background-color: #1976d2;
+}
+
+::ng-deep .mat-header-cell {
+  background-color: #1976d2 !important; /* Replace with your desired background color */
+  color: white !important; /* Text color */
+}
+
+.back {
+  background-color: blue;
+}
+
+.custom-header {
+  background-color: blue;
+}
+
+::ng-deep .mat-header-cell.custom-header {
+  background-color: #1976d2; /* Replace with your desired background color */
+  color: white; /* Text color */
+}
+
+/* .bootstrap-tagsinput {
+  @apply w-full p-2 border border-gray-300 rounded-lg shadow-sm;
+}
+
+.bootstrap-tagsinput .tag {
+  @apply inline-block bg-blue-500 text-white px-3 py-1 rounded-full;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  @apply text-red-500 cursor-pointer ml-2;
+} */

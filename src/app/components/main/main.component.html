@@ -1,0 +1,22 @@
+<div class="flex justify-between items-center p-3" style="margin-top: 1%;">
+  <div class="flex items-center space-x-2" >
+    <img src="/assets/synergechlogo.png" class="h-8" alt="Synergech Logo" />
+  </div>
+  <div class="flex space-x-12 text-sm items-center">
+    <a routerLink="/main/dashboard" routerLinkActive="border-b-2 border-blue-500" (click)="this.set()" class="font-medium">DashBoard</a>
+    <a routerLink="/parameters" routerLinkActive="border-b-2 border-blue-500" class="font-medium">Parameter</a>
+    <a routerLink="/formContract" routerLinkActive="border-b-2 border-blue-500" class="font-medium">New Contract</a>
+    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      <span class="sr-only">Open user menu</span>
+      <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+    </button>
+  </div>
+</div>
+
+
+<button >edit</button>
+<!-- <router-outlet></router-outlet> -->
+<ng-container *ngIf="this.show">
+  <app-dash-board></app-dash-board>
+</ng-container>
+<!--<app-dash-board></app-dash-board> -->
